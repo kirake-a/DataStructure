@@ -1,11 +1,10 @@
 package Link;
 
 /**
- * Lista generica simplemente ligada
- * 
+ * Crea una lista generica simplemente ligada, con un primer
+ * nodo en estado de nulo
  * @autor Ruben Alvarado
  * @author Monica Garcilazo
- * 
  * @version 21/02/2023
  */
 class LinkList<T> {
@@ -13,24 +12,23 @@ class LinkList<T> {
     T data;
 
     /**
-     * Constructor para la clase
+     * Constructor para la clase, con un primer nodo (first) con
+     * valores en null
      */
     public LinkList() {
         first = null;
     }
 
     /**
-     * Devuelve true si la lista creada esta vacia
-     * 
-     * @return Si la lista esta vacia
+     * Permite verificar si el objeto LinkList esta vacio
+     * @return true si la lista esta vacia, sino false
      */
     public boolean isEmpty() {
         return (first == null);
     }
 
     /**
-     * Crea un nuevo nodo y lo inserta al inicio
-     * 
+     * Crea un nuevo nodo y lo inserta al inicio de la LinkList
      * @param datum El dato que contendra el nuevo nodo
      */
     public void insertFirst(T datum) {
@@ -42,7 +40,6 @@ class LinkList<T> {
 
     /**
      * Inserta un nuevo nodo al final de la lista
-     * 
      * @param datum Valor del nodo 
      */
     public void insertLast(T datum) {
@@ -62,8 +59,9 @@ class LinkList<T> {
 
     /**
      * Muestra el primer elemento sin eliminarlo
-     * 
-     * @return Primer nodo
+     * @return Primer nodo en la lista,
+     *         null si no existieran valores en la lista.
+     * @see #isEmpty()
      */
     public Link<T> showFirst() {
         if (!isEmpty()) {
@@ -79,8 +77,9 @@ class LinkList<T> {
 
     /**
      * Muestra el ultimo elemento sin eliminarlo
-     * 
-     * @return Ultimo nodo
+     * @return Ultimo nodo,
+     *         null si la lista estaba vacia
+     * @see #isEmpty()
      */
     public Link<T> showLast() {
         if (!isEmpty()) {
@@ -99,7 +98,6 @@ class LinkList<T> {
 
     /**
      * Nos devuelve el tamanio de la lista
-     * 
      * @return El tamanio de la lista
      */
     public int sizeList() {
@@ -115,10 +113,8 @@ class LinkList<T> {
     /**
      *  Hace una búsqueda de un elemento y devuelve -1 si no lo encontró y la posición del dato 
      *  en la lista en caso de que se haya encontrado.
-     * 
      * @param datum El dato que se busca
-     * 
-     * @return Retorna la posicion del nodo, sino existe -1
+     * @return La posicion del nodo, si no existe -1
      */
     public int searchItem(T datum) {
         int cont = 0;
@@ -140,12 +136,9 @@ class LinkList<T> {
 
      /**
      * Actualiza el dato de un nodo, proporcionando el valor previo al 
-     * que se quiere actualizar y el valor a actualizar
-     * 
+     * que se quiere actualizar y el valor a actualizar.
      * @param previousValue Valor previo al que se quiere actualizar
      * @param newValue Nuevo valor
-     * 
-     * @return null
      */
     public void updateWithPrevNode(T previousValue, T newValue) {
 
@@ -166,12 +159,10 @@ class LinkList<T> {
     }
 
     /**
-     * Actualiza el dato de un nodo, proporcionando el valor anterior y el valor a actualizar
-     * 
+     * Actualiza el dato de un nodo proporcionando su valor actual y el 
+     * valor con el que se quiere actualizar
      * @param oldValue Valor anterior
      * @param newVelue Valor a actualizar
-     * 
-     * @return Tipo de dato Link<T>
      */
     public void updateNode(T oldValue, T newVelue) {
         if (!isEmpty()) {
@@ -191,10 +182,8 @@ class LinkList<T> {
     /**
      * Actualiza el dato de un nodo, proporcionando el valor a actualizar y la posición del elemento 
      * que se quiere actualizar
-     * 
      * @param position Posicion del nodo
      * @param newValue Valor a actualizar
-     * 
      */
     public void updateWithPosition(int position, T newValue) {
 
@@ -220,8 +209,8 @@ class LinkList<T> {
     
     /**
      * Elimina y devuelve el primer elemento de la lista
-     * 
-     * @return Elemento eliminado 
+     * @return Elemento eliminado,
+     *         null si la lista estaba vacia 
      */
     public Link<T> deleteFirst() {
         Link<T> temp = null;
@@ -233,9 +222,9 @@ class LinkList<T> {
     }
 
     /**
-     * Elimina y devuelve el ultimo elemento de la lista
-     *  
-     * @return Elemento eliminado
+     * Elimina y devuelve el ultimo elemento de la lista 
+     * @return Elemento eliminado,
+     *         null si la lista estaba vacia
      */
     public Link<T> deleteLast() {
 
@@ -259,10 +248,9 @@ class LinkList<T> {
     
     /**
      * Elimina un elemento de una posición en la lista
-     * 
      * @param position Posicion del nodo
-     * 
-     * @return Elemento eliminado
+     * @return Elemento eliminado,
+     *         null si la lista estaba vacia
      */
     public Link<T> deletePosition(int position) {
         if (!isEmpty()) {
@@ -293,11 +281,10 @@ class LinkList<T> {
     }
 
     /**
-     * Elimina un elemento proporcionado, mediante su dato
-     * 
-     * @param data Valor del nodo a eliminar
-     * 
-     * @return Elemento eliminado
+     * Elimina un elemento proporcionado, mediante su dato 
+     * @param data Valor del nodo a eliminar 
+     * @return Elemento eliminado,
+     *         null si la lista estaba vacia
      */
     public Link<T> deleteItem(T data) {
         if (!isEmpty()) {
