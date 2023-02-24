@@ -1,8 +1,7 @@
 package Link;
 
 /**
- * Crea una lista generica simplemente ligada, con un primer
- * nodo en estado de nulo
+ * Crea una lista generica simplemente ligada, con un primer nodo en estado de nulo
  * @autor Ruben Alvarado
  * @author Monica Garcilazo
  * @version 21/02/2023
@@ -59,8 +58,7 @@ class LinkList<T> {
 
     /**
      * Muestra el primer elemento sin eliminarlo
-     * @return Primer nodo en la lista,
-     *         null si no existieran valores en la lista.
+     * @return Primer nodo en la lista, null si no existieran valores en la lista.
      * @see #isEmpty()
      */
     public Link<T> showFirst() {
@@ -77,8 +75,7 @@ class LinkList<T> {
 
     /**
      * Muestra el ultimo elemento sin eliminarlo
-     * @return Ultimo nodo,
-     *         null si la lista estaba vacia
+     * @return Ultimo nodo, null si la lista estaba vacia
      * @see #isEmpty()
      */
     public Link<T> showLast() {
@@ -209,8 +206,7 @@ class LinkList<T> {
     
     /**
      * Elimina y devuelve el primer elemento de la lista
-     * @return Elemento eliminado,
-     *         null si la lista estaba vacia 
+     * @return Elemento eliminado, null si la lista estaba vacia 
      */
     public Link<T> deleteFirst() {
         Link<T> temp = null;
@@ -223,8 +219,7 @@ class LinkList<T> {
 
     /**
      * Elimina y devuelve el ultimo elemento de la lista 
-     * @return Elemento eliminado,
-     *         null si la lista estaba vacia
+     * @return Elemento eliminado, null si la lista estaba vacia
      */
     public Link<T> deleteLast() {
 
@@ -249,8 +244,7 @@ class LinkList<T> {
     /**
      * Elimina un elemento de una posición en la lista
      * @param position Posicion del nodo
-     * @return Elemento eliminado,
-     *         null si la lista estaba vacia
+     * @return Elemento eliminado, null si la lista estaba vacia
      */
     public Link<T> deletePosition(int position) {
         if (!isEmpty()) {
@@ -283,8 +277,7 @@ class LinkList<T> {
     /**
      * Elimina un elemento proporcionado, mediante su dato 
      * @param data Valor del nodo a eliminar 
-     * @return Elemento eliminado,
-     *         null si la lista estaba vacia
+     * @return Elemento eliminado, null si la lista estaba vacia
      */
     public Link<T> deleteItem(T data) {
         if (!isEmpty()) {

@@ -1,13 +1,10 @@
 package DELink;
 
 /**
- * Lista generica simplemente ligada que usa un 
- * apuntador first y uno last para indicar topes
+ * Lista generica simplemente ligada que usa un apuntador first y uno last para indicar topes
  * por ambos lados
- * 
  * @author Monica Garcilazo
  * @author Ruben Alvarado
- * 
  * @version 21/02/2023
  */
 class DELinkList<T> {
@@ -23,8 +20,9 @@ class DELinkList<T> {
     }
 
     /**
-     * 
-     * @return true si la lista esta vacia
+     * Conocer si la lista esta vacia, o en su caso esta
+     * inicializada con al menos un nodo
+     * @return true si la lista esta vacia, false si no lo esta
      */
     public boolean isEmpty() {
         return (first == null);
@@ -32,7 +30,6 @@ class DELinkList<T> {
 
     /**
      * Crea un nuevo nodo y lo inserta al inicio de la lista
-     * 
      * @param datum El valor que contendra el nodo
      */
     public void insertFirst(T datum) {
@@ -45,7 +42,6 @@ class DELinkList<T> {
 
     /**
      * Crea un nuevo nodo y lo inserta al final de la lista
-     * 
      * @param datum El dato que contendra el nodo
      */
     public void insertLast(T datum) {
@@ -58,10 +54,8 @@ class DELinkList<T> {
     }
 
     /**
-     * Muesta al primer elemento de la lista si es que
-     * la lista no esta vacia
-     * 
-     * @return Primer nodo
+     * Muesta al primer elemento de la lista si es que la lista no esta vacia
+     * @return Primer nodo, null si la lista estaba vacia
      */
     public DELink<T> showFirst() {
         if (!isEmpty()) {
@@ -76,10 +70,8 @@ class DELinkList<T> {
     }
 
     /**
-     * Muestra al ultimo elemento de la lista si es que
-     * la lista no esta vacia
-     * 
-     * @return Ultimo nodo
+     * Muestra al ultimo elemento de la lista si es que la lista no esta vacia
+     * @return Ultimo nodo, null si la lista estaba vacia
      */
     public DELink<T> showLast() {
         if (!isEmpty()) {
@@ -94,8 +86,7 @@ class DELinkList<T> {
     }
 
     /**
-     * Regresa el tamanio de la lista
-     * 
+     * Conocer el tamanio que tiene la lista
      * @return Tamanio de la lista
      */
     public int sizeList() {
@@ -105,16 +96,15 @@ class DELinkList<T> {
             cont++;
             current = current.getNext();
         }
+
         return cont;
     }
     
     /**
-     * Hace una búsqueda de un elemento y devuelve -1 si no lo encontró y la posición del dato 
+     * Hace una busqueda de un elemento y devuelve -1 si no lo encontro y la posicion del dato 
      *  en la lista en caso de que se haya encontrado.
-     * 
      * @param datum Dato que se busca
-     * 
-     * @return Retorna la posicion del nodo, sino existe -1
+     * @return Retorna la posicion del nodo buscado, si no existe -1
      */
     public int searchItem(T datum) {
         int counter = 0;
@@ -137,11 +127,9 @@ class DELinkList<T> {
     }
     
     /**
-     * Actualizael valor(dato) de un nodo, dado su valor previo
-     * 
+     * Actualizael valor(dato) de un nodo, conociendo su valor previo
      * @param oldValue El dato que se busca en la lista
      * @param newVelue Dato que sustituira al valor oldValue
-     * 
      */
     public void updateNode(T oldValue, T newVelue) {
         if (!isEmpty()) {
@@ -161,7 +149,6 @@ class DELinkList<T> {
     /**
      * Actualiza el dato de un nodo, proporcionado el valor previo al
      * que se quiere actualizar y el valor a actualizar
-     * 
      * @param previousValue Valor del nodo previo al que se quiere actualizar
      * @param newValue Nuevo valor en el nodo
      */
@@ -186,10 +173,8 @@ class DELinkList<T> {
     /**
      * Actualiza el dato de un nodo, proporcionando el valor a actualizar y 
      * la posición del elemento que se quiere actualizar
-     * 
      * @param position Posicion del nodo
      * @param newValue Valor a actualizar
-     * 
      */
     public void updateWithPosition(int position, T newValue) {
 
@@ -215,7 +200,6 @@ class DELinkList<T> {
 
     /**
      * Elimina el primer elemento de la lista
-     * 
      * @return Elemento eliminado
      */
     public T deleteFirst() {
@@ -228,7 +212,6 @@ class DELinkList<T> {
 
     /**
      * Elimina el ultimo elemento de la lista
-     * 
      * @return Elemento eliminado
      */
     public T deleteLast() {
@@ -238,11 +221,10 @@ class DELinkList<T> {
     }
     
      /**
-     * Elimina un elemento proporcionado, mediante su dato
-     * 
+     * Elimina un elemento en la lista, proporcionando el dato que contiene el nodo.
+     * Unicamente si la lista no esta vacia
      * @param data Valor del nodo a eliminar
-     * 
-     * @return Elemento eliminado
+     * @return Elemento eliminado, null si la lista estaba vacia
      */
     public DELink<T> deleteItem(T data) {
         if (!isEmpty()) {
@@ -268,11 +250,10 @@ class DELinkList<T> {
     }
     
     /**
-     *  Elimina un elemento de una posición en la lista
-     * 
+     *  Elimina un elemento de la lista con su posicion proporcionada.
+     * Unicamente si la lista no estaba vacia
      * @param position Posicion del nodo
-     *  
-     * @return Elemento eliminado
+     * @return Elemento eliminado, null si la lista estaba vacia
      */
     public DELink<T> deletePosition(int position) {
         if (!isEmpty()) {
@@ -303,7 +284,7 @@ class DELinkList<T> {
     }
 
     /**
-     * Elimina todos los nodos del objeto
+     * Elimina todos los nodos que se encuentran en la lista
      */
     public void deleteAll() {
         while (first != null) {
@@ -312,7 +293,8 @@ class DELinkList<T> {
     }
 
     /**
-     * Despliega todos los datos en la lista, mostrando el first y last
+     * Despliega todos los datos en la lista, iniciando con el first
+     * y terminando con el valor last en la lista
      */
     public void displayList() {
         System.out.print("List (first--> ");

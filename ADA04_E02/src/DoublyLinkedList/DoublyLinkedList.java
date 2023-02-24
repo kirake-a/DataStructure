@@ -2,10 +2,8 @@ package DoublyLinkedList;
 
 /**
  * Lista generica doblemente ligada
- * 
  * @author Monica Garcilazo
  * @author Ruben Alvarado
- * 
  * @version 21/02/2023
  */
 public class DoublyLinkedList<T> {
@@ -13,7 +11,8 @@ public class DoublyLinkedList<T> {
     private DoublyLink<T> last; 
     
     /**
-     * Constructor default de la clase
+     * Crear a la lista con un first y last en valor null, es decir,
+     * sin elementos en su interior como lista.
      */
     public DoublyLinkedList() {
         first = null;
@@ -21,7 +20,7 @@ public class DoublyLinkedList<T> {
     }
 
     /**
-     *  Devuelve true si la lista creada esta vacia
+     * Devuelve true si la lista creada esta vacia, false si no lo esta
      * @return Si la lista esta vacia
      */
     public boolean isEmpty() {
@@ -30,7 +29,6 @@ public class DoublyLinkedList<T> {
     
     /**
      * Crea un nuevo nodo y lo inserta al inicio
-     * 
      * @param dd El dato que contendra el nuevo nodo
      */
     public void insertFirst(T dd) {
@@ -45,8 +43,7 @@ public class DoublyLinkedList<T> {
 
     /**
      * Inserta un nuevo nodo al final de la lista
-     * 
-     * @param dd Valor del nodo 
+     * @param dd Valor que tendra el nodo
      */
     public void insertLast(T dd) {
         DoublyLink<T> newLink = new DoublyLink<>(dd);
@@ -61,11 +58,9 @@ public class DoublyLinkedList<T> {
 
     /**
      * Inserta un nuevo nodo despues de otro
-     * 
      * @param key Valor del nodo previo al que se quiere insertar
      * @param datum Valor del nodo que se quiere insertar
-     * 
-     * @return Si se pudo insertar o no
+     * @return true si se consiguio insertar, de lo contrario false
      */
     public boolean insertAfter(T key, T datum) {
         DoublyLink<T> current = first;
@@ -89,9 +84,8 @@ public class DoublyLinkedList<T> {
     }
 
     /**
-     * Despliega e lprimer elemento del DoublyLink
-     * 
-     * @return primer nodo
+     * Despliega el primer elemento del DoublyLink
+     * @return primer nodo, de lo contrario regresa null
      */
     public DoublyLink<T> showFirst() {
         if (!isEmpty()) {
@@ -106,8 +100,7 @@ public class DoublyLinkedList<T> {
 
     /**
      * Despliega el ultimo elemento del DoublyLink
-     * 
-     * @return ultimo nodo
+     * @return El ultimo nodo, de lo contrario null
      */
     public DoublyLink<T> showLast() {
         if (!isEmpty()) {
@@ -122,7 +115,7 @@ public class DoublyLinkedList<T> {
     }
 
     /**
-     * Nos devuelve el tamanio de la lista
+     * Conocer el tamanio de la lista
      * @return tamanio de la lista
      */
     public int sizeList() {
@@ -139,11 +132,9 @@ public class DoublyLinkedList<T> {
 
     /**
      *  Hace una búsqueda de un elemento y devuelve -1 si no lo encontró y la posición del dato 
-     *  en la lista en caso de que se haya encontrado.
-     * 
+     *  en la lista en caso de que se haya encontrado. 
      * @param datum Dato que se busca
-     * 
-     * @return Retorna la posicion del nodo, si no existe -1
+     * @return Retorna la posicion del nodo, si no existe retorna -1
      */
     public int searchItem(T datum) {
         int cont = 0;
@@ -164,11 +155,10 @@ public class DoublyLinkedList<T> {
     }
 
     /**
-     * Actualiza el dato de un nodo, proporcionando el valor anterior y el valor a actualizar
-     * 
+     * Actualiza el dato de un nodo, proporcionando el valor actual y el valor
+     * con el que se quiere actualizar el nodo
      * @param oldDaum Valor anterior
      * @param datum Valor al que se quiere actualizar
-     * 
      */
     public void updateNode(T oldDaum, T datum) {
         if (!isEmpty()) {
@@ -186,11 +176,10 @@ public class DoublyLinkedList<T> {
 
     /**
      * Actualiza el dato de un nodo, proporcionando el valor a actualizar y la posición del elemento 
-     * que se quiere actualizar
-     * 
-     * @param position POsicion del nodo
+     * que se quiere actualizar. Siempre y cuando la lista no sea una lista vacia
+     * @param position Posicion del nodo
      * @param newValue Nuevo valor del nodo
-     * 
+     * @see #isEmpty()
      */
     public void updateWithPosition(int position, T newValue) {
         if (!isEmpty()) {
@@ -216,7 +205,6 @@ public class DoublyLinkedList<T> {
 
     /**
      * Elimina y devuelve el primer valor de la lista
-     * 
      * @return Elemento eliminado
      */
     public DoublyLink<T> deleteFirst() {
@@ -230,8 +218,7 @@ public class DoublyLinkedList<T> {
     }
 
     /**
-     * Elimina y devuelve el ultimoo valor de la lista
-     * 
+     * Elimina y devuelve el ultimo valor en la lista
      * @return Elemento eliminado
      */
     public DoublyLink<T> deleteLast() {
@@ -246,9 +233,7 @@ public class DoublyLinkedList<T> {
     
     /**
      * Elimina y devuelve un nodo de la lista
-     * 
      * @param key Valor del nodo
-     * 
      * @return Nodo eliminado
      */
     public DoublyLink<T> deleteKey(T key) {
@@ -270,10 +255,10 @@ public class DoublyLinkedList<T> {
     }
 
     /**
-     *  Elimina un elemento de una posición en la lista 
-     * 
+     *  Elimina un elemento en la lista, dada su posicion.
+     *  Unicamente si la lista no esta vacia
      * @param position Posicion del nodo
-     * 
+     * @see #isEmpty()
      * @return Valor eliminado
      */
     public DoublyLink<T> deletePosition(int position) {
@@ -295,7 +280,7 @@ public class DoublyLinkedList<T> {
     }
     
     /**
-     * Elimina todos los nodos de la lista
+     * Elimina todos los nodos contenido en la lista
      */
     public void deleteAll() {
         while (first != null) {
@@ -304,7 +289,8 @@ public class DoublyLinkedList<T> {
     }
     
     /**
-     * 
+     * Despliega los datos de la lista tomando como inicio el nodo
+     * first de la lista
      */
     public void displayForward() {
         System.out.print("List (first-->last): ");
@@ -317,7 +303,8 @@ public class DoublyLinkedList<T> {
     }
 
     /**
-     * 
+     * Despliega los datos de la lista tomando como inicio el nodo
+     * last de la lista
      */
     public void displayBackward() {
         System.out.print("List (last-->first): ");

@@ -2,8 +2,8 @@ package Link;
 
 /**
  * Se genera un nodo de tipo generico
- * @author Ruben Alvarado
  * @author Monica Garcilazo
+ * @author Ruben Alvarado
  * @version 23/02/2023
  */
 public class Link<T> {
