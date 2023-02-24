@@ -1,0 +1,6 @@
+Expresion postfija: 2 3 + ; Resultado: 5.0
+Expresion postfija: 3 5 * ; Resultado: 15.0
+Expresion postfija: 30 2 * 5 2 1 + * + ; Resultado: 75.0
+Expresion postfija: 400 5000 + ; Resultado: 5400.0
+Expresion postfija: 7 2 + ; Resultado: 9.0
+Expresion postfija: 400 5000 + 7 2 + 0 8 - - + ; Resultado: 5417.0
