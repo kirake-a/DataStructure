@@ -83,7 +83,18 @@ public class DoublyLinkedList<T> {
         return true;
     }
 
+    /**
+     * Inserta un dato de manera ordenada a la lista, dado un parametro entero para
+     * realizar la insersion, si la lista estuviera vacia el dato unicamente se
+     * inserta a la lista, de esa forma inicializandola
+     * @param data Valor del dato que contendra el nodo a insertar
+     * @param insertedOrder valor entero que determina si se inserta de forma
+     *                      ascendente o descendente
+     * @throws Exception El dato para identificar el orden de agregacion no 
+     *                   es el solicitado
+     */
     public void insertOrdered(T data, int insertedOrder) {
+
         try {
             if (!isEmpty()) {
                 DoublyLink<T> current = this.first;
@@ -138,7 +149,7 @@ public class DoublyLinkedList<T> {
                                 link.setPrevious(current.getPrevious());
                                 current.getPrevious().setNext(link);
                                 current.setPrevious(link);
-                                
+
                                 return;
                             } else {
                                 current = current.getNext();

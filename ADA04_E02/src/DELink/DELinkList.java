@@ -57,9 +57,7 @@ class DELinkList<T> {
     /**
      * Inserta un dato de manera ordenada a la lista, dado un parametro entero para
      * realizar la insersion, si la lista estuviera vacia el dato unicamente se
-     * inserta
-     * lista para poder inicializarla
-     * 
+     * inserta a la lista, de esa forma inicializandola
      * @param data          Valor del dato que tendra el nodo que se quiere insertar
      * @param insertedOrder Valor entero por el cual se decide como se inserta el
      *                      valor a la lista.
