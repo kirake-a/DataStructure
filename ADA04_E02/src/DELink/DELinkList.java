@@ -49,8 +49,98 @@ class DELinkList<T> {
         if (isEmpty())
             first = newLink;
         else
-            last.setNext(newLink);;
+            last.setNext(newLink);
+        ;
         last = newLink;
+    }
+    
+    /**
+     * Inserta un dato de manera ordenada a la lista, dado un parametro entero para
+     * realizar la insersion, si la lista estuviera vacia el dato unicamente se
+     * inserta
+     * lista para poder inicializarla
+     * 
+     * @param data          Valor del dato que tendra el nodo que se quiere insertar
+     * @param insertedOrder Valor entero por el cual se decide como se inserta el
+     *                      valor a la lista.
+     *                      0. Insertar de manera ascendente. 1. Insertar de manera
+     *                      descendente
+     * @throws Exception El dato ingresado para determinar ascendente o descendete
+     *                   no es el adecuado
+     */
+    public void insertOrdered(T data, int insertedOrder) throws Exception {
+        try {
+            if (!isEmpty()) {
+                DELink<T> current = this.first;
+                switch (insertedOrder) {
+                    case 0:
+                        if ((Double) this.first.getdData() > (Double) data) {
+                            insertFirst(data);
+                            return;
+                        }
+
+                        while (current.getNext() != null) {
+                            current = current.getNext();
+                        }
+
+                        if ((Double) current.getdData() < (Double) data) {
+                            insertLast(data);
+                            return;
+                        }
+
+                        current = this.first;
+
+                        while (current != null) {
+                            if ((Double) current.getdData() < (Double) data) {
+                                DELink<T> link = new DELink<T>(data);
+                                link.setNext(current.getNext());
+                                current.setNext(link);
+                                return;
+                            } else {
+                                current = current.getNext();
+                            }
+                        }
+
+                        break;
+                    case 1:
+
+                        if ((Double) this.first.getdData() < (Double) data) {
+                            insertFirst(data);
+                            return;
+                        }
+
+                        while (current.getNext() != null) {
+                            current = current.getNext();
+                        }
+
+                        if ((Double) current.getdData() > (Double) data) {
+                            insertLast(data);
+                            return;
+                        }
+
+                        current = this.first;
+
+                        while (current != null) {
+                            if ((Double) data > (Double) this.first.getdData()) {
+                                insertFirst(data);
+                                return;
+                            } else {
+                                current = current.getNext();
+                            }
+                        }
+
+                        break;
+                    default:
+                        throw new Exception("Esta opcion no existe");
+                }
+            } else {
+                insertFirst(data);
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**

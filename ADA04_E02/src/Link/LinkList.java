@@ -63,7 +63,7 @@ class LinkList<T> {
      * @param data Valor del dato que tendra el nodo que se quiere insertar
      * @param insertedOrder Valor entero por el cual se decide como se inserta el valor a la lista.
      * 0. Insertar de manera ascendente. 1. Insertar de manera descendente
-     * @throws Exception
+     * @throws Exception El dato ingresado para determinar ascendente o descendete no es el adecuado
      */
     public void insertOrdered(T data, int insertedOrder) throws Exception {
         try {
