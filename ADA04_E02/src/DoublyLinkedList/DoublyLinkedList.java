@@ -83,6 +83,82 @@ public class DoublyLinkedList<T> {
         return true;
     }
 
+    public void insertOrdered(T data, int insertedOrder) {
+        try {
+            if (!isEmpty()) {
+                DoublyLink<T> current = this.first;
+
+                switch (insertedOrder) {
+                    case 0:
+                        if ((Double) this.first.getdData() > (Double) data) {
+                            insertFirst(data);
+                            return;
+                        }
+
+                        if ((Double) current.getdData() < (Double) data) {
+                            insertLast(data);
+                            return;
+                        }
+
+                        while (current != null) {
+                            if ((Double) current.getdData() > (Double) data) {
+                                DoublyLink<T> link = new DoublyLink<T>(data);
+
+                                link.setNext(current);
+                                link.setPrevious(current.getPrevious());
+                                current.getPrevious().setNext(link);
+                                current.setPrevious(link);
+
+                                return;
+                            } else {
+                                current = current.getNext();
+                            }
+                        }
+
+                        break;
+                    case 1:
+
+                        if ((Double) this.first.getdData() < (Double) data) {
+                            insertFirst(data);
+
+                            return;
+                        }
+
+                        if ((Double) current.getdData() > (Double) data) {
+                            insertLast(data);
+
+                            return;
+                        }
+
+                        while (current != null) {
+                            if ((Double) data > (Double) this.first.getdData()) {
+                                DoublyLink<T> link = new DoublyLink<T>(data);
+
+                                link.setNext(current);
+                                link.setPrevious(current.getPrevious());
+                                current.getPrevious().setNext(link);
+                                current.setPrevious(link);
+                                
+                                return;
+                            } else {
+                                current = current.getNext();
+                            }
+                        }
+
+                        break;
+                    default:
+                        throw new Exception("Esta opcion no existe");
+                }
+            } else {
+                insertFirst(data);
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     /**
      * Despliega el primer elemento del DoublyLink
      * @return primer nodo, de lo contrario regresa null
