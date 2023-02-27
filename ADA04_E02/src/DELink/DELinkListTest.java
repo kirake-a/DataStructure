@@ -2,13 +2,15 @@ package DELink;
 
 public class DELinkListTest<T> {
     
-    public static void main(String[] args) {
+    public static void main(String[] args){
         DELinkList<Double> list = new DELinkList<>(); 
         list.insertFirst(2.99);
         list.insertFirst(4.99);
-        list.insertFirst(6.99);
+        list.insertFirst(18.99);
         list.insertFirst(8.99);
-        list.displayList(); 
+        list.displayList();
+        list.insertInOrder(0, 2.00);
+        list.displayList();
         list.deletePosition(3);
         list.displayList();
         list.showFirst();

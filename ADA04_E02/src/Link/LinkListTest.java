@@ -13,6 +13,8 @@ public class LinkListTest<T> {
         list.insertLast(34);
         list.insertLast(21);
         list.displayList();
+        list.insertInOrder(0, 70);
+        list.displayList();
         list.deletePosition(6);
         list.displayList();
         list.deleteItem(98);

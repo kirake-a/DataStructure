@@ -88,87 +88,50 @@ public class DoublyLinkedList<T> {
      * realizar la insersion, si la lista estuviera vacia el dato unicamente se
      * inserta a la lista, de esa forma inicializandola
      * @param data Valor del dato que contendra el nodo a insertar
-     * @param insertedOrder valor entero que determina si se inserta de forma
+     * @param order valor entero que determina si se inserta de forma
      *                      ascendente o descendente
-     * @throws Exception El dato para identificar el orden de agregacion no 
-     *                   es el solicitado
      */
-    public void insertOrdered(T data, int insertedOrder) {
-
-        try {
-            if (!isEmpty()) {
-                DoublyLink<T> current = this.first;
-
-                switch (insertedOrder) {
-                    case 0:
-                        if ((Double) this.first.getdData() > (Double) data) {
-                            insertFirst(data);
-                            return;
-                        }
-
-                        if ((Double) current.getdData() < (Double) data) {
-                            insertLast(data);
-                            return;
-                        }
-
-                        while (current != null) {
-                            if ((Double) current.getdData() > (Double) data) {
-                                DoublyLink<T> link = new DoublyLink<T>(data);
-
-                                link.setNext(current);
-                                link.setPrevious(current.getPrevious());
-                                current.getPrevious().setNext(link);
-                                current.setPrevious(link);
-
-                                return;
-                            } else {
-                                current = current.getNext();
-                            }
-                        }
-
-                        break;
-                    case 1:
-
-                        if ((Double) this.first.getdData() < (Double) data) {
-                            insertFirst(data);
-
-                            return;
-                        }
-
-                        if ((Double) current.getdData() > (Double) data) {
-                            insertLast(data);
-
-                            return;
-                        }
-
-                        while (current != null) {
-                            if ((Double) data > (Double) this.first.getdData()) {
-                                DoublyLink<T> link = new DoublyLink<T>(data);
-
-                                link.setNext(current);
-                                link.setPrevious(current.getPrevious());
-                                current.getPrevious().setNext(link);
-                                current.setPrevious(link);
-
-                                return;
-                            } else {
-                                current = current.getNext();
-                            }
-                        }
-
-                        break;
-                    default:
-                        throw new Exception("Esta opcion no existe");
-                }
-            } else {
-                insertFirst(data);
-                return;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void insertInOrder(int order, T data){
+        if (!((order == 0) || (order == 1))) {
+         System.out.println("Esta opcion de ordenamiento no existe");
+         return;
+        } else {
+         if (!isEmpty()) {
+             DoublyLink<T> newLink = new DoublyLink<T>(data);
+             DoublyLink<T> current = first;
+             DoublyLink<T> previous = first;
+             switch(order){
+                 case 0:
+                     while (current != null && ((Comparable) data).compareTo((Comparable) current.getdData()) > 0) {
+                         previous = current;
+                         current = current.getNext();
+                     }
+                     if (current == first) {
+                         insertFirst(data);
+                     } else {
+                         previous.setNext(newLink);
+                         newLink.setNext(current);
+                     }
+                 break;
+                 case 1:
+                     while (current != null && ((Comparable) data).compareTo((Comparable) current.getdData()) < 0) {
+                         previous = current;
+                         current = current.getNext();
+                     }
+                     if (current == first) {
+                         insertFirst(data);
+                     } else {
+                         previous.setNext(newLink);
+                         newLink.setNext(current);
+                     }
+                 break;
+             }        
+         }else {
+             insertFirst(data);
+             return;
+         }
         }
-
-    }
+     }
 
     /**
      * Despliega el primer elemento del DoublyLink
