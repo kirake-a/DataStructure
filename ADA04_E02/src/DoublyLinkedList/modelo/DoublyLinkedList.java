@@ -108,9 +108,13 @@ public class DoublyLinkedList<T> {
                 DoublyLink<T> newLink = new DoublyLink<T>(data);
                 DoublyLink<T> current = first;
                 DoublyLink<T> previous = first;
+                @SuppressWarnings("unchecked")
+                Comparable<Object> firstComparable = (Comparable<Object>) data;
+                @SuppressWarnings("unchecked")
+                Comparable<Object> secondComparable = (Comparable<Object>) current.getdData();
                 switch (order) {
                     case 0:
-                        while (current != null && ((Comparable) data).compareTo((Comparable) current.getdData()) > 0) {
+                        while (current != null && (firstComparable).compareTo(secondComparable) > 0) {
                             previous = current;
                             current = current.getNext();
                         }
@@ -122,7 +126,7 @@ public class DoublyLinkedList<T> {
                         }
                         break;
                     case 1:
-                        while (current != null && ((Comparable) data).compareTo((Comparable) current.getdData()) < 0) {
+                        while (current != null && (firstComparable).compareTo(secondComparable) < 0) {
                             previous = current;
                             current = current.getNext();
                         }

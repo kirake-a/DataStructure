@@ -80,10 +80,14 @@ public class DELinkList<T> {
             if (!isEmpty()) {
                 DELink<T> newLink = new DELink<T>(data);
                 DELink<T> current = first;
+                @SuppressWarnings("unchecked")
+                Comparable<Object> firstComparable = (Comparable<Object>) data;
+                @SuppressWarnings("unchecked")
+                Comparable<Object> secondComparable = (Comparable<Object>) current.getdData();
                 DELink<T> previous = first;
                 switch (order) {
                     case 0:
-                        while (current != null && ((Comparable) data).compareTo((Comparable) current.getdData()) > 0) {
+                        while (current != null && (firstComparable).compareTo(secondComparable) > 0) {
                             previous = current;
                             current = current.getNext();
                         }
@@ -95,7 +99,7 @@ public class DELinkList<T> {
                         }
                         break;
                     case 1:
-                        while (current != null && ((Comparable) data).compareTo((Comparable) current.getdData()) < 0) {
+                        while (current != null && (firstComparable).compareTo(secondComparable) < 0) {
                             previous = current;
                             current = current.getNext();
                         }

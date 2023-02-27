@@ -75,22 +75,23 @@ public class LinkList<T> {
      *              0. Insertar de manera ascendente. 1. Insertar de manera
      *              descendente
      */
-    @SuppressWarnings("Unchecked")
-    public void insertInOrder(int order, T data) {
+    public  void insertInOrder(int order, T data) {
 
         if (!((order == 0) || (order == 1))) {
             System.out.println("Esta opcion de ordenamiento no existe");
             return;
 
         } else {
-
+            
             if (!isEmpty()) {
-                Link<T> newLink = new Link<T>(data);
                 Link<T> current = first;
+                @SuppressWarnings("unchecked") Comparable<Object> firstComparable = (Comparable<Object>) data;
+                @SuppressWarnings("unchecked") Comparable<Object> secondComparable = (Comparable<Object>) current.getdData();
+                Link<T> newLink = new Link<T>(data);
                 Link<T> previous = first;
                 switch (order) {
                     case 0:
-                        while (current != null && ((Comparable) data).compareTo((Comparable) current.getdData()) > 0) {
+                        while ((current != null) && (firstComparable.compareTo(secondComparable) > 0)) {
                             previous = current;
                             current = current.getNext();
                         }
@@ -102,7 +103,7 @@ public class LinkList<T> {
                         }
                         break;
                     case 1:
-                        while (current != null && ((Comparable) data).compareTo((Comparable) current.getdData()) < 0) {
+                        while (current != null && (firstComparable).compareTo(secondComparable) < 0) {
                             previous = current;
                             current = current.getNext();
                         }
