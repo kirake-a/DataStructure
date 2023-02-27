@@ -24,7 +24,6 @@ public class LinkList<T> {
 
     /**
      * Permite verificar si el objeto LinkList esta vacio
-     * 
      * @return true si la lista esta vacia, sino false
      */
     public boolean isEmpty() {
@@ -33,7 +32,6 @@ public class LinkList<T> {
 
     /**
      * Crea un nuevo nodo y lo inserta al inicio de la LinkList
-     * 
      * @param datum El dato que contendra el nuevo nodo
      */
     public void insertFirst(T datum) {
@@ -45,7 +43,6 @@ public class LinkList<T> {
 
     /**
      * Inserta un nuevo nodo al final de la lista
-     * 
      * @param datum Valor del nodo
      */
     public void insertLast(T datum) {
@@ -66,9 +63,7 @@ public class LinkList<T> {
     /**
      * Inserta un dato de manera ordenada a la lista, dado un parametro entero para
      * realizar la insersion, si la lista estuviera vacia el dato unicamente se
-     * inserta
-     * lista para poder inicializarla
-     * 
+     * inserta en la lista para poder inicializarla
      * @param data  Valor del dato que tendra el nodo que se quiere insertar
      * @param order Valor entero por el cual se decide como se inserta el valor a la
      *              lista.
@@ -124,7 +119,6 @@ public class LinkList<T> {
 
     /**
      * Muestra el primer elemento sin eliminarlo
-     * 
      * @return Primer nodo en la lista, null si no existieran valores en la lista.
      * @see #isEmpty()
      */
@@ -142,7 +136,6 @@ public class LinkList<T> {
 
     /**
      * Muestra el ultimo elemento sin eliminarlo
-     * 
      * @return Ultimo nodo, null si la lista estaba vacia
      * @see #isEmpty()
      */
@@ -163,7 +156,6 @@ public class LinkList<T> {
 
     /**
      * Nos devuelve el tamanio de la lista
-     * 
      * @return El tamanio de la lista
      */
     public int sizeList() {
@@ -177,10 +169,8 @@ public class LinkList<T> {
     }
 
     /**
-     * Hace una búsqueda de un elemento y devuelve -1 si no lo encontró y la
-     * posición del dato
-     * en la lista en caso de que se haya encontrado.
-     * 
+     * Hace una busqueda de un elemento y devuelve -1 si no lo encontro y la
+     * posicion del dato en la lista en caso de que se haya encontrado.
      * @param datum El dato que se busca
      * @return La posicion del nodo, si no existe -1
      */
@@ -205,7 +195,6 @@ public class LinkList<T> {
     /**
      * Actualiza el dato de un nodo, proporcionando el valor previo al
      * que se quiere actualizar y el valor a actualizar.
-     * 
      * @param previousValue Valor previo al que se quiere actualizar
      * @param newValue      Nuevo valor
      */
@@ -230,7 +219,6 @@ public class LinkList<T> {
     /**
      * Actualiza el dato de un nodo proporcionando su valor actual y el
      * valor con el que se quiere actualizar
-     * 
      * @param oldValue Valor anterior
      * @param newVelue Valor a actualizar
      */
@@ -253,7 +241,6 @@ public class LinkList<T> {
      * Actualiza el dato de un nodo, proporcionando el valor a actualizar y la
      * posición del elemento
      * que se quiere actualizar
-     * 
      * @param position Posicion del nodo
      * @param newValue Valor a actualizar
      */
@@ -281,7 +268,6 @@ public class LinkList<T> {
 
     /**
      * Elimina y devuelve el primer elemento de la lista
-     * 
      * @return Elemento eliminado, null si la lista estaba vacia
      */
     public Link<T> deleteFirst() {
@@ -295,7 +281,6 @@ public class LinkList<T> {
 
     /**
      * Elimina y devuelve el ultimo elemento de la lista
-     * 
      * @return Elemento eliminado, null si la lista estaba vacia
      */
     public Link<T> deleteLast() {
@@ -319,8 +304,7 @@ public class LinkList<T> {
     }
 
     /**
-     * Elimina un elemento de una posición en la lista
-     * 
+     * Elimina un elemento de una posicion en la lista
      * @param position Posicion del nodo
      * @return Elemento eliminado, null si la lista estaba vacia
      */
@@ -354,7 +338,6 @@ public class LinkList<T> {
 
     /**
      * Elimina un elemento proporcionado, mediante su dato
-     * 
      * @param data Valor del nodo a eliminar
      * @return Elemento eliminado, null si la lista estaba vacia
      */
