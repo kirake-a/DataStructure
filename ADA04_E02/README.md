@@ -8,6 +8,9 @@ En este proyecto se hace uso de listas simplemente y doblemente ligada como estr
 Los metodos que en estas clases se encuentran nos apoyaran para poder manipular este tipo de
 estrucutras.
 
+Se puede consultar la documentacion en formato interactivo del proyecto en la carpeta docs, 
+abriendo el archivo "index.html".
+
 ### Pre-requisitos 📋
 
 _Algunos apuntes previo a correr el programa_
