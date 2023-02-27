@@ -6,7 +6,7 @@ import Link.nodo.Link;
  * Crea una lista generica simplemente ligada, con un primer nodo en estado de
  * nulo
  * 
- * @autor Ruben Alvarado
+ * @author Ruben Alvarado
  * @author Monica Garcilazo
  * @version 21/02/2023
  */
