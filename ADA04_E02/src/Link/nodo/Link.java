@@ -1,4 +1,4 @@
-package Link;
+package Link.nodo;
 
 /**
  * Se genera un nodo de tipo generico

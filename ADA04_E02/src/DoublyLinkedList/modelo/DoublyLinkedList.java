@@ -1,4 +1,6 @@
-package DoublyLinkedList;
+package DoublyLinkedList.modelo;
+
+import DoublyLinkedList.nodo.DoublyLink;
 
 /**
  * Lista generica doblemente ligada

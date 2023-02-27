@@ -1,4 +1,6 @@
-package Link;
+package Link.modelo;
+
+import Link.nodo.Link;
 
 /**
  * Crea una lista generica simplemente ligada, con un primer nodo en estado de nulo
@@ -6,7 +8,7 @@ package Link;
  * @author Monica Garcilazo
  * @version 21/02/2023
  */
-class LinkList<T> {
+public class LinkList<T> {
     private Link<T> first;
     T data;
 

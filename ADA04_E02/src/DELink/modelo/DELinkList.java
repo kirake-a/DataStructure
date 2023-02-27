@@ -1,4 +1,6 @@
-package DELink;
+package DELink.modelo;
+
+import DELink.nodo.DELink;
 
 /**
  * Lista generica simplemente ligada que usa un apuntador first y uno last para indicar topes
@@ -7,7 +9,7 @@ package DELink;
  * @author Ruben Alvarado
  * @version 21/02/2023
  */
-class DELinkList<T> {
+public class DELinkList<T> {
     private DELink<T> first;
     private DELink<T> last;
     

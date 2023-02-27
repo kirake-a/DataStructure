@@ -1,4 +1,4 @@
-package DELink;
+package DELink.nodo;
 
 /**
  * Double Ending Link. Genera un nodo para una lista con doble terminacion

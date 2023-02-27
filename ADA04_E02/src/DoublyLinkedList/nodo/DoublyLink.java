@@ -1,4 +1,4 @@
-package DoublyLinkedList;
+package DoublyLinkedList.nodo;
 
 /**
  * Genera nodos de tipo Doubly con tipo de dato generico
