@@ -4,14 +4,15 @@ import DoublyLinkedList.nodo.DoublyLink;
 
 /**
  * Lista generica doblemente ligada
+ * 
  * @author Monica Garcilazo
  * @author Ruben Alvarado
  * @version 21/02/2023
  */
 public class DoublyLinkedList<T> {
-    private DoublyLink<T> first; 
-    private DoublyLink<T> last; 
-    
+    private DoublyLink<T> first;
+    private DoublyLink<T> last;
+
     /**
      * Crear a la lista con un first y last en valor null, es decir,
      * sin elementos en su interior como lista.
@@ -23,14 +24,16 @@ public class DoublyLinkedList<T> {
 
     /**
      * Devuelve true si la lista creada esta vacia, false si no lo esta
+     * 
      * @return Si la lista esta vacia
      */
     public boolean isEmpty() {
         return first == null;
     }
-    
+
     /**
      * Crea un nuevo nodo y lo inserta al inicio
+     * 
      * @param dd El dato que contendra el nuevo nodo
      */
     public void insertFirst(T dd) {
@@ -45,6 +48,7 @@ public class DoublyLinkedList<T> {
 
     /**
      * Inserta un nuevo nodo al final de la lista
+     * 
      * @param dd Valor que tendra el nodo
      */
     public void insertLast(T dd) {
@@ -60,7 +64,8 @@ public class DoublyLinkedList<T> {
 
     /**
      * Inserta un nuevo nodo despues de otro
-     * @param key Valor del nodo previo al que se quiere insertar
+     * 
+     * @param key   Valor del nodo previo al que se quiere insertar
      * @param datum Valor del nodo que se quiere insertar
      * @return true si se consiguio insertar, de lo contrario false
      */
@@ -78,7 +83,7 @@ public class DoublyLinkedList<T> {
         } else {
             newLink.setNext(current.getNext());
             current.getNext().setPrevious(newLink);
-            //current.next.previous = newLink;
+            // current.next.previous = newLink;
         }
         newLink.setPrevious(current);
         current.setNext(newLink);
@@ -89,54 +94,56 @@ public class DoublyLinkedList<T> {
      * Inserta un dato de manera ordenada a la lista, dado un parametro entero para
      * realizar la insersion, si la lista estuviera vacia el dato unicamente se
      * inserta a la lista, de esa forma inicializandola
-     * @param data Valor del dato que contendra el nodo a insertar
+     * 
+     * @param data  Valor del dato que contendra el nodo a insertar
      * @param order valor entero que determina si se inserta de forma
-     *                      ascendente o descendente
+     *              ascendente o descendente
      */
-    public void insertInOrder(int order, T data){
+    public void insertInOrder(int order, T data) {
         if (!((order == 0) || (order == 1))) {
-         System.out.println("Esta opcion de ordenamiento no existe");
-         return;
+            System.out.println("Esta opcion de ordenamiento no existe");
+            return;
         } else {
-         if (!isEmpty()) {
-             DoublyLink<T> newLink = new DoublyLink<T>(data);
-             DoublyLink<T> current = first;
-             DoublyLink<T> previous = first;
-             switch(order){
-                 case 0:
-                     while (current != null && ((Comparable) data).compareTo((Comparable) current.getdData()) > 0) {
-                         previous = current;
-                         current = current.getNext();
-                     }
-                     if (current == first) {
-                         insertFirst(data);
-                     } else {
-                         previous.setNext(newLink);
-                         newLink.setNext(current);
-                     }
-                 break;
-                 case 1:
-                     while (current != null && ((Comparable) data).compareTo((Comparable) current.getdData()) < 0) {
-                         previous = current;
-                         current = current.getNext();
-                     }
-                     if (current == first) {
-                         insertFirst(data);
-                     } else {
-                         previous.setNext(newLink);
-                         newLink.setNext(current);
-                     }
-                 break;
-             }        
-         }else {
-             insertFirst(data);
-             return;
-         }
+            if (!isEmpty()) {
+                DoublyLink<T> newLink = new DoublyLink<T>(data);
+                DoublyLink<T> current = first;
+                DoublyLink<T> previous = first;
+                switch (order) {
+                    case 0:
+                        while (current != null && ((Comparable) data).compareTo((Comparable) current.getdData()) > 0) {
+                            previous = current;
+                            current = current.getNext();
+                        }
+                        if (current == first) {
+                            insertFirst(data);
+                        } else {
+                            previous.setNext(newLink);
+                            newLink.setNext(current);
+                        }
+                        break;
+                    case 1:
+                        while (current != null && ((Comparable) data).compareTo((Comparable) current.getdData()) < 0) {
+                            previous = current;
+                            current = current.getNext();
+                        }
+                        if (current == first) {
+                            insertFirst(data);
+                        } else {
+                            previous.setNext(newLink);
+                            newLink.setNext(current);
+                        }
+                        break;
+                }
+            } else {
+                insertFirst(data);
+                return;
+            }
         }
-     }
+    }
 
     /**
      * Despliega el primer elemento del DoublyLink
+     * 
      * @return primer nodo, de lo contrario regresa null
      */
     public DoublyLink<T> showFirst() {
@@ -152,6 +159,7 @@ public class DoublyLinkedList<T> {
 
     /**
      * Despliega el ultimo elemento del DoublyLink
+     * 
      * @return El ultimo nodo, de lo contrario null
      */
     public DoublyLink<T> showLast() {
@@ -168,6 +176,7 @@ public class DoublyLinkedList<T> {
 
     /**
      * Conocer el tamanio de la lista
+     * 
      * @return tamanio de la lista
      */
     public int sizeList() {
@@ -178,13 +187,15 @@ public class DoublyLinkedList<T> {
             cont++;
             current = current.getNext();
         }
-        
+
         return cont;
     }
 
     /**
-     *  Hace una búsqueda de un elemento y devuelve -1 si no lo encontró y la posición del dato 
-     *  en la lista en caso de que se haya encontrado. 
+     * Hace una búsqueda de un elemento y devuelve -1 si no lo encontró y la
+     * posición del dato
+     * en la lista en caso de que se haya encontrado.
+     * 
      * @param datum Dato que se busca
      * @return Retorna la posicion del nodo, si no existe retorna -1
      */
@@ -209,8 +220,9 @@ public class DoublyLinkedList<T> {
     /**
      * Actualiza el dato de un nodo, proporcionando el valor actual y el valor
      * con el que se quiere actualizar el nodo
+     * 
      * @param oldDaum Valor anterior
-     * @param datum Valor al que se quiere actualizar
+     * @param datum   Valor al que se quiere actualizar
      */
     public void updateNode(T oldDaum, T datum) {
         if (!isEmpty()) {
@@ -227,8 +239,10 @@ public class DoublyLinkedList<T> {
     }
 
     /**
-     * Actualiza el dato de un nodo, proporcionando el valor a actualizar y la posición del elemento 
+     * Actualiza el dato de un nodo, proporcionando el valor a actualizar y la
+     * posición del elemento
      * que se quiere actualizar. Siempre y cuando la lista no sea una lista vacia
+     * 
      * @param position Posicion del nodo
      * @param newValue Nuevo valor del nodo
      * @see #isEmpty()
@@ -257,6 +271,7 @@ public class DoublyLinkedList<T> {
 
     /**
      * Elimina y devuelve el primer valor de la lista
+     * 
      * @return Elemento eliminado
      */
     public DoublyLink<T> deleteFirst() {
@@ -271,6 +286,7 @@ public class DoublyLinkedList<T> {
 
     /**
      * Elimina y devuelve el ultimo valor en la lista
+     * 
      * @return Elemento eliminado
      */
     public DoublyLink<T> deleteLast() {
@@ -282,9 +298,10 @@ public class DoublyLinkedList<T> {
         last = last.getPrevious();
         return temp;
     }
-    
+
     /**
      * Elimina y devuelve un nodo de la lista
+     * 
      * @param key Valor del nodo
      * @return Nodo eliminado
      */
@@ -307,8 +324,9 @@ public class DoublyLinkedList<T> {
     }
 
     /**
-     *  Elimina un elemento en la lista, dada su posicion.
-     *  Unicamente si la lista no esta vacia
+     * Elimina un elemento en la lista, dada su posicion.
+     * Unicamente si la lista no esta vacia
+     * 
      * @param position Posicion del nodo
      * @see #isEmpty()
      * @return Valor eliminado
@@ -330,7 +348,7 @@ public class DoublyLinkedList<T> {
         }
         return null;
     }
-    
+
     /**
      * Elimina todos los nodos contenido en la lista
      */
@@ -339,7 +357,7 @@ public class DoublyLinkedList<T> {
             first = first.getNext();
         }
     }
-    
+
     /**
      * Despliega los datos de la lista tomando como inicio el nodo
      * first de la lista
@@ -361,10 +379,10 @@ public class DoublyLinkedList<T> {
     public void displayBackward() {
         System.out.print("List (last-->first): ");
         DoublyLink<T> current = last;
-        while(current != null) {
-            current.displayLink(); 
-            current = current.getPrevious(); 
+        while (current != null) {
+            current.displayLink();
+            current = current.getPrevious();
         }
         System.out.println("");
     }
-} 
+}

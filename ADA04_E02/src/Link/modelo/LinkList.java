@@ -3,7 +3,9 @@ package Link.modelo;
 import Link.nodo.Link;
 
 /**
- * Crea una lista generica simplemente ligada, con un primer nodo en estado de nulo
+ * Crea una lista generica simplemente ligada, con un primer nodo en estado de
+ * nulo
+ * 
  * @autor Ruben Alvarado
  * @author Monica Garcilazo
  * @version 21/02/2023
@@ -22,6 +24,7 @@ public class LinkList<T> {
 
     /**
      * Permite verificar si el objeto LinkList esta vacio
+     * 
      * @return true si la lista esta vacia, sino false
      */
     public boolean isEmpty() {
@@ -30,18 +33,20 @@ public class LinkList<T> {
 
     /**
      * Crea un nuevo nodo y lo inserta al inicio de la LinkList
+     * 
      * @param datum El dato que contendra el nuevo nodo
      */
     public void insertFirst(T datum) {
         Link<T> newLink = new Link<T>(datum);
-        //newLink.next = first;
+        // newLink.next = first;
         newLink.setNext(first);
         first = newLink;
     }
 
     /**
      * Inserta un nuevo nodo al final de la lista
-     * @param datum Valor del nodo 
+     * 
+     * @param datum Valor del nodo
      */
     public void insertLast(T datum) {
         Link<T> current = first;
@@ -57,59 +62,68 @@ public class LinkList<T> {
             }
         }
     }
-    
+
     /**
-     * Inserta un dato de manera ordenada a la lista, dado un parametro entero para 
-     * realizar la insersion, si la lista estuviera vacia el dato unicamente se inserta
+     * Inserta un dato de manera ordenada a la lista, dado un parametro entero para
+     * realizar la insersion, si la lista estuviera vacia el dato unicamente se
+     * inserta
      * lista para poder inicializarla
-     * @param data Valor del dato que tendra el nodo que se quiere insertar
-     * @param order Valor entero por el cual se decide como se inserta el valor a la lista.
-     * 0. Insertar de manera ascendente. 1. Insertar de manera descendente
+     * 
+     * @param data  Valor del dato que tendra el nodo que se quiere insertar
+     * @param order Valor entero por el cual se decide como se inserta el valor a la
+     *              lista.
+     *              0. Insertar de manera ascendente. 1. Insertar de manera
+     *              descendente
      */
-    public void insertInOrder(int order, T data){
+    @SuppressWarnings("Unchecked")
+    public void insertInOrder(int order, T data) {
+
         if (!((order == 0) || (order == 1))) {
-         System.out.println("Esta opcion de ordenamiento no existe");
-         return;
+            System.out.println("Esta opcion de ordenamiento no existe");
+            return;
+
         } else {
-         if (!isEmpty()) {
-             Link<T> newLink = new Link<T>(data);
-             Link<T> current = first;
-             Link<T> previous = first;
-             switch(order){
-                 case 0:
-                     while (current != null && ((Comparable) data).compareTo((Comparable) current.getdData()) > 0) {
-                         previous = current;
-                         current = current.getNext();
-                     }
-                     if (current == first) {
-                         insertFirst(data);
-                     } else {
-                         previous.setNext(newLink);
-                         newLink.setNext(current);
-                     }
-                 break;
-                 case 1:
-                     while (current != null && ((Comparable) data).compareTo((Comparable) current.getdData()) < 0) {
-                         previous = current;
-                         current = current.getNext();
-                     }
-                     if (current == first) {
-                         insertFirst(data);
-                     } else {
-                         previous.setNext(newLink);
-                         newLink.setNext(current);
-                     }
-                 break;
-             }        
-         }else {
-             insertFirst(data);
-             return;
-         }
+
+            if (!isEmpty()) {
+                Link<T> newLink = new Link<T>(data);
+                Link<T> current = first;
+                Link<T> previous = first;
+                switch (order) {
+                    case 0:
+                        while (current != null && ((Comparable) data).compareTo((Comparable) current.getdData()) > 0) {
+                            previous = current;
+                            current = current.getNext();
+                        }
+                        if (current == first) {
+                            insertFirst(data);
+                        } else {
+                            previous.setNext(newLink);
+                            newLink.setNext(current);
+                        }
+                        break;
+                    case 1:
+                        while (current != null && ((Comparable) data).compareTo((Comparable) current.getdData()) < 0) {
+                            previous = current;
+                            current = current.getNext();
+                        }
+                        if (current == first) {
+                            insertFirst(data);
+                        } else {
+                            previous.setNext(newLink);
+                            newLink.setNext(current);
+                        }
+                        break;
+                }
+            } else {
+                insertFirst(data);
+                return;
+            }
         }
-     }
+    }
 
     /**
      * Muestra el primer elemento sin eliminarlo
+     * 
      * @return Primer nodo en la lista, null si no existieran valores en la lista.
      * @see #isEmpty()
      */
@@ -127,6 +141,7 @@ public class LinkList<T> {
 
     /**
      * Muestra el ultimo elemento sin eliminarlo
+     * 
      * @return Ultimo nodo, null si la lista estaba vacia
      * @see #isEmpty()
      */
@@ -147,6 +162,7 @@ public class LinkList<T> {
 
     /**
      * Nos devuelve el tamanio de la lista
+     * 
      * @return El tamanio de la lista
      */
     public int sizeList() {
@@ -160,8 +176,10 @@ public class LinkList<T> {
     }
 
     /**
-     *  Hace una búsqueda de un elemento y devuelve -1 si no lo encontró y la posición del dato 
-     *  en la lista en caso de que se haya encontrado.
+     * Hace una búsqueda de un elemento y devuelve -1 si no lo encontró y la
+     * posición del dato
+     * en la lista en caso de que se haya encontrado.
+     * 
      * @param datum El dato que se busca
      * @return La posicion del nodo, si no existe -1
      */
@@ -183,11 +201,12 @@ public class LinkList<T> {
         return -1;
     }
 
-     /**
-     * Actualiza el dato de un nodo, proporcionando el valor previo al 
+    /**
+     * Actualiza el dato de un nodo, proporcionando el valor previo al
      * que se quiere actualizar y el valor a actualizar.
+     * 
      * @param previousValue Valor previo al que se quiere actualizar
-     * @param newValue Nuevo valor
+     * @param newValue      Nuevo valor
      */
     public void updateWithPrevNode(T previousValue, T newValue) {
 
@@ -208,8 +227,9 @@ public class LinkList<T> {
     }
 
     /**
-     * Actualiza el dato de un nodo proporcionando su valor actual y el 
+     * Actualiza el dato de un nodo proporcionando su valor actual y el
      * valor con el que se quiere actualizar
+     * 
      * @param oldValue Valor anterior
      * @param newVelue Valor a actualizar
      */
@@ -227,10 +247,12 @@ public class LinkList<T> {
             }
         }
     }
-    
+
     /**
-     * Actualiza el dato de un nodo, proporcionando el valor a actualizar y la posición del elemento 
+     * Actualiza el dato de un nodo, proporcionando el valor a actualizar y la
+     * posición del elemento
      * que se quiere actualizar
+     * 
      * @param position Posicion del nodo
      * @param newValue Valor a actualizar
      */
@@ -255,10 +277,11 @@ public class LinkList<T> {
             }
         }
     }
-    
+
     /**
      * Elimina y devuelve el primer elemento de la lista
-     * @return Elemento eliminado, null si la lista estaba vacia 
+     * 
+     * @return Elemento eliminado, null si la lista estaba vacia
      */
     public Link<T> deleteFirst() {
         Link<T> temp = null;
@@ -270,7 +293,8 @@ public class LinkList<T> {
     }
 
     /**
-     * Elimina y devuelve el ultimo elemento de la lista 
+     * Elimina y devuelve el ultimo elemento de la lista
+     * 
      * @return Elemento eliminado, null si la lista estaba vacia
      */
     public Link<T> deleteLast() {
@@ -292,9 +316,10 @@ public class LinkList<T> {
         }
         return null;
     }
-    
+
     /**
      * Elimina un elemento de una posición en la lista
+     * 
      * @param position Posicion del nodo
      * @return Elemento eliminado, null si la lista estaba vacia
      */
@@ -306,7 +331,7 @@ public class LinkList<T> {
                 int cont = 0;
                 Link<T> temp = null;
                 Link<T> current = first;
-                if(position == 0){
+                if (position == 0) {
                     temp = first;
                     first = first.getNext();
                 }
@@ -327,8 +352,9 @@ public class LinkList<T> {
     }
 
     /**
-     * Elimina un elemento proporcionado, mediante su dato 
-     * @param data Valor del nodo a eliminar 
+     * Elimina un elemento proporcionado, mediante su dato
+     * 
+     * @param data Valor del nodo a eliminar
      * @return Elemento eliminado, null si la lista estaba vacia
      */
     public Link<T> deleteItem(T data) {
@@ -352,7 +378,7 @@ public class LinkList<T> {
             }
         }
         return null;
-    } 
+    }
 
     /**
      * Elimina todos los elementos de la lista
@@ -362,16 +388,16 @@ public class LinkList<T> {
             first = first.getNext();
         }
     }
-    
+
     /**
      * Despliega todos los datos en la lista, mostrando el first y last
      */
     public void displayList() {
         System.out.print("List (first--> ");
         Link<T> current = first;
-        while(current != null) {
-            current.displayLink(); 
-            current = current.getNext(); 
+        while (current != null) {
+            current.displayLink();
+            current = current.getNext();
         }
         System.out.println("<--last)");
     }
