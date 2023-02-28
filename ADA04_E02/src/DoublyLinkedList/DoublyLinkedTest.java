@@ -1,5 +1,7 @@
 package DoublyLinkedList;
 
+import DoublyLinkedList.modelo.DoublyLinkedList;
+
 public class DoublyLinkedTest {
     public static void main(String[] args) {
     DoublyLinkedList<Integer> theList = new DoublyLinkedList<>();
@@ -8,7 +10,9 @@ public class DoublyLinkedTest {
     theList.insertFirst(66);
     theList.insertLast(11); 
     theList.insertLast(33);
-    theList.insertLast(55);
+    theList.insertLast(70);
+    theList.displayForward();
+    theList.insertInOrder(0, 67);
     theList.displayForward();
     theList.deletePosition(7);
     theList.displayForward();
@@ -30,5 +34,7 @@ public class DoublyLinkedTest {
     theList.insertAfter(33, 88); 
     theList.deleteAll();
     theList.displayForward(); 
+    
     }
+
 }

@@ -1,5 +1,7 @@
 package Link;
 
+import Link.modelo.LinkList;
+
 public class LinkListTest<T> {
     public static void main(String[] args) {
         LinkList<Integer> list = new LinkList<Integer>();
@@ -12,6 +14,8 @@ public class LinkListTest<T> {
         list.insertFirst(64);
         list.insertLast(34);
         list.insertLast(21);
+        list.displayList();
+        list.insertInOrder(0, 70);
         list.displayList();
         list.deletePosition(6);
         list.displayList();
