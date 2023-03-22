@@ -209,6 +209,36 @@ public class DoublyLinkedList<T> {
     }
 
     /**
+     * Retorna el valor contenido en el nodo en la posicion dada
+     * @param position La posicion en la lista de la cual se requiere obtener el valor del nodo
+     * @return Dato contenido en el nodo
+     */
+    public T searchItemPosition(int position){
+        int counterPosition = 0;
+        T data = null;
+        DoublyLink<T> current = first;
+
+        if (!isEmpty()) {
+
+            if (position > this.sizeList()) {
+                System.out.println("La posicion sobrepasa el tamanio de la lista");
+            } else{ 
+
+                while (counterPosition != position) {
+                    current = current.getNext();
+                    counterPosition++;
+                }
+
+                if (counterPosition == position) {
+                    data = current.getdData();
+                }
+            }
+        }
+
+        return data;
+    }
+
+    /**
      * Actualiza el dato de un nodo, proporcionando el valor actual y el valor
      * con el que se quiere actualizar el nodo
      * @param oldDaum Valor anterior
@@ -224,6 +254,25 @@ public class DoublyLinkedList<T> {
                     break;
                 } else
                     current = current.getNext();
+            }
+        }
+    }
+
+    /**
+     * Intercambia los valores entre dos nodos dados sus posiciones dentro de la lista
+     * @param position1 La posicion del primero nodo
+     * @param position2 La posicion del segundo nodo
+     */
+    public void changeValuePositions(int position1, int position2){
+        if (!isEmpty()) {
+            if ((position1 > this.sizeList()) | (position2 > this.sizeList())) {
+                System.out.println("La posicion sobrepasa el tamanio de la lista");
+            } else{
+                T data1 = this.searchItemPosition(position1);
+                T data2 = this.searchItemPosition(position2);
+
+                this.updateNode(data1, data2);
+                this.updateNode(data2, data1);
             }
         }
     }
