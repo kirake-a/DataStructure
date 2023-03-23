@@ -1,71 +1,60 @@
 package model.sortingMethods;
 
-public class MergeSort {
-    // Todavia no esta el metodo decreciente
-    
-    public void mergeSortUpward(int arr[], int left, int right) {
-        if (left < right) {
-            // Encuentra el punto medio del vector.
-            int middle = (left + right) / 2;
+public class MergeSort{
+   private long[] theArray;          // ref to array theArray
+   private int nElems;               // number of data items
 
-            // Divide la primera y segunda mitad (llamada recursiva).
-            mergeSortUpward(arr, left, middle);
-            mergeSortUpward(arr, middle + 1, right);
+   public MergeSort(int max)   {
+      theArray = new long[max];      // create array
+      nElems = 0;
+   }
+   
+   public void insert(long value){
+      theArray[nElems] = value;      // insert it
+      nElems++;                      // increment size
+   }
 
-            // Une las mitades.
-            merge(arr, left, middle, right);
-        }
-    }
+   public void display() {
+      for(int j=0; j<nElems; j++)    // for each element,
+         System.out.print(theArray[j] + " ");  // display it
+      System.out.println("");
+   }
 
-    private void merge(int arr[], int left, int middle, int right) {
-        // Encuentra el tamaño de los sub-vectores para unirlos.
-        int n1 = middle - left + 1;
-        int n2 = right - middle;
+   public void mergeSort() {
+      long[] workSpace = new long[nElems];
+      recMergeSort(workSpace, 0, nElems-1);
+   }
 
-        // Vectores temporales.
-        int leftArray[] = new int[n1];
-        int rightArray[] = new int[n2];
+   private void recMergeSort(long[] workSpace, int lowerBound, int upperBound){
+      if(lowerBound == upperBound)            // if range is 1,
+         return;                              // no use sorting
+      else {                                    
+         int mid = (lowerBound+upperBound) / 2; // find midpoint        
+         recMergeSort(workSpace, lowerBound, mid); // sort low half
+         recMergeSort(workSpace, mid+1, upperBound); // sort high half
+         merge(workSpace, lowerBound, mid+1, upperBound); // merge them
+      }  // end else
+   }  // end recMergeSort()
 
-        // Copia los datos a los arrays temporales.
-        for (int i = 0; i < n1; i++) {
-            leftArray[i] = arr[left + i];
-        }
+   private void merge(long[] workSpace, int lowPtr, int highPtr, int upperBound) {
+      int j = 0;                             // workspace index
+      int lowerBound = lowPtr;
+      int mid = highPtr-1;
+      int n = upperBound-lowerBound+1;       // # of items
 
-        for (int j = 0; j < n2; j++) {
-            rightArray[j] = arr[middle + j + 1];
-        }
-        /* Une los vectorestemporales. */
+      while(lowPtr <= mid && highPtr <= upperBound)
+         if( theArray[lowPtr] < theArray[highPtr] )
+            workSpace[j++] = theArray[lowPtr++];
+         else
+            workSpace[j++] = theArray[highPtr++];
 
-        // Índices inicial del primer y segundo sub-vector.
-        int i = 0, j = 0;
+      while(lowPtr <= mid)
+         workSpace[j++] = theArray[lowPtr++];
 
-        // Índice inicial del sub-vector arr[].
-        int k = left;
+      while(highPtr <= upperBound)
+         workSpace[j++] = theArray[highPtr++];
 
-        // Ordenamiento.
-        while (i < n1 && j < n2) {
-            if (leftArray[i] <= rightArray[j]) {
-                arr[k] = leftArray[i];
-                i++;
-            } else {
-                arr[k] = rightArray[j];
-                j++;
-            }
-            k++;
-        } // Fin del while.
-
-        /* Si quedan elementos por ordenar */
-        // Copiar los elementos restantes de leftArray[].
-        while (i < n1) {
-            arr[k] = leftArray[i];
-            i++;
-            k++;
-        }
-        // Copiar los elementos restantes de rightArray[].
-        while (j < n2) {
-            arr[k] = rightArray[j];
-            j++;
-            k++;
-        }
-    }
+      for(j=0; j<n; j++)
+         theArray[lowerBound+j] = workSpace[j];
+   }
 }

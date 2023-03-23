@@ -7,10 +7,5 @@ package model;
  * y si sera excepciones propias o ya de java
  */
 public class Sorter {
-    DoublyLinkedList<Song> songs;
-
-    public Sorter(DoublyLinkedList<Song> songs) {
-        this.songs = songs;
-    }
 
 }

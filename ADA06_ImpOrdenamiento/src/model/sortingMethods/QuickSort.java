@@ -1,72 +1,75 @@
 package model.sortingMethods;
 
-public class QuickSort {
-    // Todavia no esta la version descendente del metodo
+public class QuickSort{
+    private long[] theArray;          // ref to array theArray
+    private int nElems;               // number of data items
 
-    /**
-     * The main funcion that implements QuickSort
-     * 
-     * @param arr  Array to be sorted
-     * @param low  Starting index
-     * @param high Ending index
-     */
-    public void quickSortUpward(int[] arr, int low, int high) {
-        if (low < high) {
-
-            // pi is partitioning index, arr[p]
-            // is now at right place
-            int pi = partition(arr, low, high);
-
-            // Separately sort elements before
-            // partition and after partition
-            quickSortUpward(arr, low, pi - 1);
-            quickSortUpward(arr, pi + 1, high);
-        }
+    public QuickSort(int max)   {
+      theArray = new long[max];      // create array
+      nElems = 0;
     }
 
-    private void swap(int[] arr, int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+    public void insert(long value){
+      theArray[nElems] = value;      // insert it
+      nElems++;                      // increment size
     }
 
-    /**
-     * This function takes the last element as pivot, places
-     * the pivot element as its correct position in sorted
-     * array, and places all smaller (smaller than pivot)
-     * to left of pivot and all greater elements to right
-     * of pivot
-     * 
-     * @param arr
-     * @param low
-     * @param high
-     * @return
-     */
-    private int partition(int[] arr, int low, int high) {
+    public void display() {
+      for(int j=0; j<nElems; j++)    // for each element,
+         System.out.print(theArray[j] + " ");  // display it
+      System.out.println("");
+    }
 
-        // pivot
-        int pivot = arr[high];
-
+    void swap(int i, int j){
+        long temp = theArray[i];
+        theArray[i] = theArray[j];
+        theArray[j] = temp;
+    }
+    
+    /* toma el ultimo elemento como pivote, 
+    coloca el pivote en su posicion correcta del arreglo ordenado,
+    coloca todos los valores mas pequeños (menores a los pivotes)
+    a la izquierda del pivote y coloca todos los valores mas grandes 
+    (mayores a los pivotes) a la derecha del pivote 
+    */
+    int partition(int low, int high){
+        
+        long pivot = theArray[high];
+        
         // Index of smaller element and
         // indicates the right position
         // of pivot found so far
         int i = (low - 1);
-
-        for (int j = low; j <= high - 1; j++) {
-
+    
+        for(int j = low; j <= high - 1; j++){
             // If current element is smaller
             // than the pivot
-            if (arr[j] < pivot) {
-
+            if (theArray[j] < pivot){
                 // Increment index of
                 // smaller element
                 i++;
-                swap(arr, i, j);
+                swap(i, j);
             }
         }
-
-        swap(arr, i + 1, high);
-
+        swap(i + 1, high);
         return (i + 1);
+    }
+    
+    /* The main function that implements QuickSort
+            arr[] --> Array to be sorted,
+            low --> Starting index,
+            high --> Ending index
+    */
+    void recQSort(int low, int high){
+        if (low < high){
+            // pi is partitioning index, arr[p]
+            // is now at right place
+            int pi = partition(low, high);
+    
+            // Separately sort elements before
+            // partition and after partition
+            recQSort(low, pi - 1);
+            recQSort(pi + 1, high);
+        }
     }
 }
