@@ -1,5 +1,8 @@
 package model;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 /**
  * Lista generica doblemente ligada
  * @author Monica Garcilazo
@@ -17,6 +20,10 @@ public class DoublyLinkedList<T> {
     public DoublyLinkedList() {
         first = null;
         last = null;
+    }
+
+    public DoublyLinkedList(Collection<? extends T> c){
+        this();
     }
 
     /**
