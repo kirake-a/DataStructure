@@ -2,7 +2,15 @@ package model.sortingMethods;
 
 public class BinaryInsertionSort {
  
-//  implementacion iterativa 
+    // implementacion iterativa
+    /**
+     * 
+     * @param a
+     * @param item
+     * @param low
+     * @param high
+     * @return
+     */ 
     public int binarySearch(int a[], int item, int low, int high){
         while (low <= high) {
             int mid = low + (high - low) / 2;
@@ -16,8 +24,14 @@ public class BinaryInsertionSort {
         return low;
     }
 
+    /**
+     * 
+     * @param a
+     * @param n
+     */
     public void binaryInsertionSort(int a[], int n) {
-        int i, loc, j, k, selected;
+        int i, loc, j, selected;
+        //int k;
     
         for (i = 1; i < n; ++i) {
             j = i - 1;
