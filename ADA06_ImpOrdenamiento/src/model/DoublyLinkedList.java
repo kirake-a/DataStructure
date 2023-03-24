@@ -9,6 +9,7 @@ import java.util.LinkedList;
  * @author Ruben Alvarado
  * @version 21/02/2023
  */
+@SuppressWarnings("unused")
 public class DoublyLinkedList<T> {
     private DoublyLink<T> first;
     private DoublyLink<T> last;

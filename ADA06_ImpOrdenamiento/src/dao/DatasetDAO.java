@@ -8,6 +8,7 @@ import java.io.IOException;
 import model.Country;
 import model.DoublyLinkedList;
 
+@SuppressWarnings("unused")
 public class DatasetDAO {
     private DoublyLinkedList<Country> data;
     private String path;
