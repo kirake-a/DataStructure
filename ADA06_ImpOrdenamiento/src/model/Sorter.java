@@ -14,7 +14,8 @@ import model.sortingMethods.RadixSort;
 public class Sorter {
     private DoublyLinkedList<Country> list;
 
-    public Sorter(){}
+    public Sorter() {
+    }
 
     public Sorter(DoublyLinkedList<Country> list) {
         this.list = list;
@@ -77,16 +78,37 @@ public class Sorter {
      * @throws Exception El digito de la variable key no es un metodo de
      *                   ordenamiento
      */
-    public void sorting(int key, int sortAttribute, DoublyLinkedList<Country> list) throws Exception {
+    public DoublyLinkedList<Country> sorting(int key, int sortAttribute, DoublyLinkedList<Country> auxList)
+            throws Exception {
         /*
          * Escoge el metodo de ordenamiento de la lista, en teoria esta
          * clase debera devolver la lista ordenada para su futuro procesamiento
          */
         switch (key) {
+            // Ordenamiento Quick Sort
             case 0:
-
-                break;
-
+                QuickSort<Country> quickOperator = new QuickSort<>(auxList);
+                quickOperator.sort(sortAttribute);
+                auxList = quickOperator.getList();
+                return auxList;
+            // Ordenamiento Merge Sort
+            case 1:
+                MergeSort<Country> mergeOoperator = new MergeSort<>(auxList);
+                mergeOoperator.sort(sortAttribute);
+                auxList = mergeOoperator.getList();
+                return auxList;
+            // Ordenamiento Binary Insertion Sort
+            case 2:
+                BinaryInsertionSort<Country> binaryOperator = new BinaryInsertionSort<>(auxList);
+                binaryOperator.sort(sortAttribute);
+                auxList = binaryOperator.getList();
+                return auxList;
+            // Ordenamiento Radix Sort
+            case 3: // NO ESTA IMPLEMENTADO TODAVIA
+                RadixSort<Country> radixOperator = new RadixSort<>(auxList);
+                radixOperator.sort(sortAttribute);
+                auxList = radixOperator.getList();
+                return auxList;
             default:
                 throw new Exception();
         }

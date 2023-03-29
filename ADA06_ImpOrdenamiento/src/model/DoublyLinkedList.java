@@ -491,10 +491,11 @@ public class DoublyLinkedList<T> {
     /**
      * Convierte una lista de tipo {@code DoublyLinkedList} a una lista
      * de tipo {@code LinkedList}
+     * 
      * @return Lista derivada de la clase {@code LinkedList}
      * @see LinkedList
      */
-    public LinkedList<T> convertToLinkedListT(){
+    public LinkedList<T> convertToLinkedListT() {
         LinkedList<T> newList = new LinkedList<>();
 
         if (!isEmpty()) {

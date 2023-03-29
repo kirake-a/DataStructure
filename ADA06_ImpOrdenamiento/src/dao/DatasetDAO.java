@@ -13,12 +13,12 @@ public class DatasetDAO {
     private String path;
     private BufferedReader reader;
 
-    public DatasetDAO(String path){
+    public DatasetDAO(String path) {
         data = new DoublyLinkedList<>();
         this.path = path;
     }
 
-    public void readFile() throws IOException{
+    public void readFile() throws IOException {
         File file = new File(this.path);
 
         if (file.canRead()) {
