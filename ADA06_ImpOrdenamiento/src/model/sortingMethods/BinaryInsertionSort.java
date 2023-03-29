@@ -6,12 +6,14 @@ import model.DoublyLinkedList;
 public class BinaryInsertionSort<T extends Comparable <T>>{
 
     /**
-     * 
-     * @param list
-     * @param item
-     * @param low
-     * @param high
-     * @return
+     * Busqueda binaria dentro de una {@code DoublyLinkedList}
+     * @param list Lista doblemente ligada
+     * @param item Dato objetivo
+     * @param low Posicion inicial de busqueda
+     * @param high Posicion final de busqueda
+     * @param sortAttribute Selecciona el atributo por el cual se realizara
+     *                      comparacion entre los nodos
+     * @return Valor de la comparacion
      */
     public int binarySearch(DoublyLinkedList<T> list, T item, int low, int high, int sortAttribute) {
         while (low <= high) {
@@ -28,6 +30,14 @@ public class BinaryInsertionSort<T extends Comparable <T>>{
         return low;
     }
 
+    /**
+     * Implementacion del metodo de ordenamiento binary insertion sort con
+     * listas doblemente ligadas
+     * @param list Lista doblemente ligada
+     * @param n
+     * @param sortAttribute Selecciona el atributo por el cual se realizara
+     *                      comparacion entre los nodos
+     */
     public void binaryInsertionSort(DoublyLinkedList<T> list, int n, int sortAttribute){
         int i, location, j;
         T selected;
@@ -46,14 +56,18 @@ public class BinaryInsertionSort<T extends Comparable <T>>{
         }
     }
 
-    public void printArray(int arr[]) {
-        int n = arr.length;
-        for (int i = 0; i < n; ++i)
-            System.out.print(arr[i] + " ");
-
-        System.out.println();
-    }
-
+    /**
+     * Realiza una comparacion entre el tipo de dato {@code a} y el tipo de dato {@code b}, 
+     * en funcion de conocer cual de ellos es mas grande o si fuera el caso, conocer si los datos
+     * son iguales, para ellos obtendremos que, si el tipo de dato {@code a} es menor al tipo de 
+     * dato {@code b} se regresa {@code -1}, si fuera el caso se regresa un {@code 1}, y si ambos
+     * datos son iguales entonces se regresa un {@code 0}
+     * @param a Primer dato, se comparara con el segundo dato
+     * @param b Segundo dato, se comparara con el primer dato
+     * @param sortAttribute Selecciona el atributo por el cual se realizara
+     *                      comparacion entre los nodos
+     * @return El valor resultante de la comparacion
+     */
     private int compare(T a, T b, int sortAttribute) {
 
         Country country1 = (Country) a;
@@ -63,9 +77,9 @@ public class BinaryInsertionSort<T extends Comparable <T>>{
 
             case 1:
 
-                if (country1.getPopulation() > country2.getPopulation()) {
+                if (country1.getPopulation() < country2.getPopulation()) {
                     return -1;
-                } else if (country1.getPopulation() < country2.getPopulation()) {
+                } else if (country1.getPopulation() > country2.getPopulation()) {
                     return 1;
                 } else {
                     return 0;
@@ -74,18 +88,18 @@ public class BinaryInsertionSort<T extends Comparable <T>>{
                 return country1.getCountryName().compareTo(country2.getCountryName());
 
             case 3:
-                if (country1.getActiveCases() > country2.getActiveCases()) {
+                if (country1.getActiveCases() < country2.getActiveCases()) {
                     return -1;
-                } else if (country1.getActiveCases() < country2.getActiveCases()) {
+                } else if (country1.getActiveCases() > country2.getActiveCases()) {
                     return 1;
                 } else {
                     return 0;
                 }
 
             case 4:
-                if (country1.getTotalDeaths() > country2.getTotalDeaths()) {
+                if (country1.getTotalDeaths() < country2.getTotalDeaths()) {
                     return -1;
-                } else if (country1.getTotalDeaths() < country2.getTotalDeaths()) {
+                } else if (country1.getTotalDeaths() > country2.getTotalDeaths()) {
                     return 1;
                 } else {
                     return 0;
