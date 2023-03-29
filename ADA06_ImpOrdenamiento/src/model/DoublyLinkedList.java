@@ -23,10 +23,6 @@ public class DoublyLinkedList<T> {
         last = null;
     }
 
-    public DoublyLinkedList(Collection<? extends T> c){
-        this();
-    }
-
     /**
      * Devuelve true si la lista creada esta vacia, false si no lo esta
      * @return Si la lista esta vacia
@@ -352,6 +348,26 @@ public class DoublyLinkedList<T> {
 
         }
 
+    }
+
+    /**
+     * Regresa una lista derivada de la lista original dado un intervalo de
+     * la lista original para con ello obtener a todos esos nodos, en el intervalo.
+     * @param start Posicion de inicio de la sublista
+     * @param end Posicion de finalizado de la lista. Tomar en cuenta que el nodo en
+     *            la posicion {@code end} no se agrega a la sublista
+     * @return Sublista de la original en los intervalores recibidos
+     */
+    public DoublyLinkedList<T> sublist(int start, int end){
+        DoublyLinkedList<T> list = new DoublyLinkedList<>();
+
+        if ((start < this.sizeList()) && (end < this.sizeList())) {
+            for (int i = start; i < end; i++) {
+                list.insertInPosition(i, this.searchItemPosition(i));
+            }
+        }
+
+        return list;
     }
 
     /**
