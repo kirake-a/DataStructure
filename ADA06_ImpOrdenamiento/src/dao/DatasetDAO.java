@@ -28,4 +28,14 @@ public class DatasetDAO {
             throw new IOException();
         }
     }
+
+    public DoublyLinkedList<Country> getData() {
+        return data;
+    }
+
+    public void setData(DoublyLinkedList<Country> data) {
+        this.data = data;
+    }
+
+    
 }
