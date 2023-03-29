@@ -1,9 +1,6 @@
 package model;
 
-import java.util.Comparator;
-
-@SuppressWarnings("unused")
-public class Country implements Comparator<Country>, Comparable<Country>{
+public class Country {
     private Integer serialNumber;
     private String countryName;
     private Double totalCases;
@@ -87,33 +84,6 @@ public class Country implements Comparator<Country>, Comparable<Country>{
 
     public void setPopulation(Float population) {
         this.population = population;
-    }
-
-    // Ejemplos del uso de compare y compareTo, para utilizar
-    // en la implementacion de los metodos de ordenamiento
-    @Override
-    public int compare(Country o1, Country o2) {
-        return o1.getTotalCases().compareTo(o2.getTotalCases());
-    }
-
-    @Override
-    /**
-     * 
-     * @param country
-     * @return
-     */
-    public int compareTo(Country country) {
-        int output;
-
-        if (country.getCountryName().compareToIgnoreCase(this.countryName) > 0) {
-            output = 1;
-        } else if(country.countryName.compareToIgnoreCase(this.countryName) < 0){
-            output = -1;
-        } else{
-            output = 0;
-        }
-        
-        return output;
     }
 
 }

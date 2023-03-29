@@ -46,13 +46,18 @@ public class QuickSort<T extends Comparable<T>> {
     }
 
     /**
-     * Realiza una comparacion entre el tipo de dato {@code a} y el tipo de dato {@code b}, 
-     * en funcion de conocer cual de ellos es mas grande o si fuera el caso, conocer si los datos
-     * son iguales, para ellos obtendremos que, si el tipo de dato {@code a} es menor al tipo de 
-     * dato {@code b} se regresa {@code -1}, si fuera el caso se regresa un {@code 1}, y si ambos
+     * Realiza una comparacion entre el tipo de dato {@code a} y el tipo de dato
+     * {@code b},
+     * en funcion de conocer cual de ellos es mas grande o si fuera el caso, conocer
+     * si los datos
+     * son iguales, para ellos obtendremos que, si el tipo de dato {@code a} es
+     * menor al tipo de
+     * dato {@code b} se regresa {@code -1}, si fuera el caso se regresa un
+     * {@code 1}, y si ambos
      * datos son iguales entonces se regresa un {@code 0}
-     * @param a Primer dato, se comparara con el segundo dato
-     * @param b Segundo dato, se comparara con el primer dato
+     * 
+     * @param a             Primer dato, se comparara con el segundo dato
+     * @param b             Segundo dato, se comparara con el primer dato
      * @param sortAttribute Selecciona el atributo por el cual se realizara
      *                      comparacion entre los nodos
      * @return El valor resultante de la comparacion
