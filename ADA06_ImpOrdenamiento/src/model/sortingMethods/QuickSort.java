@@ -45,6 +45,18 @@ public class QuickSort<T extends Comparable<T>> {
         b.setdData(temp);
     }
 
+    /**
+     * Realiza una comparacion entre el tipo de dato {@code a} y el tipo de dato {@code b}, 
+     * en funcion de conocer cual de ellos es mas grande o si fuera el caso, conocer si los datos
+     * son iguales, para ellos obtendremos que, si el tipo de dato {@code a} es menor al tipo de 
+     * dato {@code b} se regresa {@code -1}, si fuera el caso se regresa un {@code 1}, y si ambos
+     * datos son iguales entonces se regresa un {@code 0}
+     * @param a Primer dato, se comparara con el segundo dato
+     * @param b Segundo dato, se comparara con el primer dato
+     * @param sortAttribute Selecciona el atributo por el cual se realizara
+     *                      comparacion entre los nodos
+     * @return El valor resultante de la comparacion
+     */
     private int compare(T a, T b, int sortAttribute) {
 
         Country country1 = (Country) a;
@@ -54,9 +66,9 @@ public class QuickSort<T extends Comparable<T>> {
 
             case 1:
 
-                if (country1.getPopulation() > country2.getPopulation()) {
+                if (country1.getPopulation() < country2.getPopulation()) {
                     return -1;
-                } else if (country1.getPopulation() < country2.getPopulation()) {
+                } else if (country1.getPopulation() > country2.getPopulation()) {
                     return 1;
                 } else {
                     return 0;
@@ -65,18 +77,18 @@ public class QuickSort<T extends Comparable<T>> {
                 return country1.getCountryName().compareTo(country2.getCountryName());
 
             case 3:
-                if (country1.getActiveCases() > country2.getActiveCases()) {
+                if (country1.getActiveCases() < country2.getActiveCases()) {
                     return -1;
-                } else if (country1.getActiveCases() < country2.getActiveCases()) {
+                } else if (country1.getActiveCases() > country2.getActiveCases()) {
                     return 1;
                 } else {
                     return 0;
                 }
 
             case 4:
-                if (country1.getTotalDeaths() > country2.getTotalDeaths()) {
+                if (country1.getTotalDeaths() < country2.getTotalDeaths()) {
                     return -1;
-                } else if (country1.getTotalDeaths() < country2.getTotalDeaths()) {
+                } else if (country1.getTotalDeaths() > country2.getTotalDeaths()) {
                     return 1;
                 } else {
                     return 0;
