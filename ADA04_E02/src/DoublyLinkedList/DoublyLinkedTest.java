@@ -1,5 +1,7 @@
 package DoublyLinkedList;
 
+import DoublyLinkedList.modelo.DoublyLinkedList;
+
 public class DoublyLinkedTest {
     public static void main(String[] args) {
     DoublyLinkedList<Integer> theList = new DoublyLinkedList<>();

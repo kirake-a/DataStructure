@@ -1,5 +1,7 @@
 package Link;
 
+import Link.modelo.LinkList;
+
 public class LinkListTest<T> {
     public static void main(String[] args) {
         LinkList<Integer> list = new LinkList<Integer>();

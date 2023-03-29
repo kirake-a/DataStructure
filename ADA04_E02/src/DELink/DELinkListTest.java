@@ -1,5 +1,7 @@
 package DELink;
 
+import DELink.modelo.*;
+
 public class DELinkListTest<T> {
     
     public static void main(String[] args){

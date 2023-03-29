@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"DELink.modelo"},{"l":"DELink.nodo"},{"l":"DoublyLinkedList.modelo"},{"l":"DoublyLinkedList.nodo"},{"l":"Link.modelo"},{"l":"Link.nodo"}]

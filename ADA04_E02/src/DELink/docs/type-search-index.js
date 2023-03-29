@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"DELink.nodo","l":"DELink"},{"p":"DELink.modelo","l":"DELinkList"}]
