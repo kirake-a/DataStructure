@@ -4,23 +4,28 @@ import model.Country;
 import model.DoublyLink;
 import model.DoublyLinkedList;
 
-public class QuickSort<T extends Comparable<T>> {
+public class QuickSort<T> {
+    private DoublyLinkedList<T> list;
 
-    public void sort(DoublyLinkedList<T> list, int sortingAttribute) {
-        if (list == null || list.isEmpty()) {
-            return;
-        }
-        quicksort(list.getFirst(), list.getLast(), sortingAttribute);
+    public QuickSort(DoublyLinkedList<T> list){
+        this.list = list;
     }
 
-    private void quicksort(DoublyLink<T> left, DoublyLink<T> right, int sortingAttribute) {
+    public void sort(int sortingAttribute) {
+        if (this.list == null || this.list.isEmpty()) {
+            return;
+        }
+        quickSort(list.getFirst(), list.getLast(), sortingAttribute);
+    }
+
+    private void quickSort(DoublyLink<T> left, DoublyLink<T> right, int sortingAttribute) {
         if (left == null || right == null || left == right || left.getPrevious() == right) {
             return;
         }
 
         DoublyLink<T> pivot = partition(left, right, sortingAttribute);
-        quicksort(left, pivot.getPrevious(), sortingAttribute);
-        quicksort(pivot.getNext(), right, sortingAttribute);
+        quickSort(left, pivot.getPrevious(), sortingAttribute);
+        quickSort(pivot.getNext(), right, sortingAttribute);
     }
 
     private DoublyLink<T> partition(DoublyLink<T> left, DoublyLink<T> right, int sortingAttribute) {
@@ -102,5 +107,9 @@ public class QuickSort<T extends Comparable<T>> {
             default:
                 return 0;
         }
+    }
+
+    public DoublyLinkedList<T> getList(){
+        return this.list;
     }
 }

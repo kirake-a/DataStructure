@@ -3,8 +3,8 @@ package model.sortingMethods;
 import model.Country;
 import model.DoublyLinkedList;
 
-public class MergeSort<T extends Comparable<T>> {
-    private DoublyLinkedList<T> theList;
+public class MergeSort<T> {
+    private DoublyLinkedList<T> list;
     private int nElems; // number of data items
     private int sortAttribute;
 
@@ -13,12 +13,13 @@ public class MergeSort<T extends Comparable<T>> {
     // nElems = 0;
     // }
 
-    public MergeSort() {
-        nElems = 0;
+    public MergeSort(DoublyLinkedList<T> theList) {
+        this.list = theList;
+        nElems = theList.sizeList();
     }
 
     public void insert(T value) {
-        theList.insertInPosition(nElems, value);
+        list.insertInPosition(nElems, value);
         nElems++;
     }
 
@@ -27,47 +28,46 @@ public class MergeSort<T extends Comparable<T>> {
     // recMergeSort(workSpace, 0, nElems-1);
     // }
 
-    public void mergeSort(int sortAttribute) {
-        DoublyLinkedList<T> list = new DoublyLinkedList<>();
+    public void sort(int sortAttribute) {
         this.sortAttribute = sortAttribute;
         recMergeSort(list, 0, nElems - 1);
     }
 
-    private void recMergeSort(DoublyLinkedList<T> list, int lowerBound, int upperBound) {
+    private void recMergeSort(DoublyLinkedList<T> auxList, int lowerBound, int upperBound) {
         if (lowerBound == upperBound) {
             return;
         } else {
             int mid = (lowerBound + upperBound) / 2;
-            recMergeSort(list, lowerBound, mid);
-            recMergeSort(list, mid + 1, upperBound);
-            merge(list, lowerBound, mid + 1, upperBound, this.sortAttribute);
+            recMergeSort(auxList, lowerBound, mid);
+            recMergeSort(auxList, mid + 1, upperBound);
+            merge(auxList, lowerBound, mid + 1, upperBound, this.sortAttribute);
         }
     }
 
-    private void merge(DoublyLinkedList<T> list, int lowPtr, int highPtr, int upperBound, int sortAttribute) {
+    private void merge(DoublyLinkedList<T> auxList, int lowPtr, int highPtr, int upperBound, int sortAttribute) {
         int j = 0; // workspace index
         int lowerBound = lowPtr;
         int mid = highPtr - 1;
         int numItems = upperBound - lowerBound + 1;
 
         while (lowPtr <= mid && highPtr <= upperBound) {
-            if (compare(theList.searchItemPosition(lowPtr), theList.searchItemPosition(highPtr), sortAttribute) < 0) {
-                list.insertInPosition(j++, this.theList.searchItemPosition(lowPtr++));
+            if (compare(auxList.searchItemPosition(lowPtr), auxList.searchItemPosition(highPtr), sortAttribute) < 0) {
+                auxList.insertInPosition(j++, this.list.searchItemPosition(lowPtr++));
             } else {
-                list.insertInPosition(j++, this.theList.searchItemPosition(highPtr++));
+                auxList.insertInPosition(j++, this.list.searchItemPosition(highPtr++));
             }
         }
 
         while (lowPtr <= mid) {
-            list.insertInPosition(j++, this.theList.searchItemPosition(lowPtr++));
+            auxList.insertInPosition(j++, this.list.searchItemPosition(lowPtr++));
         }
 
         while (highPtr <= upperBound) {
-            list.insertInPosition(j++, this.theList.searchItemPosition(highPtr++));
+            auxList.insertInPosition(j++, this.list.searchItemPosition(highPtr++));
         }
 
         for (int i = 0; i < numItems; i++) {
-            this.theList.insertInPosition(lowerBound + i, list.searchItemPosition(i));
+            this.list.insertInPosition(lowerBound + i, auxList.searchItemPosition(i));
         }
     }
 
@@ -128,5 +128,9 @@ public class MergeSort<T extends Comparable<T>> {
             default:
                 return 0;
         }
+    }
+
+    public DoublyLinkedList<T> getList(){
+        return this.list;
     }
 }

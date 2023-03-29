@@ -489,6 +489,24 @@ public class DoublyLinkedList<T> {
     }
 
     /**
+     * Convierte una lista de tipo {@code DoublyLinkedList} a una lista
+     * de tipo {@code LinkedList}
+     * @return Lista derivada de la clase {@code LinkedList}
+     * @see LinkedList
+     */
+    public LinkedList<T> convertToLinkedListT(){
+        LinkedList<T> newList = new LinkedList<>();
+
+        if (!isEmpty()) {
+            DoublyLink<T> current = first;
+            while (current != null) {
+                newList.add(current.getdData());
+            }
+        }
+        return newList;
+    }
+
+    /**
      * Elimina todos los nodos contenido en la lista
      */
     public void deleteAll() {
