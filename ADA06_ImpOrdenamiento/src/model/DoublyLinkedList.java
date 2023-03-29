@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 /**
- * Lista generica doblemente ligada
+ * Implementacion personalizada de una lista doblemente ligada
  * @author Monica Garcilazo
  * @author Ruben Alvarado
  * @version 21/02/2023
@@ -368,6 +368,22 @@ public class DoublyLinkedList<T> {
         }
 
         return list;
+    }
+
+    /**
+     * Unifica la lista actual con la lista del argumento.
+     * Agrega la lista del argumento en su mismo orden al final
+     * de la lista actual.
+     * @param listJoin Lista que se anexara al final
+     */
+    public void mergeList(DoublyLinkedList<T> listJoin){
+        int counterPosition = 0;
+        int listSize = listJoin.sizeList();
+
+        while (counterPosition != listSize) {
+            this.insertLast(listJoin.searchItemPosition(counterPosition));
+            counterPosition++;
+        }
     }
 
     /**
