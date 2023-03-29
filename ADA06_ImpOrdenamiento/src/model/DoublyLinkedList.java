@@ -35,6 +35,14 @@ public class DoublyLinkedList<T> {
         return first == null;
     }
 
+    public DoublyLink<T> getFirst(){
+        return this.first;
+    }
+
+    public DoublyLink<T> getLast(){
+        return this.last;
+    }
+
     /**
      * Crea un nuevo nodo y lo inserta al inicio
      * @param dd El dato que contendra el nuevo nodo

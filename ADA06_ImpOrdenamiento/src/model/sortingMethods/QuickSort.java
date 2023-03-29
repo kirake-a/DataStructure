@@ -1,75 +1,89 @@
 package model.sortingMethods;
 
-public class QuickSort{
-    private long[] theArray;          // ref to array theArray
-    private int nElems;               // number of data items
+import model.Country;
+import model.DoublyLink;
+import model.DoublyLinkedList;
 
-    public QuickSort(int max)   {
-      theArray = new long[max];      // create array
-      nElems = 0;
+public class QuickSort<T extends Comparable<T>> {
+
+    public void sort(DoublyLinkedList<T> list, int sortingAttribute) {
+        if (list == null || list.isEmpty()) {
+            return;
+        }
+        quicksort(list.getFirst(), list.getLast(), sortingAttribute);
     }
 
-    public void insert(long value){
-      theArray[nElems] = value;      // insert it
-      nElems++;                      // increment size
+    private void quicksort(DoublyLink<T> left, DoublyLink<T> right, int sortingAttribute) {
+        if (left == null || right == null || left == right || left.getPrevious() == right) {
+            return;
+        }
+
+        DoublyLink<T> pivot = partition(left, right, sortingAttribute);
+        quicksort(left, pivot.getPrevious(), sortingAttribute);
+        quicksort(pivot.getNext(), right, sortingAttribute);
     }
 
-    public void display() {
-      for(int j=0; j<nElems; j++)    // for each element,
-         System.out.print(theArray[j] + " ");  // display it
-      System.out.println("");
-    }
+    private DoublyLink<T> partition(DoublyLink<T> left, DoublyLink<T> right, int sortingAttribute) {
+        DoublyLink<T> pivot = right;
+        DoublyLink<T> i = left.getPrevious();
 
-    void swap(int i, int j){
-        long temp = theArray[i];
-        theArray[i] = theArray[j];
-        theArray[j] = temp;
-    }
-    
-    /* toma el ultimo elemento como pivote, 
-    coloca el pivote en su posicion correcta del arreglo ordenado,
-    coloca todos los valores mas pequeños (menores a los pivotes)
-    a la izquierda del pivote y coloca todos los valores mas grandes 
-    (mayores a los pivotes) a la derecha del pivote 
-    */
-    int partition(int low, int high){
-        
-        long pivot = theArray[high];
-        
-        // Index of smaller element and
-        // indicates the right position
-        // of pivot found so far
-        int i = (low - 1);
-    
-        for(int j = low; j <= high - 1; j++){
-            // If current element is smaller
-            // than the pivot
-            if (theArray[j] < pivot){
-                // Increment index of
-                // smaller element
-                i++;
+        for (DoublyLink<T> j = left; j != right; j = j.getNext()) {
+            if (compare(j.getdData(), pivot.getdData(), sortingAttribute) > 0) {
+                i = (i == null) ? left : i.getNext();
                 swap(i, j);
             }
         }
-        swap(i + 1, high);
-        return (i + 1);
+
+        i = (i == null) ? left : i.getNext();
+        swap(i, right);
+        return i;
     }
-    
-    /* The main function that implements QuickSort
-            arr[] --> Array to be sorted,
-            low --> Starting index,
-            high --> Ending index
-    */
-    void recQSort(int low, int high){
-        if (low < high){
-            // pi is partitioning index, arr[p]
-            // is now at right place
-            int pi = partition(low, high);
-    
-            // Separately sort elements before
-            // partition and after partition
-            recQSort(low, pi - 1);
-            recQSort(pi + 1, high);
+
+    private void swap(DoublyLink<T> a, DoublyLink<T> b) {
+        T temp = a.getdData();
+        a.setdData(b.getdData());
+        b.setdData(temp);
+    }
+
+    private int compare(T a, T b, int sortAttribute) {
+
+        Country country1 = (Country) a;
+        Country country2 = (Country) b;
+
+        switch (sortAttribute) {
+
+            case 1:
+
+                if (country1.getPopulation() > country2.getPopulation()) {
+                    return -1;
+                } else if (country1.getPopulation() < country2.getPopulation()) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            case 2:
+                return country1.getCountryName().compareTo(country2.getCountryName());
+
+            case 3:
+                if (country1.getActiveCases() > country2.getActiveCases()) {
+                    return -1;
+                } else if (country1.getActiveCases() < country2.getActiveCases()) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+
+            case 4:
+                if (country1.getTotalDeaths() > country2.getTotalDeaths()) {
+                    return -1;
+                } else if (country1.getTotalDeaths() < country2.getTotalDeaths()) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+
+            default:
+                return 0;
         }
     }
 }
