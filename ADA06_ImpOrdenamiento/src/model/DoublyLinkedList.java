@@ -4,11 +4,13 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 /**
- * Lista generica doblemente ligada
+ * Implementacion personalizada de una lista doblemente ligada
+ * 
  * @author Monica Garcilazo
  * @author Ruben Alvarado
  * @version 21/02/2023
  */
+@SuppressWarnings("unused")
 public class DoublyLinkedList<T> {
     private DoublyLink<T> first;
     private DoublyLink<T> last;
@@ -22,12 +24,9 @@ public class DoublyLinkedList<T> {
         last = null;
     }
 
-    public DoublyLinkedList(Collection<? extends T> c){
-        this();
-    }
-
     /**
      * Devuelve true si la lista creada esta vacia, false si no lo esta
+     * 
      * @return Si la lista esta vacia
      */
     public boolean isEmpty() {
@@ -35,7 +34,50 @@ public class DoublyLinkedList<T> {
     }
 
     /**
+     * Regresa el nodo {@code first} dentro de la lista doblemente ligada
+     * 
+     * @return Nodo first
+     */
+    public DoublyLink<T> getFirst() {
+        return this.first;
+    }
+
+    /**
+     * Regresa el nodo {@code last} dentro de la lista doblemente ligada
+     * 
+     * @return Nodo last
+     */
+    public DoublyLink<T> getLast() {
+        return this.last;
+    }
+
+    public void insertInPosition(int position, T datum) {
+        if (!isEmpty()) {
+            int counterPosition = 0;
+            DoublyLink<T> current = first;
+
+            if (position > this.sizeList()) {
+                System.out.println("La posicion sobrepasa el tamanio de la lista");
+            } else {
+
+                while (counterPosition != position - 1) {
+                    current = current.getNext();
+                    counterPosition++;
+                }
+
+                DoublyLink<T> newLink = new DoublyLink<T>(datum);
+
+                newLink.setNext(current.getNext());
+                newLink.setPrevious(current);
+                current.setNext(newLink);
+                current.getNext().setPrevious(newLink);
+            }
+        }
+    }
+
+    /**
      * Crea un nuevo nodo y lo inserta al inicio
+     * 
      * @param dd El dato que contendra el nuevo nodo
      */
     public void insertFirst(T dd) {
@@ -50,6 +92,7 @@ public class DoublyLinkedList<T> {
 
     /**
      * Inserta un nuevo nodo al final de la lista
+     * 
      * @param dd Valor que tendra el nodo
      */
     public void insertLast(T dd) {
@@ -65,9 +108,10 @@ public class DoublyLinkedList<T> {
 
     /**
      * Inserta un nuevo nodo despues de otro
+     * 
      * @param key   Valor del nodo previo al que se quiere insertar
      * @param datum Valor del nodo que se quiere insertar
-     * @return      true si se consiguio insertar, de lo contrario false
+     * @return true si se consiguio insertar, de lo contrario false
      */
     public boolean insertAfter(T key, T datum) {
         DoublyLink<T> current = first;
@@ -94,6 +138,7 @@ public class DoublyLinkedList<T> {
      * Inserta un dato de manera ordenada a la lista, dado un parametro entero para
      * realizar la insersion, si la lista estuviera vacia el dato unicamente se
      * inserta a la lista, de esa forma inicializandola
+     * 
      * @param data  Valor del dato que contendra el nodo a insertar
      * @param order valor entero que determina si se inserta de forma
      *              ascendente o descendente
@@ -146,6 +191,7 @@ public class DoublyLinkedList<T> {
 
     /**
      * Despliega el primer elemento del DoublyLink
+     * 
      * @return primer nodo, de lo contrario regresa null
      */
     public DoublyLink<T> showFirst() {
@@ -161,6 +207,7 @@ public class DoublyLinkedList<T> {
 
     /**
      * Despliega el ultimo elemento del DoublyLink
+     * 
      * @return El ultimo nodo, de lo contrario null
      */
     public DoublyLink<T> showLast() {
@@ -177,6 +224,7 @@ public class DoublyLinkedList<T> {
 
     /**
      * Conocer el tamanio de la lista
+     * 
      * @return tamanio de la lista
      */
     public int sizeList() {
@@ -194,6 +242,7 @@ public class DoublyLinkedList<T> {
     /**
      * Hace una busqueda de un elemento y devuelve -1 si no lo encontro y la
      * posicion del dato en la lista en caso de que se haya encontrado.
+     * 
      * @param datum Dato que se busca
      * @return Retorna la posicion del nodo, si no existe retorna -1
      */
@@ -217,10 +266,12 @@ public class DoublyLinkedList<T> {
 
     /**
      * Retorna el valor contenido en el nodo en la posicion dada
-     * @param position La posicion en la lista de la cual se requiere obtener el valor del nodo
+     * 
+     * @param position La posicion en la lista de la cual se requiere obtener el
+     *                 valor del nodo
      * @return Dato contenido en el nodo
      */
-    public T searchItemPosition(int position){
+    public T searchItemPosition(int position) {
         int counterPosition = 0;
         T data = null;
         DoublyLink<T> current = first;
@@ -229,7 +280,7 @@ public class DoublyLinkedList<T> {
 
             if (position > this.sizeList()) {
                 System.out.println("La posicion sobrepasa el tamanio de la lista");
-            } else{ 
+            } else {
 
                 while (counterPosition != position) {
                     current = current.getNext();
@@ -248,6 +299,7 @@ public class DoublyLinkedList<T> {
     /**
      * Actualiza el dato de un nodo, proporcionando el valor actual y el valor
      * con el que se quiere actualizar el nodo
+     * 
      * @param oldDaum Valor anterior
      * @param datum   Valor al que se quiere actualizar
      */
@@ -266,15 +318,17 @@ public class DoublyLinkedList<T> {
     }
 
     /**
-     * Intercambia los valores entre dos nodos dados sus posiciones dentro de la lista
+     * Intercambia los valores entre dos nodos dados sus posiciones dentro de la
+     * lista
+     * 
      * @param position1 La posicion del primero nodo
      * @param position2 La posicion del segundo nodo
      */
-    public void changeValuePositions(int position1, int position2){
+    public void changeValuePositions(int position1, int position2) {
         if (!isEmpty()) {
             if ((position1 > this.sizeList()) | (position2 > this.sizeList())) {
                 System.out.println("La posicion sobrepasa el tamanio de la lista");
-            } else{
+            } else {
                 T data1 = this.searchItemPosition(position1);
                 T data2 = this.searchItemPosition(position2);
 
@@ -286,7 +340,9 @@ public class DoublyLinkedList<T> {
 
     /**
      * Actualiza el dato de un nodo, proporcionando el valor a actualizar y la
-     * posicion del elemento que se quiere actualizar. Siempre y cuando la lista no sea una lista vacia
+     * posicion del elemento que se quiere actualizar. Siempre y cuando la lista no
+     * sea una lista vacia
+     * 
      * @param position Posicion del nodo
      * @param newValue Nuevo valor del nodo
      * @see #isEmpty()
@@ -314,7 +370,47 @@ public class DoublyLinkedList<T> {
     }
 
     /**
+     * Regresa una lista derivada de la lista original dado un intervalo de
+     * la lista original para con ello obtener a todos esos nodos, en el intervalo.
+     * 
+     * @param start Posicion de inicio de la sublista
+     * @param end   Posicion de finalizado de la lista. Tomar en cuenta que el nodo
+     *              en
+     *              la posicion {@code end} no se agrega a la sublista
+     * @return Sublista de la original en los intervalores recibidos
+     */
+    public DoublyLinkedList<T> sublist(int start, int end) {
+        DoublyLinkedList<T> list = new DoublyLinkedList<>();
+
+        if ((start < this.sizeList()) && (end < this.sizeList())) {
+            for (int i = start; i < end; i++) {
+                list.insertInPosition(i, this.searchItemPosition(i));
+            }
+        }
+
+        return list;
+    }
+
+    /**
+     * Unifica la lista actual con la lista del argumento.
+     * Agrega la lista del argumento en su mismo orden al final
+     * de la lista actual.
+     * 
+     * @param listJoin Lista que se anexara al final
+     */
+    public void mergeList(DoublyLinkedList<T> listJoin) {
+        int counterPosition = 0;
+        int listSize = listJoin.sizeList();
+
+        while (counterPosition != listSize) {
+            this.insertLast(listJoin.searchItemPosition(counterPosition));
+            counterPosition++;
+        }
+    }
+
+    /**
      * Elimina y devuelve el primer valor de la lista
+     * 
      * @return Elemento eliminado
      */
     public DoublyLink<T> deleteFirst() {
@@ -329,6 +425,7 @@ public class DoublyLinkedList<T> {
 
     /**
      * Elimina y devuelve el ultimo valor en la lista
+     * 
      * @return Elemento eliminado
      */
     public DoublyLink<T> deleteLast() {
@@ -343,6 +440,7 @@ public class DoublyLinkedList<T> {
 
     /**
      * Elimina y devuelve un nodo de la lista
+     * 
      * @param key Valor del nodo
      * @return Nodo eliminado
      */
@@ -367,6 +465,7 @@ public class DoublyLinkedList<T> {
     /**
      * Elimina un elemento en la lista, dada su posicion.
      * Unicamente si la lista no esta vacia
+     * 
      * @param position Posicion del nodo
      * @see #isEmpty()
      * @return Valor eliminado

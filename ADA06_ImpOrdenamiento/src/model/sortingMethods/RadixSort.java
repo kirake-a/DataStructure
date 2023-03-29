@@ -1,59 +1,80 @@
 package model.sortingMethods;
 
-public class RadixSort {
+// Radix sort Java implementation
+//import java.io.*;
+import java.util.*;
 
-    /**
-     * Implements the radix Sort method
-     * @param array
-     * @param size
-     */
-    public void radixSortUpward(int array[], int size) {
-        // Get maximum element
-        int max = getMax(array, size);
+public class RadixSort<T extends Comparable<T>> {
+	private long[] theArray; // ref to array theArray
+	private int nElems; // number of data items
+	// -----------------------------------------------------------
 
-        // Apply counting sort to sort elements based on place value.
-        for (int place = 1; max / place > 0; place *= 10)
-            countingSort(array, size, place);
-    }
+	public RadixSort(int max) {
+		theArray = new long[max]; // create array
+		nElems = 0;
+	}
 
-    // Using counting sort to sort the elements in the basis of significant places
-    private void countingSort(int array[], int size, int place) {
-        int[] output = new int[size + 1];
-        int max = array[0];
-        for (int i = 1; i < size; i++) {
-            if (array[i] > max)
-                max = array[i];
-        }
-        int[] count = new int[max + 1];
+	// -----------------------------------------------------------
+	public void insert(long value) {
+		theArray[nElems] = value; // insert it
+		nElems++; // increment size
+	}
 
-        for (int i = 0; i < max; ++i)
-            count[i] = 0;
+	public void display() {
+		for (int j = 0; j < nElems; j++) // for each element,
+			System.out.print(theArray[j] + " "); // display it
+		System.out.println("");
+	}
 
-        // Calculate count of elements
-        for (int i = 0; i < size; i++)
-            count[(array[i] / place) % 10]++;
+	// A utility function to get maximum value in arr[]
+	private long getMax() {
+		long mx = theArray[0];
+		for (int i = 1; i < nElems; i++)
+			if (theArray[i] > mx)
+				mx = theArray[i];
+		return mx;
+	}
 
-        // Calculate cumulative count
-        for (int i = 1; i < 10; i++)
-            count[i] += count[i - 1];
+	// A function to do counting sort of arr[] according to
+	// the digit represented by exp.
+	public void countSort(int exp) {
+		long[] output = new long[nElems]; // output array
+		int i;
+		long[] count = new long[10];
+		Arrays.fill(count, 0);
 
-        // Place the elements in sorted order
-        for (int i = size - 1; i >= 0; i--) {
-            output[count[(array[i] / place) % 10] - 1] = array[i];
-            count[(array[i] / place) % 10]--;
-        }
+		// Store count of occurrences in count[]
+		for (i = 0; i < nElems; i++)
+			count[(int) ((theArray[i] / exp) % 10)]++;
 
-        for (int i = 0; i < size; i++)
-            array[i] = output[i];
-    }
+		// Change count[i] so that count[i] now contains
+		// actual position of this digit in output[]
+		for (i = 1; i < 10; i++)
+			count[i] += count[i - 1];
 
-    // Function to get the largest element from an array
-    private int getMax(int array[], int n) {
-        int max = array[0];
+		// Build the output array
+		for (i = nElems - 1; i >= 0; i--) {
+			output[(int) (count[(int) ((theArray[i] / exp) % 10)] - 1)] = theArray[i];
+			count[(int) ((theArray[i] / exp) % 10)]--;
+		}
 
-        for (int i = 1; i < n; i++)
-            if (array[i] > max)
-                max = array[i];
-        return max;
-    }
+		// Copy the output array to arr[], so that arr[] now
+		// contains sorted numbers according to current digit
+		theArray = Arrays.copyOf(output, output.length);
+
+	}
+
+	// The main function to that sorts arr[] of size n using
+	// Radix Sort
+	public void sort() {
+		// Find the maximum number to know number of digits
+		long m = getMax();
+
+		// Do counting sort for every digit. Note that
+		// instead of passing digit number, exp is passed.
+		// exp is 10^i where i is current digit number
+		for (int exp = 1; m / exp > 0; exp *= 10)
+			countSort(exp);
+	}
 }
+/* This code is contributed by Devesh Agrawal */

@@ -1,71 +1,132 @@
 package model.sortingMethods;
 
-public class MergeSort {
-    // Todavia no esta el metodo decreciente
-    
-    public void mergeSortUpward(int arr[], int left, int right) {
-        if (left < right) {
-            // Encuentra el punto medio del vector.
-            int middle = (left + right) / 2;
+import model.Country;
+import model.DoublyLinkedList;
 
-            // Divide la primera y segunda mitad (llamada recursiva).
-            mergeSortUpward(arr, left, middle);
-            mergeSortUpward(arr, middle + 1, right);
+public class MergeSort<T extends Comparable<T>> {
+    private DoublyLinkedList<T> theList;
+    private int nElems; // number of data items
+    private int sortAttribute;
 
-            // Une las mitades.
-            merge(arr, left, middle, right);
+    // public MergeSort(int max) {
+    // theArray = new long[max]; // create array
+    // nElems = 0;
+    // }
+
+    public MergeSort() {
+        nElems = 0;
+    }
+
+    public void insert(T value) {
+        theList.insertInPosition(nElems, value);
+        nElems++;
+    }
+
+    // public void mergeSort() {
+    // long[] workSpace = new long[nElems];
+    // recMergeSort(workSpace, 0, nElems-1);
+    // }
+
+    public void mergeSort(int sortAttribute) {
+        DoublyLinkedList<T> list = new DoublyLinkedList<>();
+        this.sortAttribute = sortAttribute;
+        recMergeSort(list, 0, nElems - 1);
+    }
+
+    private void recMergeSort(DoublyLinkedList<T> list, int lowerBound, int upperBound) {
+        if (lowerBound == upperBound) {
+            return;
+        } else {
+            int mid = (lowerBound + upperBound) / 2;
+            recMergeSort(list, lowerBound, mid);
+            recMergeSort(list, mid + 1, upperBound);
+            merge(list, lowerBound, mid + 1, upperBound, this.sortAttribute);
         }
     }
 
-    private void merge(int arr[], int left, int middle, int right) {
-        // Encuentra el tamaño de los sub-vectores para unirlos.
-        int n1 = middle - left + 1;
-        int n2 = right - middle;
+    private void merge(DoublyLinkedList<T> list, int lowPtr, int highPtr, int upperBound, int sortAttribute) {
+        int j = 0; // workspace index
+        int lowerBound = lowPtr;
+        int mid = highPtr - 1;
+        int numItems = upperBound - lowerBound + 1;
 
-        // Vectores temporales.
-        int leftArray[] = new int[n1];
-        int rightArray[] = new int[n2];
-
-        // Copia los datos a los arrays temporales.
-        for (int i = 0; i < n1; i++) {
-            leftArray[i] = arr[left + i];
-        }
-
-        for (int j = 0; j < n2; j++) {
-            rightArray[j] = arr[middle + j + 1];
-        }
-        /* Une los vectorestemporales. */
-
-        // Índices inicial del primer y segundo sub-vector.
-        int i = 0, j = 0;
-
-        // Índice inicial del sub-vector arr[].
-        int k = left;
-
-        // Ordenamiento.
-        while (i < n1 && j < n2) {
-            if (leftArray[i] <= rightArray[j]) {
-                arr[k] = leftArray[i];
-                i++;
+        while (lowPtr <= mid && highPtr <= upperBound) {
+            if (compare(theList.searchItemPosition(lowPtr), theList.searchItemPosition(highPtr), sortAttribute) < 0) {
+                list.insertInPosition(j++, this.theList.searchItemPosition(lowPtr++));
             } else {
-                arr[k] = rightArray[j];
-                j++;
+                list.insertInPosition(j++, this.theList.searchItemPosition(highPtr++));
             }
-            k++;
-        } // Fin del while.
-
-        /* Si quedan elementos por ordenar */
-        // Copiar los elementos restantes de leftArray[].
-        while (i < n1) {
-            arr[k] = leftArray[i];
-            i++;
-            k++;
         }
-        // Copiar los elementos restantes de rightArray[].
-        while (j < n2) {
-            arr[k] = rightArray[j];
-            j++;
-            k++;
+
+        while (lowPtr <= mid) {
+            list.insertInPosition(j++, this.theList.searchItemPosition(lowPtr++));
+        }
+
+        while (highPtr <= upperBound) {
+            list.insertInPosition(j++, this.theList.searchItemPosition(highPtr++));
+        }
+
+        for (int i = 0; i < numItems; i++) {
+            this.theList.insertInPosition(lowerBound + i, list.searchItemPosition(i));
+        }
+    }
+
+    /**
+     * Realiza una comparacion entre el tipo de dato {@code a} y el tipo de dato
+     * {@code b},
+     * en funcion de conocer cual de ellos es mas grande o si fuera el caso, conocer
+     * si los datos
+     * son iguales, para ellos obtendremos que, si el tipo de dato {@code a} es
+     * menor al tipo de
+     * dato {@code b} se regresa {@code -1}, si fuera el caso se regresa un
+     * {@code 1}, y si ambos
+     * datos son iguales entonces se regresa un {@code 0}
+     * 
+     * @param a             Primer dato, se comparara con el segundo dato
+     * @param b             Segundo dato, se comparara con el primer dato
+     * @param sortAttribute Selecciona el atributo por el cual se realizara
+     *                      comparacion entre los nodos
+     * @return El valor resultante de la comparacion
+     */
+    private int compare(T a, T b, int sortAttribute) {
+
+        Country country1 = (Country) a;
+        Country country2 = (Country) b;
+
+        switch (sortAttribute) {
+
+            case 1:
+
+                if (country1.getPopulation() < country2.getPopulation()) {
+                    return -1;
+                } else if (country1.getPopulation() > country2.getPopulation()) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            case 2:
+                return country1.getCountryName().compareTo(country2.getCountryName());
+
+            case 3:
+                if (country1.getActiveCases() < country2.getActiveCases()) {
+                    return -1;
+                } else if (country1.getActiveCases() > country2.getActiveCases()) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+
+            case 4:
+                if (country1.getTotalDeaths() < country2.getTotalDeaths()) {
+                    return -1;
+                } else if (country1.getTotalDeaths() > country2.getTotalDeaths()) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+
+            default:
+                return 0;
         }
     }
 }
