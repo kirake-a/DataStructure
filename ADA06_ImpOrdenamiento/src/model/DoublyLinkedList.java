@@ -35,12 +35,44 @@ public class DoublyLinkedList<T> {
         return first == null;
     }
 
+    /**
+     * Regresa el nodo {@code first} dentro de la lista doblemente ligada
+     * @return Nodo first
+     */
     public DoublyLink<T> getFirst(){
         return this.first;
     }
 
+    /**
+     * Regresa el nodo {@code last} dentro de la lista doblemente ligada
+     * @return Nodo last
+     */
     public DoublyLink<T> getLast(){
         return this.last;
+    }
+
+    public void insertInPosition(int position, T datum){
+        if (!isEmpty()) {
+            int counterPosition = 0;
+            DoublyLink<T> current = first;
+
+            if (position > this.sizeList()) {
+                System.out.println("La posicion sobrepasa el tamanio de la lista");
+            } else {
+                
+                while (counterPosition != position-1) {
+                    current = current.getNext();
+                    counterPosition++;
+                }
+
+                DoublyLink<T> newLink = new DoublyLink<T>(datum);
+
+                newLink.setNext(current.getNext());
+                newLink.setPrevious(current);
+                current.setNext(newLink);
+                current.getNext().setPrevious(newLink);
+            }
+        }
     }
 
     /**
