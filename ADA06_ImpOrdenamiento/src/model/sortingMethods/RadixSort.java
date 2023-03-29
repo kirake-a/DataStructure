@@ -4,14 +4,16 @@ package model.sortingMethods;
 //import java.io.*;
 import java.util.*;
 
-public class RadixSort<T extends Comparable<T>> {
+import model.DoublyLinkedList;
+
+public class RadixSort<T> {
 	private long[] theArray; // ref to array theArray
 	private int nElems; // number of data items
-	// -----------------------------------------------------------
+	private DoublyLinkedList<T> theList;
 
-	public RadixSort(int max) {
-		theArray = new long[max]; // create array
-		nElems = 0;
+	public RadixSort(DoublyLinkedList<T> list){
+		this.theList = list;
+		this.nElems = list.sizeList();
 	}
 
 	// -----------------------------------------------------------
@@ -66,7 +68,7 @@ public class RadixSort<T extends Comparable<T>> {
 
 	// The main function to that sorts arr[] of size n using
 	// Radix Sort
-	public void sort() {
+	public void sort(int sortAttribute) {
 		// Find the maximum number to know number of digits
 		long m = getMax();
 
@@ -75,6 +77,10 @@ public class RadixSort<T extends Comparable<T>> {
 		// exp is 10^i where i is current digit number
 		for (int exp = 1; m / exp > 0; exp *= 10)
 			countSort(exp);
+	}
+
+	public DoublyLinkedList<T> getList(){
+		return this.theList;
 	}
 }
 /* This code is contributed by Devesh Agrawal */

@@ -8,18 +8,17 @@ import java.io.IOException;
 import model.Country;
 import model.DoublyLinkedList;
 
-@SuppressWarnings("unused")
 public class DatasetDAO {
     private DoublyLinkedList<Country> data;
     private String path;
     private BufferedReader reader;
 
-    public DatasetDAO(String path){
+    public DatasetDAO(String path) {
         data = new DoublyLinkedList<>();
         this.path = path;
     }
 
-    public void readFile() throws IOException{
+    public void readFile() throws IOException {
         File file = new File(this.path);
 
         if (file.canRead()) {
@@ -28,14 +27,5 @@ public class DatasetDAO {
             throw new IOException();
         }
     }
-
-    public DoublyLinkedList<Country> getData() {
-        return data;
-    }
-
-    public void setData(DoublyLinkedList<Country> data) {
-        this.data = data;
-    }
-
     
 }

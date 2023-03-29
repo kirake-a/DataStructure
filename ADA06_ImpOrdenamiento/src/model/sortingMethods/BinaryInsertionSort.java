@@ -3,7 +3,20 @@ package model.sortingMethods;
 import model.Country;
 import model.DoublyLinkedList;
 
-public class BinaryInsertionSort<T extends Comparable<T>> {
+public class BinaryInsertionSort<T> {
+    private DoublyLinkedList<T> theList;
+    private int nElements;
+    private int sortAttribute;
+
+    public BinaryInsertionSort(DoublyLinkedList<T> list){
+        this.theList = list;
+        this.nElements = list.sizeList();
+    }
+
+    public void sort(int sortingAttribute){
+        this.sortAttribute = sortingAttribute;
+        binaryInsertionSort(theList, nElements);
+    }
 
     /**
      * Busqueda binaria dentro de una {@code DoublyLinkedList}
@@ -12,17 +25,15 @@ public class BinaryInsertionSort<T extends Comparable<T>> {
      * @param item          Dato objetivo
      * @param low           Posicion inicial de busqueda
      * @param high          Posicion final de busqueda
-     * @param sortAttribute Selecciona el atributo por el cual se realizara
-     *                      comparacion entre los nodos
      * @return Valor de la comparacion
      */
-    public int binarySearch(DoublyLinkedList<T> list, T item, int low, int high, int sortAttribute) {
+    private int binarySearch(DoublyLinkedList<T> list, T item, int low, int high) {
         while (low <= high) {
             int mid = low + (high - low) / 2; // La mitad de la lista
 
             if (item.equals(list.searchItemPosition(mid)))
                 return mid + 1;
-            else if (compare(item, list.searchItemPosition(mid), sortAttribute) < 0)
+            else if (compare(item, list.searchItemPosition(mid), this.sortAttribute) < 0)
                 low = mid + 1;
             else
                 high = mid - 1;
@@ -37,10 +48,8 @@ public class BinaryInsertionSort<T extends Comparable<T>> {
      * 
      * @param list          Lista doblemente ligada
      * @param n
-     * @param sortAttribute Selecciona el atributo por el cual se realizara
-     *                      comparacion entre los nodos
      */
-    public void binaryInsertionSort(DoublyLinkedList<T> list, int n, int sortAttribute) {
+    public void binaryInsertionSort(DoublyLinkedList<T> list, int n) {
         int i, location, j;
         T selected;
 
@@ -48,7 +57,7 @@ public class BinaryInsertionSort<T extends Comparable<T>> {
             j = i - 1;
             selected = list.searchItemPosition(i);
 
-            location = binarySearch(list, selected, 0, j, sortAttribute);
+            location = binarySearch(list, selected, 0, j);
 
             while (j >= location) {
                 list.insertInPosition(j + 1, list.searchItemPosition(j));
@@ -115,5 +124,9 @@ public class BinaryInsertionSort<T extends Comparable<T>> {
             default:
                 return 0;
         }
+    }
+
+    public DoublyLinkedList<T> getList(){
+        return this.theList;
     }
 }
