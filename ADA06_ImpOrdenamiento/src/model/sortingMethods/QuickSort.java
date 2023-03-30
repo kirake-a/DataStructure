@@ -22,7 +22,7 @@ public class QuickSort<T> {
         }
         quickSort(list.getFirst(), list.getLast(), sortingAttribute);
         long finall = System.nanoTime();
-        tiempo = (inicio - finall);
+        tiempo = (finall - inicio);
     }
 
     private void quickSort(DoublyLink<T> left, DoublyLink<T> right, int sortingAttribute) {
