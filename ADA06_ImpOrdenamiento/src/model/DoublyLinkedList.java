@@ -269,26 +269,26 @@ public class DoublyLinkedList<T> {
      * 
      * @param position La posicion en la lista de la cual se requiere obtener el
      *                 valor del nodo
-     * @return Dato contenido en el nodo
+     * @return Objeto contenido en el nodo
      */
     public T searchItemPosition(int position) {
-        int counterPosition = 0;
         T data = null;
-        DoublyLink<T> current = first;
 
         if (!isEmpty()) {
-
             if (position > this.sizeList()) {
                 System.out.println("La posicion sobrepasa el tamanio de la lista");
             } else {
+                int counter = 0;
+                DoublyLink<T> current = this.first;
 
-                while (counterPosition != position) {
-                    current = current.getNext();
-                    counterPosition++;
-                }
-
-                if (counterPosition == position) {
-                    data = current.getdData();
+                while (current != null) {
+                    if (counter == position) {
+                        data = current.getdData();
+                        break;
+                    } else {
+                        counter++;
+                        current = current.getNext();
+                    }
                 }
             }
         }
