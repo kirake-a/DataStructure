@@ -47,7 +47,7 @@ public class Sorter {
             case 1:
                 MergeSort<Country> mergeOoperator = new MergeSort<>(this.list);
                 mergeOoperator.sort(sortingAttribute);
-                this.list = mergeOoperator.getList();
+                this.list = mergeOoperator.getListAttribute();
                 return this.list;
             // Ordenamiento Binary Insertion Sort
             case 2:
@@ -95,7 +95,7 @@ public class Sorter {
             case 1:
                 MergeSort<Country> mergeOoperator = new MergeSort<>(auxList);
                 mergeOoperator.sort(sortAttribute);
-                auxList = mergeOoperator.getList();
+                auxList = mergeOoperator.getListAttribute();
                 return auxList;
             // Ordenamiento Binary Insertion Sort
             case 2:
