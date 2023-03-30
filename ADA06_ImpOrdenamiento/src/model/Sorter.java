@@ -114,4 +114,20 @@ public class Sorter {
         }
     }
 
+    public void printListAsc(DoublyLinkedList<Country> auxList){
+        DoublyLink<Country> current = auxList.getLast();
+        while (current != null) {
+            System.out.println(current.getdData().getCountryName());
+            current = current.getPrevious();
+        }
+    }
+
+    public void printLIstDesc(DoublyLinkedList<Country> auxList){
+        DoublyLink<Country> current = auxList.getFirst();
+        while (current != null) {
+            System.out.println(current.getdData().getCountryName());
+            current = current.getNext();
+        }
+    }
+
 }

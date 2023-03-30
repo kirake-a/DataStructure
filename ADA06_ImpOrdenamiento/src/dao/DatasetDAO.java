@@ -2,30 +2,118 @@ package dao;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 
 import model.Country;
+import model.DoublyLink;
 import model.DoublyLinkedList;
 
 public class DatasetDAO {
     private DoublyLinkedList<Country> data;
+    public BufferedReader reader;
     private String path;
-    private BufferedReader reader;
+    private File file;
+    private String line;
+
+    DecimalFormat decimales = new DecimalFormat("###,###.###");
 
     public DatasetDAO(String path) {
         data = new DoublyLinkedList<>();
-        this.path = path;
+        this.file = new File(path);
+    }
+    /*
+     * public void readFile() throws IOException {
+     * File file = new File(this.path);
+     * 
+     * if (file.canRead()) {
+     * reader = new BufferedReader(new FileReader(this.path));
+     * } else {
+     * throw new IOException();
+     * }
+     * }
+     */
+
+    public DoublyLinkedList<Country> getFileData() throws NumberFormatException, ParseException {
+        Country country;
+        String parts[];
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            while ((line = reader.readLine()) != null) {
+                parts = line.split(",");
+                country = new Country(Integer.parseInt(parts[0]), parts[1], Double.parseDouble(parts[2]),
+                        Double.parseDouble(parts[3]), Double.parseDouble(parts[4]), Double.parseDouble(parts[5]),
+                        Double.parseDouble(parts[6]), Double.parseDouble(parts[7]));
+                data.insertLast(country);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error al instanciar variable reader");
+            e.printStackTrace();
+        } catch (IOException e1) {
+            System.out.println("Es posible que no existan countrys en este documento");
+        }
+        return data;
     }
 
-    public void readFile() throws IOException {
-        File file = new File(this.path);
+    public void writeFile(String path, DoublyLinkedList<Country> data) {
+        String typeFile = ".csv";
+        file = createFile(path);
 
-        if (file.canRead()) {
-            reader = new BufferedReader(new FileReader(this.path));
-        } else {
-            throw new IOException();
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter(file, true));
+            DoublyLink<Country> current = data.getLast();
+            Country aux;
+
+            while (current != null) {
+
+            }
+
+            DoublyLink<Country> current = auxList.getLast();
+            while (current != null) {
+                System.out.println(current.getdData().getCountryName());
+                current = current.getPrevious();
+            }
+            for (int i = 0; i < data.sizeList(); i++) {
+                Country aux;
+
+                aux = data.getFirst();
+                writer.println(data.getFirst + "," + array[i].getName() + "," + array[i].getLastName1() + ","
+                        + array[i].getLastName2() + "," + String.valueOf(array[i].getFinalScore()));
+            }
+            writer.close();
+            System.out.println("CSV created correctly");
+
+            writer.close();
+
+        } catch (FileNotFoundException fileNotFound) {
+            System.out.println("File not found exception");
+            fileNotFound.printStackTrace(System.out);
+        } catch (IOException exception) {
+            exception.printStackTrace(System.out);
         }
     }
-    
+
+    public File createFile(String fileNameAux) {
+        String fileName = "finalFiles/" + fileNameAux + ".csv"; // Check how to locate it into the destination folder
+        File newFile = null;
+
+        try {
+            newFile = new File(fileName);
+            PrintWriter output = new PrintWriter(newFile);
+            System.out.println("Archivo generado de manera satisfactoria");
+
+            output.close();
+        } catch (FileNotFoundException exception) {
+            System.out.println("Something went wrong while creating the new file");
+            exception.printStackTrace(System.out);
+        }
+
+        return newFile;
+    }
+
 }

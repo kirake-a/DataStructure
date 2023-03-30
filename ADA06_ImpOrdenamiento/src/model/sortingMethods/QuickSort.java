@@ -77,9 +77,9 @@ public class QuickSort<T> {
             case 1:
 
                 if (country1.getPopulation() < country2.getPopulation()) {
-                    return -1;
-                } else if (country1.getPopulation() > country2.getPopulation()) {
                     return 1;
+                } else if (country1.getPopulation() > country2.getPopulation()) {
+                    return -1;
                 } else {
                     return 0;
                 }
@@ -88,18 +88,18 @@ public class QuickSort<T> {
 
             case 3:
                 if (country1.getActiveCases() < country2.getActiveCases()) {
-                    return -1;
-                } else if (country1.getActiveCases() > country2.getActiveCases()) {
                     return 1;
+                } else if (country1.getActiveCases() > country2.getActiveCases()) {
+                    return -1;
                 } else {
                     return 0;
                 }
 
             case 4:
                 if (country1.getTotalDeaths() < country2.getTotalDeaths()) {
-                    return -1;
-                } else if (country1.getTotalDeaths() > country2.getTotalDeaths()) {
                     return 1;
+                } else if (country1.getTotalDeaths() > country2.getTotalDeaths()) {
+                    return -1;
                 } else {
                     return 0;
                 }

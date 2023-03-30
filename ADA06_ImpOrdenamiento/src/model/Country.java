@@ -8,10 +8,10 @@ public class Country {
     private Double totalRecovered;
     private Double activeCases;
     private Double totalTest;
-    private Float population;
+    private Double population;
 
     public Country(Integer serialNumber, String country, Double totalCases, Double totalDeaths, Double totalRecovered,
-            Double activeCases, Double totalTest, Float population) {
+            Double activeCases, Double totalTest, Double population) {
         this.serialNumber = serialNumber;
         this.countryName = country;
         this.totalCases = totalCases;
@@ -78,11 +78,11 @@ public class Country {
         this.totalTest = totalTest;
     }
 
-    public Float getPopulation() {
+    public Double getPopulation() {
         return population;
     }
 
-    public void setPopulation(Float population) {
+    public void setPopulation(Double population) {
         this.population = population;
     }
 
