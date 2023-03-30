@@ -8,6 +8,11 @@ public class BinaryInsertionSort<T> {
     private int nElements;
     private int sortAttribute;
 
+    private long tiempo;
+    private int comparaciones;
+    private int intercambios;
+
+
     public BinaryInsertionSort(DoublyLinkedList<T> list){
         this.theList = list;
         this.nElements = list.sizeList();
@@ -50,6 +55,7 @@ public class BinaryInsertionSort<T> {
      * @param n
      */
     public void binaryInsertionSort(DoublyLinkedList<T> list, int n) {
+        intercambios++;
         int i, location, j;
         T selected;
 
@@ -129,4 +135,17 @@ public class BinaryInsertionSort<T> {
     public DoublyLinkedList<T> getList(){
         return this.theList;
     }
+
+    public long getTiempo() {
+        return tiempo;
+    }
+
+    public int getComparaciones() {
+        return comparaciones;
+    }
+
+    public int getIntercambios() {
+        return intercambios;
+    }
+
 }

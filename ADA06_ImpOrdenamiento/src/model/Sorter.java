@@ -12,7 +12,18 @@ import model.sortingMethods.RadixSort;
  * y si sera excepciones propias o ya de java
  */
 public class Sorter {
-    private static long tiempoEjecucionQuick;
+    private long tiempoEjecucionQuick = 0;
+    private long tiempoEjecucionBinary = 0;
+    private long tiempoEjecucionMerge = 0;
+
+    private int numComparacionesQuick = 0;
+    private int numComparacionesBinary = 0;
+    private int numComparacionesMerge = 0;
+
+    private int numIntercambiosQuick = 0;
+    private int numIntercambiosBinary = 0;
+    private int numIntercambiosMerge = 0;
+
     private DoublyLinkedList<Country> list;
 
     public Sorter() {
@@ -93,6 +104,10 @@ public class Sorter {
                 auxList = quickOperator.getList();
                 tiempoEjecucionQuick = quickOperator.getTiempo();
                 System.out.println(tiempoEjecucionQuick);
+                numComparacionesQuick = quickOperator.getComparaciones();
+                System.out.println(numComparacionesQuick);
+                numIntercambiosQuick = quickOperator.getIntercambios();
+                System.out.println(numIntercambiosQuick);
                 return auxList;
             // Ordenamiento Merge Sort
             case 1:
@@ -133,4 +148,40 @@ public class Sorter {
         }
     }
 
+    public long getTiempoEjecucionQuick() {
+        return tiempoEjecucionQuick;
+    }
+
+    public long getTiempoEjecucionBinary() {
+        return tiempoEjecucionBinary;
+    }
+
+    public long getTiempoEjecucionMerge() {
+        return tiempoEjecucionMerge;
+    }
+
+    public int getNumComparacionesQuick() {
+        return numComparacionesQuick;
+    }
+
+    public int getNumComparacionesBinary() {
+        return numComparacionesBinary;
+    }
+
+    public int getNumComparacionesMerge() {
+        return numComparacionesMerge;
+    }
+
+    public int getNumIntercambiosQuick() {
+        return numIntercambiosQuick;
+    }
+
+    public int getNumIntercambiosBinary() {
+        return numIntercambiosBinary;
+    }
+
+    public int getNumIntercambiosMerge() {
+        return numIntercambiosMerge;
+    }
+    
 }

@@ -7,6 +7,9 @@ public class MergeSort<T> {
     private DoublyLinkedList<T> list;
     private int nElems; // number of data items
     private int sortAttribute;
+    private long tiempo;
+    private int comparacion;
+    private int intercambios;
 
     // public MergeSort(int max) {
     // theArray = new long[max]; // create array
@@ -29,8 +32,11 @@ public class MergeSort<T> {
     // }
 
     public void sort(int sortAttribute) {
+        long inicio = System.nanoTime();
         this.sortAttribute = sortAttribute;
         recMergeSort(list, 0, nElems - 1);
+        long finall = System.nanoTime();
+        tiempo = (finall - inicio);
     }
 
     private void recMergeSort(DoublyLinkedList<T> auxList, int lowerBound, int upperBound) {
@@ -45,6 +51,7 @@ public class MergeSort<T> {
     }
 
     private void merge(DoublyLinkedList<T> auxList, int lowPtr, int highPtr, int upperBound, int sortAttribute) {
+        intercambios++;
         int j = 0; // workspace index
         int lowerBound = lowPtr;
         int mid = highPtr - 1;
@@ -89,6 +96,7 @@ public class MergeSort<T> {
      * @return El valor resultante de la comparacion
      */
     private int compare(T a, T b, int sortAttribute) {
+        comparacion++;
 
         Country country1 = (Country) a;
         Country country2 = (Country) b;
@@ -133,4 +141,18 @@ public class MergeSort<T> {
     public DoublyLinkedList<T> getList(){
         return this.list;
     }
+
+   
+    public long getTiempo() {
+        return tiempo;
+    }
+
+    public int getComparacion() {
+        return comparacion;
+    }
+
+    public int getIntercambios() {
+        return intercambios;
+    }
+    
 }

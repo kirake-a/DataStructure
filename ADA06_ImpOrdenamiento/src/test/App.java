@@ -1,5 +1,6 @@
 package test;
 
+import dao.DaoPDF;
 import dao.DatasetDAO;
 import model.Country;
 import model.DoublyLinkedList;
@@ -29,10 +30,14 @@ public class App {
         DoublyLinkedList<Country> listapendeja = new DoublyLinkedList<>();
         listapendeja = sorter.sorting(0,2, data);
         dao.writeFile("Ejemplito", listapendeja);
-        sorter.printListAsc(listapendeja); // ascendente
+        //sorter.printListAsc(listapendeja); // ascendente
         System.out.println("--------------------------");
-        sorter.printLIstDesc(listapendeja); //Descendiente
+        //sorter.printLIstDesc(listapendeja); //Descendiente
         System.out.println("hola");
+
+        DaoPDF pdf = new DaoPDF();
+        pdf.createPDF(sorter.getTiempoEjecucionMerge(), sorter.getNumComparacionesMerge(), sorter.getNumIntercambiosMerge(), sorter.getTiempoEjecucionBinary(), sorter.getNumComparacionesBinary(), sorter.getNumIntercambiosBinary(), sorter.getTiempoEjecucionQuick(), sorter.getNumComparacionesQuick(), sorter.getNumIntercambiosQuick());
+
 
         //sorter.sorting(1, 2, data);
         //listapendeja = sorter.sorting(2, 2, data);
