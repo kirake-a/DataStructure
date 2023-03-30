@@ -6,16 +6,23 @@ import model.DoublyLinkedList;
 
 public class QuickSort<T> {
     private DoublyLinkedList<T> list;
+    private int comparaciones;
+    private int intercambios;
+    private long tiempo;
+
 
     public QuickSort(DoublyLinkedList<T> list){
         this.list = list;
     }
 
     public void sort(int sortingAttribute) {
+        long inicio = System.nanoTime();
         if (this.list == null || this.list.isEmpty()) {
             return;
         }
         quickSort(list.getFirst(), list.getLast(), sortingAttribute);
+        long finall = System.nanoTime();
+        tiempo = (finall - inicio);
     }
 
     private void quickSort(DoublyLink<T> left, DoublyLink<T> right, int sortingAttribute) {
@@ -48,6 +55,7 @@ public class QuickSort<T> {
         T temp = a.getdData();
         a.setdData(b.getdData());
         b.setdData(temp);
+        intercambios++;
     }
 
     /**
@@ -68,6 +76,7 @@ public class QuickSort<T> {
      * @return El valor resultante de la comparacion
      */
     private int compare(T a, T b, int sortAttribute) {
+        comparaciones++;
 
         Country country1 = (Country) a;
         Country country2 = (Country) b;
@@ -112,4 +121,24 @@ public class QuickSort<T> {
     public DoublyLinkedList<T> getList(){
         return this.list;
     }
+
+
+    public int getComparaciones() {
+        return comparaciones;
+    }
+
+
+    public int getIntercambios() {
+        return intercambios;
+    }
+
+
+    public long getTiempo() {
+        return tiempo;
+    }
+
+    
+
+   
+    
 }

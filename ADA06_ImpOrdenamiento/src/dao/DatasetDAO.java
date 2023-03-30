@@ -7,8 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DecimalFormat;
-import java.text.ParseException;
+
 
 import model.Country;
 import model.DoublyLink;
@@ -17,12 +16,10 @@ import model.DoublyLinkedList;
 public class DatasetDAO {
     private DoublyLinkedList<Country> data;
     public BufferedReader reader;
-    private String path;
     private File file;
     private String line;
 
-    DecimalFormat decimales = new DecimalFormat("###,###.###");
-
+ 
     public DatasetDAO(String path) {
         data = new DoublyLinkedList<>();
         this.file = new File(path);
@@ -39,7 +36,7 @@ public class DatasetDAO {
      * }
      */
 
-    public DoublyLinkedList<Country> getFileData() throws NumberFormatException, ParseException {
+    public DoublyLinkedList<Country> getFileData() throws NumberFormatException{
         Country country;
         String parts[];
         try {
@@ -61,30 +58,21 @@ public class DatasetDAO {
     }
 
     public void writeFile(String path, DoublyLinkedList<Country> data) {
-        String typeFile = ".csv";
         file = createFile(path);
 
         try {
             PrintWriter writer = new PrintWriter(new FileWriter(file, true));
-            DoublyLink<Country> current = data.getLast();
-            Country aux;
+            DoublyLink<Country> current = data.getFirst();
 
             while (current != null) {
+                writer.println(current.getdData().getSerialNumber() + "," + current.getdData().getCountryName() + ","
+                        + current.getdData().getTotalCases() + "," + current.getdData().getTotalDeaths() + ","
+                        + current.getdData().getTotalRecovered() + "," + current.getdData().getActiveCases() + ","
+                        + current.getdData().getTotalTest() + "," + current.getdData().getPopulation());
 
+                        current = current.getNext();
             }
 
-            DoublyLink<Country> current = auxList.getLast();
-            while (current != null) {
-                System.out.println(current.getdData().getCountryName());
-                current = current.getPrevious();
-            }
-            for (int i = 0; i < data.sizeList(); i++) {
-                Country aux;
-
-                aux = data.getFirst();
-                writer.println(data.getFirst + "," + array[i].getName() + "," + array[i].getLastName1() + ","
-                        + array[i].getLastName2() + "," + String.valueOf(array[i].getFinalScore()));
-            }
             writer.close();
             System.out.println("CSV created correctly");
 

@@ -27,7 +27,8 @@ public class App {
         */
 
         DoublyLinkedList<Country> listapendeja = new DoublyLinkedList<>();
-        listapendeja = sorter.sorting(2, 2, data);
+        listapendeja = sorter.sorting(0,2, data);
+        dao.writeFile("Ejemplito", listapendeja);
         sorter.printListAsc(listapendeja); // ascendente
         System.out.println("--------------------------");
         sorter.printLIstDesc(listapendeja); //Descendiente

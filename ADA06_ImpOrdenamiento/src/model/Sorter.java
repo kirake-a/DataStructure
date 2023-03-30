@@ -12,6 +12,7 @@ import model.sortingMethods.RadixSort;
  * y si sera excepciones propias o ya de java
  */
 public class Sorter {
+    private static long tiempoEjecucionQuick;
     private DoublyLinkedList<Country> list;
 
     public Sorter() {
@@ -90,6 +91,8 @@ public class Sorter {
                 QuickSort<Country> quickOperator = new QuickSort<>(auxList);
                 quickOperator.sort(sortAttribute);
                 auxList = quickOperator.getList();
+                tiempoEjecucionQuick = quickOperator.getTiempo();
+                System.out.println(tiempoEjecucionQuick);
                 return auxList;
             // Ordenamiento Merge Sort
             case 1:
