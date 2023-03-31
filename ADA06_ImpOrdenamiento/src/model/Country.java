@@ -1,5 +1,13 @@
 package model;
 
+/**
+ * Crea instancias de tipo {@code Country} para
+ * representar cada una de las filas del dataset.
+ * 
+ * @version 31/03/2023
+ * @author Ruben Alvarado
+ * @author Monica Garcilazo
+ */
 public class Country {
     private Integer serialNumber;
     private String countryName;
@@ -12,6 +20,7 @@ public class Country {
 
     /**
      * Constructor para generar las instancias con sus atributos
+     * Cada atributo corresponde a una columna del dataset
      */
     public Country(Integer serialNumber, String country, Double totalCases, Double totalDeaths, Double totalRecovered,
             Double activeCases, Double totalTest, Double population) {
@@ -25,9 +34,7 @@ public class Country {
         this.population = population;
     }
 
-    /**
-     * 
-     */
+ 
     public Integer getSerialNumber() {
         return serialNumber;
     }

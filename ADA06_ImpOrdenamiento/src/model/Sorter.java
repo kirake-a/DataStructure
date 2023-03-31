@@ -8,6 +8,14 @@ import model.sortingMethods.QuickSort;
  * Encargado de realizar las llamadas a las funciones que
  * realizan los ordenamiento del dataset que llega en forma de
  * una lista doblemente ligada
+ * 
+ * @author Monica Garcilazo
+ * @author Ruben Alvarado
+ * @version 31/03/2023
+ * @see DoublyLinkedList
+ * @see MergeSort
+ * @see QuickSort
+ * @see BinaryInsertionSort
  */
 public class Sorter {
     private long tiempoEjecucionQuick = 0;
@@ -89,6 +97,7 @@ public class Sorter {
 
     /**
      * Despliega la lista del argumento en forma descendente
+     * 
      * @param auxList Lista a mostrar
      */
     public void printListDesc(DoublyLinkedList<Country> auxList) {
@@ -101,6 +110,7 @@ public class Sorter {
 
     /**
      * Despliega la lista del argumento en forma ascendente
+     * 
      * @param auxList Lista a mostrar
      */
     public void printListAsc(DoublyLinkedList<Country> auxList) {
@@ -110,20 +120,22 @@ public class Sorter {
             current = current.getNext();
         }
     }
-    
-    /** 
-     * Tiempo de ejecucion del metodo de ordenamiento 
+
+    /**
+     * Tiempo de ejecucion del metodo de ordenamiento
      * {@code Quick Sort}
+     * 
      * @return Tiempo total de ejecucion en nanosegundo
      * @see QuickSort
      */
     public long getTiempoEjecucionQuick() {
         return tiempoEjecucionQuick;
     }
-    
-    /** 
-     * Tiempo de ejecucion del metodo de ordenamiento 
+
+    /**
+     * Tiempo de ejecucion del metodo de ordenamiento
      * {@code Binary Insertion Sort}
+     * 
      * @return Tiempo total de ejecucion en nanosegundo
      * @see BinaryInsertionSort
      */
@@ -131,9 +143,10 @@ public class Sorter {
         return tiempoEjecucionBinary;
     }
 
-    /** 
-     * Tiempo de ejecucion del metodo de ordenamiento 
+    /**
+     * Tiempo de ejecucion del metodo de ordenamiento
      * {@code Merge Sort}
+     * 
      * @return Tiempo total de ejecucion en nanosegundo
      * @see MergeSort
      */
@@ -142,8 +155,9 @@ public class Sorter {
     }
 
     /**
-     * Numero de comparaciones dadas al implementar 
+     * Numero de comparaciones dadas al implementar
      * el metodo de ordenamiento {@code Quick Sort}
+     * 
      * @return Numero total de comparaciones
      * @see QuickSort
      */
@@ -152,9 +166,10 @@ public class Sorter {
     }
 
     /**
-     * Numero de comparaciones dadas al implementar 
+     * Numero de comparaciones dadas al implementar
      * el metodo de ordenamiento {@code Binary Insertion Sort
      * @return Numero total de comparaciones
+     * 
      * @see BinaryInsertionSort
      */
     public int getNumComparacionesBinary() {
@@ -162,8 +177,9 @@ public class Sorter {
     }
 
     /**
-     * Numero de comparaciones dadas al implementar 
+     * Numero de comparaciones dadas al implementar
      * el metodo de ordenamiento {@code Merge Sort}
+     * 
      * @see MergeSort
      * @return Numero total de comparaciones
      */
@@ -174,6 +190,7 @@ public class Sorter {
     /**
      * Numero de intercambios realizados
      * el implementar la funcion {@code Quick Sort}
+     * 
      * @return Numero de intercambios
      * @see QuickSort
      */
@@ -184,6 +201,7 @@ public class Sorter {
     /**
      * Numero de intercambios realizados
      * el implementar la funcion {@code Binary Insertio Sort}
+     * 
      * @return Numero de intercambios
      * @see BinaryInsertiionSort
      */
@@ -194,6 +212,7 @@ public class Sorter {
     /**
      * Numero de intercambios realizados
      * el implementar la funcion {@code Merge Sort}
+     * 
      * @return Numero de intercambios
      * @see MergeSort
      */

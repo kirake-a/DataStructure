@@ -11,24 +11,50 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
+/**
+ * Encargado de realizar todos los procesos orientado a
+ * leer, escribir, eliminar y actualizar al momento
+ * de tratar con archivos pdf.
+ * 
+ * @version 31/03/2023
+ * @author Ruben Alvarado
+ * @author Monica Garcilazo
+ * @see DoublyLinkedList
+ */
 public class DaoPDF {
     String name;
     Document documento;
     FileOutputStream archivo;
     Paragraph titulo;
 
-    public DaoPDF(){
+    /**
+     * Contructor.
+     * 
+     */
+    public DaoPDF() {
         this.name = "finalFiles/" + "TablaMetricas";
         documento = new Document();
         titulo = new Paragraph("Metricas de los algoritmos de ordenamiento");
     }
 
-    public void createPDF(long teM, int ncm, int nim, long teb, int ncb, int nib, long teq, int ncq, int niq){
+    /** 
+     * Metodo para crear el PDF con las metricas de los algortimos
+     * @param teM Tiempo de Ejecucion del algortimo MergeSort
+     * @param ncm Numero de Comparaciones del algoritmo MergeSort
+     * @param nim Numero de Intercambios del algoritmo MergeSort
+     * @param teb Tiempo de Ejecucion del algoritmo BinaryInsertionSort
+     * @param ncb Numero de Comparaciones del algoritmo BinaryInsertionSort
+     * @param nib Numero de Intercambios del algoritmo BinaryInsertionSort
+     * @param teq Tiempo de Ejecucion del algoritmo QuickSort
+     * @param ncq Numero de Comparaciones del algoritmo QuickSort
+     * @param niq Numero de Intercambios del algoritmo QuickSort
+     */
+    public void createPDF(long teM, int ncm, int nim, long teb, int ncb, int nib, long teq, int ncq, int niq) {
         try {
             archivo = new FileOutputStream(name + ".pdf");
             PdfWriter.getInstance(documento, archivo);
             documento.open();
-            titulo.setAlignment(1);//1 es en medio, default es izquierda
+            titulo.setAlignment(1);// 1 es en medio, default es izquierda
 
             documento.add(titulo);
             documento.add(Chunk.NEWLINE);
@@ -43,13 +69,12 @@ public class DaoPDF {
             numComparaciones.setBackgroundColor(BaseColor.PINK);
             PdfPCell numInter = new PdfPCell(new Phrase("Numero de Intercambios"));
             numInter.setBackgroundColor(BaseColor.PINK);
-            
 
             tabla.addCell(cero);
             tabla.addCell(tiempo);
             tabla.addCell(numComparaciones);
             tabla.addCell(numInter);
-        
+
             tabla.addCell("MergeSort");
             tabla.addCell(String.valueOf(teM));
             tabla.addCell(String.valueOf(ncm));

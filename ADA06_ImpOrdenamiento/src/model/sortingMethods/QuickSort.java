@@ -4,17 +4,41 @@ import model.Country;
 import model.DoublyLink;
 import model.DoublyLinkedList;
 
+/**
+ * Implementa el metodo de ordenamiento Quick Sort
+ * haciendo uso de listas doblemente ligadas.
+ * 
+ * @author Monica Garcilazo
+ * @author Ruben Alvarado
+ * @version 31/03/2023
+ * @see DoublyLinkedList
+ */
 public class QuickSort<T> {
     private DoublyLinkedList<T> list;
     private int comparaciones;
     private int intercambios;
     private long tiempo;
 
-
-    public QuickSort(DoublyLinkedList<T> list){
+    /**
+     * Inicializa un nuevo {@code QuickSort} con una
+     * {@code DoublyLinkedList<T>}.
+     * 
+     * @param list Lista que se integra a la clase para operarse.
+     */
+    public QuickSort(DoublyLinkedList<T> list) {
         this.list = list;
     }
 
+    /**
+     * Inicia el proceso de ordenamiento de la lista dada en el argumento del
+     * constructor de la clase
+     * {@code QuickSort}.
+     * 
+     * @param sortAttribute Variable que identifica el atributo por el cual la lista
+     *                      {@code list} se ordena.
+     * @return Lista resultante del proceso de ordenamiento.
+     * @see DoublyLinkedList
+     */
     public void sort(int sortingAttribute) {
         long inicio = System.nanoTime();
         if (this.list == null || this.list.isEmpty()) {
@@ -118,13 +142,14 @@ public class QuickSort<T> {
         }
     }
 
-    public DoublyLinkedList<T> getList(){
+    public DoublyLinkedList<T> getList() {
         return this.list;
     }
 
     /**
      * Numero de comparaciones totales generadas
      * al realizar el proceso de ordenamiento
+     * 
      * @return Comparaciones totales
      */
     public int getComparaciones() {
@@ -134,6 +159,7 @@ public class QuickSort<T> {
     /**
      * Numero de intercambios totales generados
      * al realiza el proceso de ordenamiento
+     * 
      * @return Intercambios totales
      */
     public int getIntercambios() {
@@ -143,14 +169,11 @@ public class QuickSort<T> {
     /**
      * Tiempo total en el que el algoritmo de
      * ordenamiento realizo el proceso completo
+     * 
      * @return Tiempo total
      */
     public long getTiempo() {
         return tiempo;
     }
 
-    
-
-   
-    
 }

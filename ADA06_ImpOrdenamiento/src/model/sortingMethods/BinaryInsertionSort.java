@@ -4,6 +4,15 @@ import model.Country;
 import model.DoublyLink;
 import model.DoublyLinkedList;
 
+/**
+ * Implementa el metodo de ordenamiento Binary Insertion
+ * Sort haciendo uso de listas doblemente ligadas.
+ * 
+ * @author Monica Garcilazo
+ * @author Ruben Alvarado
+ * @version 31/03/2023
+ * @see DoublyLinkedList
+ */
 public class BinaryInsertionSort<T> {
     DoublyLinkedList<T> list;
     private int sortAttribute;
@@ -11,18 +20,19 @@ public class BinaryInsertionSort<T> {
     private int comparaciones;
     private int intercambios;
 
-    public BinaryInsertionSort(DoublyLinkedList<T> list){
+    public BinaryInsertionSort(DoublyLinkedList<T> list) {
         this.list = list;
     }
 
-    /** 
+    /**
      * Inicia el proceso para hacer el ordenamiento de una lista
      * doblemente ligada mediante el uso del metodo de ordenamiento
      * binary insertion.
+     * 
      * @param sortAttribute
      * @return Lista ordenada de tipo {@code DoublyLinkedList<T>}
      */
-    public DoublyLinkedList<T> sort(int sortAttribute){
+    public DoublyLinkedList<T> sort(int sortAttribute) {
         long inicio = System.nanoTime();
         this.sortAttribute = sortAttribute;
         binaryInsertSort(this.list);
@@ -70,7 +80,7 @@ public class BinaryInsertionSort<T> {
             T midVal = list.searchItemPosition(mid);
 
             int comparation = compare(key, midVal, this.sortAttribute);
-            
+
             if (comparation == 0) {
                 return mid;
             } else if (comparation < 0) {
@@ -146,6 +156,7 @@ public class BinaryInsertionSort<T> {
     /**
      * Numero de comparaciones totales generadas
      * al realizar el proceso de ordenamiento
+     * 
      * @return Comparaciones totales
      */
     public int getComparaciones() {
@@ -155,6 +166,7 @@ public class BinaryInsertionSort<T> {
     /**
      * Numero de intercambios totales generados
      * al realiza el proceso de ordenamiento
+     * 
      * @return Intercambios totales
      */
     public int getIntercambios() {
@@ -164,10 +176,11 @@ public class BinaryInsertionSort<T> {
     /**
      * Tiempo total en el que el algoritmo de
      * ordenamiento realizo el proceso completo
+     * 
      * @return Tiempo total
      */
     public long getTime() {
         return time;
     }
-    
+
 }
