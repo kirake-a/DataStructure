@@ -4,6 +4,15 @@ import model.Country;
 import model.DoublyLink;
 import model.DoublyLinkedList;
 
+/**
+ * Implementa el metodo de ordenamiento Merge Sort
+ * haciendo uso de listas doblemente ligadas.
+ * 
+ * @author Monica Garcilazo
+ * @author Ruben Alvarado
+ * @version 31/03/2023
+ * @see DoublyLinkedList
+ */
 public class MergeSort<T> {
     private DoublyLinkedList<T> list;
     private int sortAttribute;
@@ -11,11 +20,17 @@ public class MergeSort<T> {
     private int comparacion;
     private int intercambios;
 
+    /**
+     * Inicializa un nuevo {@code MergeSort} con una
+     * {@code DoublyLinkedList<T>}.
+     * 
+     * @param list Lista que se integra a la clase para operarse.
+     */
     public MergeSort(DoublyLinkedList<T> list) {
         this.list = list;
     }
 
-    private DoublyLinkedList<T> mergeSort(DoublyLinkedList<T> list){
+    private DoublyLinkedList<T> mergeSort(DoublyLinkedList<T> list) {
         if (list.sizeList() <= 1) {
             return list;
         }
@@ -30,7 +45,7 @@ public class MergeSort<T> {
         while (current != null) {
             if (index < middle) {
                 leftList.insertLast(current.getdData());
-            } else { 
+            } else {
                 rightList.insertLast(current.getdData());
             }
 
@@ -44,7 +59,7 @@ public class MergeSort<T> {
         return merge(leftList, rightList);
     }
 
-    private DoublyLinkedList<T> merge(DoublyLinkedList<T> left, DoublyLinkedList<T> right){
+    private DoublyLinkedList<T> merge(DoublyLinkedList<T> left, DoublyLinkedList<T> right) {
         DoublyLinkedList<T> result = new DoublyLinkedList<>();
         DoublyLink<T> leftNode = left.getFirst();
         DoublyLink<T> rightNode = right.getFirst();
@@ -74,6 +89,16 @@ public class MergeSort<T> {
         return result;
     }
 
+    /**
+     * Inicia el proceso de ordenamiento de la lista dada en el argumento del
+     * constructor de la clase
+     * {@code MergeSort}.
+     * 
+     * @param sortAttribute Variable que identifica el atributo por el cual la lista
+     *                      {@code list} se ordena.
+     * @return Lista resultante del proceso de ordenamiento.
+     * @see DoublyLinkedList
+     */
     public DoublyLinkedList<T> sort(int sortAttribute) {
         long inicio = System.nanoTime();
         this.sortAttribute = sortAttribute;
@@ -144,18 +169,32 @@ public class MergeSort<T> {
         }
     }
 
-    public DoublyLinkedList<T> getList() {
-        return this.list;
-    }
-
+    /**
+     * Tiempo total en el que el algoritmo de
+     * ordenamiento realizo el proceso completo
+     * 
+     * @return Tiempo total
+     */
     public long getTime() {
         return time;
     }
 
+    /**
+     * Numero de comparaciones totales generadas
+     * al realizar el proceso de ordenamiento
+     * 
+     * @return Comparaciones totales
+     */
     public int getComparacion() {
         return comparacion;
     }
 
+    /**
+     * Numero de intercambios totales generados
+     * al realiza el proceso de ordenamiento
+     * 
+     * @return Intercambios totales
+     */
     public int getIntercambios() {
         return intercambios;
     }

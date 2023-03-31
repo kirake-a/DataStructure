@@ -3,13 +3,19 @@ package model;
 import model.sortingMethods.BinaryInsertionSort;
 import model.sortingMethods.MergeSort;
 import model.sortingMethods.QuickSort;
-import model.sortingMethods.RadixSort;
 
-/*
- * Este metodo es que el esta encargado de llamar al
- * metodo de ordenamiento que sea requerido.
- * Considerar si se necesitaran excepciones para las llamadas
- * y si sera excepciones propias o ya de java
+/**
+ * Encargado de realizar las llamadas a las funciones que
+ * realizan los ordenamiento del dataset que llega en forma de
+ * una lista doblemente ligada
+ * 
+ * @author Monica Garcilazo
+ * @author Ruben Alvarado
+ * @version 31/03/2023
+ * @see DoublyLinkedList
+ * @see MergeSort
+ * @see QuickSort
+ * @see BinaryInsertionSort
  */
 public class Sorter {
     private long tiempoEjecucionQuick = 0;
@@ -24,57 +30,11 @@ public class Sorter {
     private int numIntercambiosBinary = 0;
     private int numIntercambiosMerge = 0;
 
-    private DoublyLinkedList<Country> list;
-
-    public Sorter() {
-    }
-
-    public Sorter(DoublyLinkedList<Country> list) {
-        this.list = list;
-    }
-
     /**
-     * Ordena la lista dada previamente en el constructor del objeto, segun el
-     * metodo de ordenamiento
-     * seleccionado por la key dada en el argumento.
-     * 
-     * @param key Selecciona el tipo de algoritmo a usar para ordenar la lista de
-     *            datos.
-     * @throws Exception El digito de la variable key no es un metodo de
-     *                   ordenamiento
+     * Constructor por defecto para generar instancias
      */
-    public DoublyLinkedList<Country> sorting(int key, int sortingAttribute) throws Exception {
-        /*
-         * Escoge el metodo de ordenamiento de la lista, en teoria esta
-         * clase debera devolver la lista ordenada para su futuro procesamiento
-         */
-        switch (key) {
-            // Ordenamiento Quick Sort
-            case 0:
-                QuickSort<Country> quickOperator = new QuickSort<>(this.list);
-                quickOperator.sort(sortingAttribute);
-                this.list = quickOperator.getList();
-                return this.list;
-            // Ordenamiento Merge Sort
-            case 1:
-                MergeSort<Country> mergeOoperator = new MergeSort<>(this.list);
-                mergeOoperator.sort(sortingAttribute);
-                this.list = mergeOoperator.getList();
-                return this.list;
-            // Ordenamiento Binary Insertion Sort
-            case 2:
-                BinaryInsertionSort<Country> binaryOperator = new BinaryInsertionSort<>(this.list);
-                binaryOperator.sort(sortingAttribute);
-                return this.list;
-            // Ordenamiento Radix Sort
-            case 3: // NO ESTA IMPLEMENTADO TODAVIA
-                RadixSort<Country> radixOperator = new RadixSort<>(this.list);
-                radixOperator.sort(sortingAttribute);
-                this.list = radixOperator.getList();
-                return this.list;
-            default:
-                throw new Exception();
-        }
+    public Sorter() {
+
     }
 
     /**
@@ -130,18 +90,17 @@ public class Sorter {
                 System.out.println(numComparacionesBinary);
                 System.out.println(numIntercambiosBinary);
                 return theResult;
-            // Ordenamiento Radix Sort
-            case 3: // NO ESTA IMPLEMENTADO TODAVIA
-                RadixSort<Country> radixOperator = new RadixSort<>(auxList);
-                radixOperator.sort(sortAttribute);
-                auxList = radixOperator.getList();
-                return auxList;
             default:
                 throw new Exception();
         }
     }
 
-    public void printListDesc(DoublyLinkedList<Country> auxList){
+    /**
+     * Despliega la lista del argumento en forma descendente
+     * 
+     * @param auxList Lista a mostrar
+     */
+    public void printListDesc(DoublyLinkedList<Country> auxList) {
         DoublyLink<Country> current = auxList.getLast();
         while (current != null) {
             System.out.println(current.getdData().getCountryName());
@@ -149,7 +108,12 @@ public class Sorter {
         }
     }
 
-    public void printListAsc(DoublyLinkedList<Country> auxList){
+    /**
+     * Despliega la lista del argumento en forma ascendente
+     * 
+     * @param auxList Lista a mostrar
+     */
+    public void printListAsc(DoublyLinkedList<Country> auxList) {
         DoublyLink<Country> current = auxList.getFirst();
         while (current != null) {
             System.out.println(current.getdData().getCountryName());
@@ -157,40 +121,103 @@ public class Sorter {
         }
     }
 
+    /**
+     * Tiempo de ejecucion del metodo de ordenamiento
+     * {@code Quick Sort}
+     * 
+     * @return Tiempo total de ejecucion en nanosegundo
+     * @see QuickSort
+     */
     public long getTiempoEjecucionQuick() {
         return tiempoEjecucionQuick;
     }
 
+    /**
+     * Tiempo de ejecucion del metodo de ordenamiento
+     * {@code Binary Insertion Sort}
+     * 
+     * @return Tiempo total de ejecucion en nanosegundo
+     * @see BinaryInsertionSort
+     */
     public long getTiempoEjecucionBinary() {
         return tiempoEjecucionBinary;
     }
 
+    /**
+     * Tiempo de ejecucion del metodo de ordenamiento
+     * {@code Merge Sort}
+     * 
+     * @return Tiempo total de ejecucion en nanosegundo
+     * @see MergeSort
+     */
     public long getTiempoEjecucionMerge() {
         return tiempoEjecucionMerge;
     }
 
+    /**
+     * Numero de comparaciones dadas al implementar
+     * el metodo de ordenamiento {@code Quick Sort}
+     * 
+     * @return Numero total de comparaciones
+     * @see QuickSort
+     */
     public int getNumComparacionesQuick() {
         return numComparacionesQuick;
     }
 
+    /**
+     * Numero de comparaciones dadas al implementar
+     * el metodo de ordenamiento {@code Binary Insertion Sort
+     * @return Numero total de comparaciones
+     * 
+     * @see BinaryInsertionSort
+     */
     public int getNumComparacionesBinary() {
         return numComparacionesBinary;
     }
 
+    /**
+     * Numero de comparaciones dadas al implementar
+     * el metodo de ordenamiento {@code Merge Sort}
+     * 
+     * @see MergeSort
+     * @return Numero total de comparaciones
+     */
     public int getNumComparacionesMerge() {
         return numComparacionesMerge;
     }
 
+    /**
+     * Numero de intercambios realizados
+     * el implementar la funcion {@code Quick Sort}
+     * 
+     * @return Numero de intercambios
+     * @see QuickSort
+     */
     public int getNumIntercambiosQuick() {
         return numIntercambiosQuick;
     }
 
+    /**
+     * Numero de intercambios realizados
+     * el implementar la funcion {@code Binary Insertio Sort}
+     * 
+     * @return Numero de intercambios
+     * @see BinaryInsertiionSort
+     */
     public int getNumIntercambiosBinary() {
         return numIntercambiosBinary;
     }
 
+    /**
+     * Numero de intercambios realizados
+     * el implementar la funcion {@code Merge Sort}
+     * 
+     * @return Numero de intercambios
+     * @see MergeSort
+     */
     public int getNumIntercambiosMerge() {
         return numIntercambiosMerge;
     }
-    
+
 }

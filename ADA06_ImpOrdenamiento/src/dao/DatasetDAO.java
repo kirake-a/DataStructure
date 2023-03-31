@@ -8,35 +8,42 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-
 import model.Country;
 import model.DoublyLink;
 import model.DoublyLinkedList;
 
+/**
+ * Encargado de realizar todos los procesos orientado a
+ * leer, escribir, eliminar y actualizar dentro del dataset,
+ * en formato .csv.
+ * 
+ * @version 31/03/2023
+ * @author Ruben Alvarado
+ * @author Monica Garcilazo
+ * @see DoublyLinkedList
+ */
 public class DatasetDAO {
     private DoublyLinkedList<Country> data;
     public BufferedReader reader;
     private File file;
     private String line;
 
- 
+    /**
+     * 
+     * @param path
+     */
     public DatasetDAO(String path) {
         data = new DoublyLinkedList<>();
         this.file = new File(path);
     }
-    /*
-     * public void readFile() throws IOException {
-     * File file = new File(this.path);
-     * 
-     * if (file.canRead()) {
-     * reader = new BufferedReader(new FileReader(this.path));
-     * } else {
-     * throw new IOException();
-     * }
-     * }
-     */
 
-    public DoublyLinkedList<Country> getFileData() throws NumberFormatException{
+    /**
+     * Metodo para crear una lista doblemente ligada con los datos del dataset
+     * 
+     * @return Una lista doblemente ligada con los datos del csv
+     * @throws NumberFormatException
+     */
+    public DoublyLinkedList<Country> getFileData() throws NumberFormatException {
         Country country;
         String parts[];
         try {
@@ -57,6 +64,13 @@ public class DatasetDAO {
         return data;
     }
 
+    /**
+     * Metodo para escribir el CSV
+     * 
+     * @param path  Nombre del archivo
+     * @param data  Lista doblemente ligada con los datos
+     * @param order orden en el que se va a imprimir (ascendete o descendete)
+     */
     public void writeFile(String path, DoublyLinkedList<Country> data, int order) {
         file = createFile(path);
 
@@ -67,30 +81,34 @@ public class DatasetDAO {
                     DoublyLink<Country> current = data.getFirst();
 
                     while (current != null) {
-                        writer.println(current.getdData().getSerialNumber() + "," + current.getdData().getCountryName() + ","
+                        writer.println(current.getdData().getSerialNumber() + "," + current.getdData().getCountryName()
+                                + ","
                                 + current.getdData().getTotalCases() + "," + current.getdData().getTotalDeaths() + ","
-                                + current.getdData().getTotalRecovered() + "," + current.getdData().getActiveCases() + ","
+                                + current.getdData().getTotalRecovered() + "," + current.getdData().getActiveCases()
+                                + ","
                                 + current.getdData().getTotalTest() + "," + current.getdData().getPopulation());
-        
-                                current = current.getNext();
+
+                        current = current.getNext();
                     }
-        
+
                     break;
                 case 1:
                     DoublyLink<Country> currentt = data.getLast();
 
                     while (currentt != null) {
-                        writer.println(currentt.getdData().getSerialNumber() + "," + currentt.getdData().getCountryName() + ","
+                        writer.println(currentt.getdData().getSerialNumber() + ","
+                                + currentt.getdData().getCountryName() + ","
                                 + currentt.getdData().getTotalCases() + "," + currentt.getdData().getTotalDeaths() + ","
-                                + currentt.getdData().getTotalRecovered() + "," + currentt.getdData().getActiveCases() + ","
+                                + currentt.getdData().getTotalRecovered() + "," + currentt.getdData().getActiveCases()
+                                + ","
                                 + currentt.getdData().getTotalTest() + "," + currentt.getdData().getPopulation());
-        
-                                currentt = currentt.getPrevious();
+
+                        currentt = currentt.getPrevious();
                     }
                 default:
                     break;
             }
-            
+
             writer.close();
             System.out.println("CSV created correctly");
 
@@ -104,6 +122,12 @@ public class DatasetDAO {
         }
     }
 
+    /**
+     * Crea el archivo csv y asigna la carpeta en donde se quiere guardar
+     * 
+     * @param fileNameAux Nombre del archivo
+     * @return El documento csv
+     */
     public File createFile(String fileNameAux) {
         String fileName = "finalFiles/" + fileNameAux + ".csv"; // Check how to locate it into the destination folder
         File newFile = null;
