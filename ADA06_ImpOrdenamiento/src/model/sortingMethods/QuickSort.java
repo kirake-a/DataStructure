@@ -40,7 +40,7 @@ public class QuickSort<T> {
         DoublyLink<T> i = left.getPrevious();
 
         for (DoublyLink<T> j = left; j != right; j = j.getNext()) {
-            if (compare(j.getdData(), pivot.getdData(), sortingAttribute) > 0) {
+            if (compare(j.getdData(), pivot.getdData(), sortingAttribute) < 0) {
                 i = (i == null) ? left : i.getNext();
                 swap(i, j);
             }
