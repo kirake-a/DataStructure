@@ -562,4 +562,23 @@ public class DoublyLinkedList<T> {
     public void setFirst(DoublyLink<T> first){
         this.first = first;
     }
+
+    public DoublyLink<T> find(int index) {
+        DoublyLink<T> current;
+        int middleIndex = sizeList() / 2; 
+        
+        if (index <= middleIndex) { 
+            current = first;
+            for (int i = 0; i < index; i++) { 
+                current = current.getNext();
+            }
+        } else { 
+            current = last;
+            for (int i = sizeList() - 1; i > index; i--) { 
+                current = current.getPrevious();
+            }
+        }
+        
+        return current; 
+    }
 }

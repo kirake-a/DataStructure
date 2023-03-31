@@ -7,7 +7,7 @@ import model.DoublyLinkedList;
 public class MergeSort<T> {
     private DoublyLinkedList<T> list;
     private int sortAttribute;
-    private long tiempo;
+    private long time;
     private int comparacion;
     private int intercambios;
 
@@ -15,7 +15,7 @@ public class MergeSort<T> {
         this.list = list;
     }
 
-    public DoublyLinkedList<T> mergeSort(DoublyLinkedList<T> list){
+    private DoublyLinkedList<T> mergeSort(DoublyLinkedList<T> list){
         if (list.sizeList() <= 1) {
             return list;
         }
@@ -77,7 +77,7 @@ public class MergeSort<T> {
         this.sortAttribute = sortAttribute;
         DoublyLinkedList<T> theResult = mergeSort(this.list);
         long finall = System.nanoTime();
-        tiempo = (finall - inicio);
+        time = (finall - inicio);
 
         return theResult;
     }
@@ -146,56 +146,8 @@ public class MergeSort<T> {
         return this.list;
     }
 
-    // DESDE AQUI SE INTENTA IMPLEMENTAR OTRA FORMA DE MERGE SORT
-    private void sortMethod(DoublyLinkedList<T> theList) {
-        if (theList.sizeList() > 1) {
-            int middle = theList.sizeList() / 2;
-            DoublyLinkedList<T> leftHalf = theList.sublist(theList, 0, middle);
-            DoublyLinkedList<T> rightHalf = theList.sublist(theList, middle, theList.sizeList());
-
-            System.out.println("LeftList: " + leftHalf.sizeList());
-            System.out.println("RightList: " + rightHalf.sizeList());
-
-            sortMethod(leftHalf);
-            sortMethod(rightHalf);
-            merge(leftHalf, rightHalf, theList);
-        }
-    }
-
-    public void merge(DoublyLinkedList<T> leftHalf, DoublyLinkedList<T> rightHalf, DoublyLinkedList<T> auxList) {
-        //intercambios++;
-        int i = 0;
-        int j = 0;
-        int k = 0;
-
-        while (i < leftHalf.sizeList() && j < rightHalf.sizeList()) {
-            if (compare( leftHalf.searchItemPosition(i), rightHalf.searchItemPosition(j),
-                    this.sortAttribute) <= 0) {
-                auxList.insertInPosition(k, leftHalf.searchItemPosition(i));
-                i++;
-            } else {
-                auxList.insertInPosition(k, rightHalf.searchItemPosition(j));
-                j++;
-            }
-
-            k++;
-        }
-
-        while (i < leftHalf.sizeList()) {
-            auxList.insertInPosition(k, leftHalf.searchItemPosition(i));
-            i++;
-            k++;
-        }
-
-        while (j < rightHalf.sizeList()) {
-            auxList.insertInPosition(k, leftHalf.searchItemPosition(j));
-            j++;
-            k++;
-        }
-    }
-
-    public long getTiempo() {
-        return tiempo;
+    public long getTime() {
+        return time;
     }
 
     public int getComparacion() {

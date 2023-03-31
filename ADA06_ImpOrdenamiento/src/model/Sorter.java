@@ -65,7 +65,6 @@ public class Sorter {
             case 2:
                 BinaryInsertionSort<Country> binaryOperator = new BinaryInsertionSort<>(this.list);
                 binaryOperator.sort(sortingAttribute);
-                this.list = binaryOperator.getList();
                 return this.list;
             // Ordenamiento Radix Sort
             case 3: // NO ESTA IMPLEMENTADO TODAVIA
@@ -113,7 +112,7 @@ public class Sorter {
             case 1:
                 MergeSort<Country> mergeOperator = new MergeSort<Country>(auxList);
                 auxList = mergeOperator.sort(sortAttribute);
-                this.tiempoEjecucionMerge = mergeOperator.getTiempo();
+                this.tiempoEjecucionMerge = mergeOperator.getTime();
                 this.numComparacionesMerge = mergeOperator.getComparacion();
                 this.numIntercambiosMerge = mergeOperator.getIntercambios();
                 System.out.println(tiempoEjecucionMerge);
@@ -122,10 +121,15 @@ public class Sorter {
                 return auxList;
             // Ordenamiento Binary Insertion Sort
             case 2:
-                BinaryInsertionSort<Country> binaryOperator = new BinaryInsertionSort<>(auxList);
-                binaryOperator.sort(sortAttribute);
-                auxList = binaryOperator.getList();
-                return auxList;
+                BinaryInsertionSort<Country> binaryOperator = new BinaryInsertionSort<Country>(auxList);
+                DoublyLinkedList<Country> theResult = binaryOperator.sort(sortAttribute);
+                this.tiempoEjecucionBinary = binaryOperator.getTime();
+                this.numComparacionesBinary = binaryOperator.getComparaciones();
+                this.numIntercambiosBinary = binaryOperator.getIntercambios();
+                System.out.println(tiempoEjecucionBinary);
+                System.out.println(numComparacionesBinary);
+                System.out.println(numIntercambiosBinary);
+                return theResult;
             // Ordenamiento Radix Sort
             case 3: // NO ESTA IMPLEMENTADO TODAVIA
                 RadixSort<Country> radixOperator = new RadixSort<>(auxList);
