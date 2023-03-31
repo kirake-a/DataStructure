@@ -1,6 +1,5 @@
 package test;
 
-import dao.DaoPDF;
 import dao.DatasetDAO;
 import model.Country;
 import model.DoublyLinkedList;
@@ -26,18 +25,17 @@ public class App {
         data.insertFirst(tres);
         data.insertFirst(cuatro);
         */
-
-        DoublyLinkedList<Country> listapendeja = new DoublyLinkedList<>();
-        listapendeja = sorter.sorting(0,2, data);
-        dao.writeFile("Ejemplito", listapendeja);
-        //sorter.printListAsc(listapendeja); // ascendente
+        
+        DoublyLinkedList<Country> auxList = new DoublyLinkedList<>();
+        auxList = sorter.sorting(0,2, data);
+        //dao.writeFile("Ejemplito", auxList);
+        sorter.printListAsc(auxList); // ascendente
         System.out.println("--------------------------");
-        //sorter.printLIstDesc(listapendeja); //Descendiente
-        System.out.println("hola");
+        sorter.printListDesc(auxList); //Descendiente
 
-        DaoPDF pdf = new DaoPDF();
+        /* DaoPDF pdf = new DaoPDF();
         pdf.createPDF(sorter.getTiempoEjecucionMerge(), sorter.getNumComparacionesMerge(), sorter.getNumIntercambiosMerge(), sorter.getTiempoEjecucionBinary(), sorter.getNumComparacionesBinary(), sorter.getNumIntercambiosBinary(), sorter.getTiempoEjecucionQuick(), sorter.getNumComparacionesQuick(), sorter.getNumIntercambiosQuick());
-
+        */
 
         //sorter.sorting(1, 2, data);
         //listapendeja = sorter.sorting(2, 2, data);

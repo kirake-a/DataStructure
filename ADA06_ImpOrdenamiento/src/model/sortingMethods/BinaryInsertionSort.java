@@ -1,76 +1,79 @@
 package model.sortingMethods;
 
 import model.Country;
+import model.DoublyLink;
 import model.DoublyLinkedList;
 
 public class BinaryInsertionSort<T> {
-    private DoublyLinkedList<T> theList;
-    private int nElements;
+    DoublyLinkedList<T> list;
     private int sortAttribute;
-
-    private long tiempo;
+    private long time;
     private int comparaciones;
     private int intercambios;
 
-
     public BinaryInsertionSort(DoublyLinkedList<T> list){
-        this.theList = list;
-        this.nElements = list.sizeList();
+        this.list = list;
     }
 
-    public void sort(int sortingAttribute){
-        this.sortAttribute = sortingAttribute;
-        binaryInsertionSort(theList, nElements);
+    public DoublyLinkedList<T> sort(int sortAttribute){
+        long inicio = System.nanoTime();
+        this.sortAttribute = sortAttribute;
+        binaryInsertSort(this.list);
+        DoublyLinkedList<T> theResult = this.list;
+        long finall = System.nanoTime();
+        time = (finall - inicio);
+
+        return theResult;
     }
 
-    /**
-     * Busqueda binaria dentro de una {@code DoublyLinkedList}
-     * 
-     * @param list          Lista doblemente ligada
-     * @param item          Dato objetivo
-     * @param low           Posicion inicial de busqueda
-     * @param high          Posicion final de busqueda
-     * @return Valor de la comparacion
-     */
-    private int binarySearch(DoublyLinkedList<T> list, T item, int low, int high) {
-        while (low <= high) {
-            int mid = low + (high - low) / 2; // La mitad de la lista
-
-            if (item.equals(list.searchItemPosition(mid)))
-                return mid + 1;
-            else if (compare(item, list.searchItemPosition(mid), this.sortAttribute) < 0)
-                low = mid + 1;
-            else
-                high = mid - 1;
+    private void binaryInsertSort(DoublyLinkedList<T> list) {
+        if (list.isEmpty()) {
+            return;
         }
 
-        return low;
-    }
+        DoublyLink<T> current = list.getFirst().getNext();
 
-    /**
-     * Implementacion del metodo de ordenamiento binary insertion sort con
-     * listas doblemente ligadas
-     * 
-     * @param list          Lista doblemente ligada
-     * @param n
-     */
-    public void binaryInsertionSort(DoublyLinkedList<T> list, int n) {
-        intercambios++;
-        int i, location, j;
-        T selected;
+        while (current != null) {
+            int pos = binarySearch(list, current.getPrevious(), current.getdData());
 
-        for (i = 1; i < n; ++i) {
-            j = i - 1;
-            selected = list.searchItemPosition(i);
+            if (pos != -1) {
 
-            location = binarySearch(list, selected, 0, j);
+                DoublyLink<T> temp = current;
+                T tempData = temp.getdData();
 
-            while (j >= location) {
-                list.insertInPosition(j + 1, list.searchItemPosition(j));
-                j--;
+                while (temp.getPrevious() != null
+                        && compare(tempData, temp.getPrevious().getdData(), this.sortAttribute) < 0) {
+                    temp.setdData(temp.getPrevious().getdData());
+                    temp = temp.getPrevious();
+                }
+
+                temp.setdData(tempData);
             }
-            list.insertInPosition(j + 1, selected);
+
+            current = current.getNext();
         }
+    }
+
+    private int binarySearch(DoublyLinkedList<T> list, DoublyLink<T> last, T key) {
+        int left = 0;
+        int right = list.sizeList() - 1;
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            T midVal = list.searchItemPosition(mid);
+
+            int comparation = compare(key, midVal, this.sortAttribute);
+            
+            if (comparation == 0) {
+                return mid;
+            } else if (comparation < 0) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return left;
     }
 
     /**
@@ -91,6 +94,7 @@ public class BinaryInsertionSort<T> {
      * @return El valor resultante de la comparacion
      */
     private int compare(T a, T b, int sortAttribute) {
+        comparaciones++;
 
         Country country1 = (Country) a;
         Country country2 = (Country) b;
@@ -100,9 +104,9 @@ public class BinaryInsertionSort<T> {
             case 1:
 
                 if (country1.getPopulation() < country2.getPopulation()) {
-                    return -1;
-                } else if (country1.getPopulation() > country2.getPopulation()) {
                     return 1;
+                } else if (country1.getPopulation() > country2.getPopulation()) {
+                    return -1;
                 } else {
                     return 0;
                 }
@@ -111,18 +115,18 @@ public class BinaryInsertionSort<T> {
 
             case 3:
                 if (country1.getActiveCases() < country2.getActiveCases()) {
-                    return -1;
-                } else if (country1.getActiveCases() > country2.getActiveCases()) {
                     return 1;
+                } else if (country1.getActiveCases() > country2.getActiveCases()) {
+                    return -1;
                 } else {
                     return 0;
                 }
 
             case 4:
                 if (country1.getTotalDeaths() < country2.getTotalDeaths()) {
-                    return -1;
-                } else if (country1.getTotalDeaths() > country2.getTotalDeaths()) {
                     return 1;
+                } else if (country1.getTotalDeaths() > country2.getTotalDeaths()) {
+                    return -1;
                 } else {
                     return 0;
                 }
@@ -130,14 +134,6 @@ public class BinaryInsertionSort<T> {
             default:
                 return 0;
         }
-    }
-
-    public DoublyLinkedList<T> getList(){
-        return this.theList;
-    }
-
-    public long getTiempo() {
-        return tiempo;
     }
 
     public int getComparaciones() {
@@ -148,4 +144,12 @@ public class BinaryInsertionSort<T> {
         return intercambios;
     }
 
+    public int getSortAttribute() {
+        return sortAttribute;
+    }
+
+    public long getTime() {
+        return time;
+    }
+    
 }

@@ -1,81 +1,85 @@
 package model.sortingMethods;
 
 import model.Country;
+import model.DoublyLink;
 import model.DoublyLinkedList;
 
 public class MergeSort<T> {
     private DoublyLinkedList<T> list;
-    private int nElems; // number of data items
     private int sortAttribute;
-    private long tiempo;
+    private long time;
     private int comparacion;
     private int intercambios;
 
-    // public MergeSort(int max) {
-    // theArray = new long[max]; // create array
-    // nElems = 0;
-    // }
-
-    public MergeSort(DoublyLinkedList<T> theList) {
-        this.list = theList;
-        nElems = theList.sizeList();
+    public MergeSort(DoublyLinkedList<T> list) {
+        this.list = list;
     }
 
-    public void insert(T value) {
-        list.insertInPosition(nElems, value);
-        nElems++;
-    }
-
-    // public void mergeSort() {
-    // long[] workSpace = new long[nElems];
-    // recMergeSort(workSpace, 0, nElems-1);
-    // }
-
-    public void sort(int sortAttribute) {
-        long inicio = System.nanoTime();
-        this.sortAttribute = sortAttribute;
-        recMergeSort(list, 0, nElems - 1);
-        long finall = System.nanoTime();
-        tiempo = (finall - inicio);
-    }
-
-    private void recMergeSort(DoublyLinkedList<T> auxList, int lowerBound, int upperBound) {
-        if (lowerBound == upperBound) {
-            return;
-        } else {
-            int mid = (lowerBound + upperBound) / 2;
-            recMergeSort(auxList, lowerBound, mid);
-            recMergeSort(auxList, mid + 1, upperBound);
-            merge(auxList, lowerBound, mid + 1, upperBound, this.sortAttribute);
+    private DoublyLinkedList<T> mergeSort(DoublyLinkedList<T> list){
+        if (list.sizeList() <= 1) {
+            return list;
         }
+
+        DoublyLinkedList<T> leftList = new DoublyLinkedList<>();
+        DoublyLinkedList<T> rightList = new DoublyLinkedList<>();
+        int middle = list.sizeList() / 2;
+
+        DoublyLink<T> current = list.getFirst();
+        int index = 0;
+
+        while (current != null) {
+            if (index < middle) {
+                leftList.insertLast(current.getdData());
+            } else { 
+                rightList.insertLast(current.getdData());
+            }
+
+            index++;
+            current = current.getNext();
+        }
+
+        leftList = mergeSort(leftList);
+        rightList = mergeSort(rightList);
+
+        return merge(leftList, rightList);
     }
 
-    private void merge(DoublyLinkedList<T> auxList, int lowPtr, int highPtr, int upperBound, int sortAttribute) {
-        intercambios++;
-        int j = 0; // workspace index
-        int lowerBound = lowPtr;
-        int mid = highPtr - 1;
-        int numItems = upperBound - lowerBound + 1;
+    private DoublyLinkedList<T> merge(DoublyLinkedList<T> left, DoublyLinkedList<T> right){
+        DoublyLinkedList<T> result = new DoublyLinkedList<>();
+        DoublyLink<T> leftNode = left.getFirst();
+        DoublyLink<T> rightNode = right.getFirst();
 
-        while (lowPtr <= mid && highPtr <= upperBound) {
-            if (compare(auxList.searchItemPosition(lowPtr), auxList.searchItemPosition(highPtr), sortAttribute) < 0) {
-                auxList.insertInPosition(j++, this.list.searchItemPosition(lowPtr++));
+        while ((leftNode != null) && (rightNode != null)) {
+            if (compare(leftNode.getdData(), rightNode.getdData(), sortAttribute) <= 0) {
+                result.insertLast(leftNode.getdData());
+                leftNode = leftNode.getNext();
             } else {
-                auxList.insertInPosition(j++, this.list.searchItemPosition(highPtr++));
+                result.insertLast(rightNode.getdData());
+                rightNode = rightNode.getNext();
             }
         }
 
-        while (lowPtr <= mid) {
-            auxList.insertInPosition(j++, this.list.searchItemPosition(lowPtr++));
+        while (leftNode != null) {
+            result.insertLast(leftNode.getdData());
+            leftNode = leftNode.getNext();
         }
 
-        while (highPtr <= upperBound) {
-            auxList.insertInPosition(j++, this.list.searchItemPosition(highPtr++));
+        while (rightNode != null) {
+            result.insertLast(rightNode.getdData());
+            rightNode = rightNode.getNext();
         }
 
-        for (int i = 0; i < numItems; i++) {
-            this.list.insertInPosition(lowerBound + i, auxList.searchItemPosition(i));
-        }
+        return result;
+    }
+
+    public DoublyLinkedList<T> sort(int sortAttribute) {
+        long inicio = System.nanoTime();
+        this.sortAttribute = sortAttribute;
+        DoublyLinkedList<T> theResult = mergeSort(this.list);
+        long finall = System.nanoTime();
+        time = (finall - inicio);
+
+        return theResult;
     }
 
     /**
@@ -106,9 +110,9 @@ public class MergeSort<T> {
             case 1:
 
                 if (country1.getPopulation() < country2.getPopulation()) {
-                    return -1;
-                } else if (country1.getPopulation() > country2.getPopulation()) {
                     return 1;
+                } else if (country1.getPopulation() > country2.getPopulation()) {
+                    return -1;
                 } else {
                     return 0;
                 }
@@ -117,18 +121,18 @@ public class MergeSort<T> {
 
             case 3:
                 if (country1.getActiveCases() < country2.getActiveCases()) {
-                    return -1;
-                } else if (country1.getActiveCases() > country2.getActiveCases()) {
                     return 1;
+                } else if (country1.getActiveCases() > country2.getActiveCases()) {
+                    return -1;
                 } else {
                     return 0;
                 }
 
             case 4:
                 if (country1.getTotalDeaths() < country2.getTotalDeaths()) {
-                    return -1;
-                } else if (country1.getTotalDeaths() > country2.getTotalDeaths()) {
                     return 1;
+                } else if (country1.getTotalDeaths() > country2.getTotalDeaths()) {
+                    return -1;
                 } else {
                     return 0;
                 }
@@ -138,13 +142,12 @@ public class MergeSort<T> {
         }
     }
 
-    public DoublyLinkedList<T> getList(){
+    public DoublyLinkedList<T> getList() {
         return this.list;
     }
 
-   
-    public long getTiempo() {
-        return tiempo;
+    public long getTime() {
+        return time;
     }
 
     public int getComparacion() {
@@ -154,5 +157,5 @@ public class MergeSort<T> {
     public int getIntercambios() {
         return intercambios;
     }
-    
+
 }

@@ -3,6 +3,8 @@ package model;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
+
 /**
  * Implementacion personalizada de una lista doblemente ligada
  * 
@@ -53,24 +55,26 @@ public class DoublyLinkedList<T> {
 
     public void insertInPosition(int position, T datum) {
         if (!isEmpty()) {
-            int counterPosition = 0;
-            DoublyLink<T> current = first;
 
-            if (position > this.sizeList()) {
+            if (position > this.sizeList() && position < 0) {
                 System.out.println("La posicion sobrepasa el tamanio de la lista");
             } else {
+                int counterPosition = 0;
+                DoublyLink<T> current = first;
 
-                while (counterPosition != position - 1) {
-                    current = current.getNext();
-                    counterPosition++;
+                while (current != null) {
+                    if (counterPosition == position) {
+                        DoublyLink<T> newLink = new DoublyLink<>(datum);
+
+                        newLink.setNext(current.getNext());
+                        newLink.setPrevious(current);
+                        current.setNext(newLink);
+                        current.getNext().setPrevious(newLink);
+                    } else {
+                        current = current.getNext();
+                        counterPosition++;
+                    }
                 }
-
-                DoublyLink<T> newLink = new DoublyLink<T>(datum);
-
-                newLink.setNext(current.getNext());
-                newLink.setPrevious(current);
-                current.setNext(newLink);
-                current.getNext().setPrevious(newLink);
             }
         }
     }
@@ -275,7 +279,7 @@ public class DoublyLinkedList<T> {
         T data = null;
 
         if (!isEmpty()) {
-            if (position > this.sizeList()) {
+            if (position > this.sizeList() && position < 0) {
                 System.out.println("La posicion sobrepasa el tamanio de la lista");
             } else {
                 int counter = 0;
@@ -379,16 +383,27 @@ public class DoublyLinkedList<T> {
      *              la posicion {@code end} no se agrega a la sublista
      * @return Sublista de la original en los intervalores recibidos
      */
-    public DoublyLinkedList<T> sublist(int start, int end) {
-        DoublyLinkedList<T> list = new DoublyLinkedList<>();
-
-        if ((start < this.sizeList()) && (end < this.sizeList())) {
-            for (int i = start; i < end; i++) {
-                list.insertInPosition(i, this.searchItemPosition(i));
-            }
+    public DoublyLinkedList<T> sublist(DoublyLinkedList<T> aList, int start, int end) {
+        if (start < 0 || start > aList.sizeList() - 1 || end < 0 || end > aList.sizeList() || start > end) {
+            throw new IndexOutOfBoundsException();
         }
 
-        return list;
+        DoublyLinkedList<T> subList = new DoublyLinkedList<T>();
+        DoublyLink<T> current = aList.getFirst();
+        int index = 0;
+
+        while (index < start) {
+            current = current.getNext();
+            index++;
+        }
+
+        while (index < end) {
+            subList.insertLast(current.getdData());
+            current = current.getNext();
+            index++;
+        }
+
+        return subList;
     }
 
     /**
@@ -542,5 +557,28 @@ public class DoublyLinkedList<T> {
             current = current.getPrevious();
         }
         System.out.println("");
+    }
+
+    public void setFirst(DoublyLink<T> first){
+        this.first = first;
+    }
+
+    public DoublyLink<T> find(int index) {
+        DoublyLink<T> current;
+        int middleIndex = sizeList() / 2; 
+        
+        if (index <= middleIndex) { 
+            current = first;
+            for (int i = 0; i < index; i++) { 
+                current = current.getNext();
+            }
+        } else { 
+            current = last;
+            for (int i = sizeList() - 1; i > index; i--) { 
+                current = current.getPrevious();
+            }
+        }
+        
+        return current; 
     }
 }
