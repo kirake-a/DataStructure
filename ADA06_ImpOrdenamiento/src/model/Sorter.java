@@ -134,7 +134,6 @@ public class Sorter {
             case 3: // NO ESTA IMPLEMENTADO TODAVIA
                 RadixSort<Country> radixOperator = new RadixSort<>(auxList);
                 radixOperator.sort(sortAttribute);
-                auxList = radixOperator.getList();
                 return auxList;
             default:
                 throw new Exception();

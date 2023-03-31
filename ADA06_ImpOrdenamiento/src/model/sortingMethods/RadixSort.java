@@ -4,83 +4,128 @@ package model.sortingMethods;
 //import java.io.*;
 import java.util.*;
 
+import model.Country;
+import model.DoublyLink;
 import model.DoublyLinkedList;
 
 public class RadixSort<T> {
-	private long[] theArray; // ref to array theArray
-	private int nElems; // number of data items
 	private DoublyLinkedList<T> theList;
+	private int comparaciones = 0;
+	private int intercambios;
+	private long tiempo;
+	private int sortAttribute;
 
 	public RadixSort(DoublyLinkedList<T> list){
 		this.theList = list;
-		this.nElems = list.sizeList();
 	}
 
-	// -----------------------------------------------------------
-	public void insert(long value) {
-		theArray[nElems] = value; // insert it
-		nElems++; // increment size
+	public void sorter(int sortAttribute){
+		this.sortAttribute = sortAttribute;
+		DoublyLinkedList<T> result;
 	}
 
-	public void display() {
-		for (int j = 0; j < nElems; j++) // for each element,
-			System.out.print(theArray[j] + " "); // display it
-		System.out.println("");
-	}
-
-	// A utility function to get maximum value in arr[]
-	private long getMax() {
-		long mx = theArray[0];
-		for (int i = 1; i < nElems; i++)
-			if (theArray[i] > mx)
-				mx = theArray[i];
-		return mx;
-	}
-
-	// A function to do counting sort of arr[] according to
-	// the digit represented by exp.
-	public void countSort(int exp) {
-		long[] output = new long[nElems]; // output array
-		int i;
-		long[] count = new long[10];
-		Arrays.fill(count, 0);
-
-		// Store count of occurrences in count[]
-		for (i = 0; i < nElems; i++)
-			count[(int) ((theArray[i] / exp) % 10)]++;
-
-		// Change count[i] so that count[i] now contains
-		// actual position of this digit in output[]
-		for (i = 1; i < 10; i++)
-			count[i] += count[i - 1];
-
-		// Build the output array
-		for (i = nElems - 1; i >= 0; i--) {
-			output[(int) (count[(int) ((theArray[i] / exp) % 10)] - 1)] = theArray[i];
-			count[(int) ((theArray[i] / exp) % 10)]--;
+	private void radixSort(DoublyLinkedList<T> list){
+		if (list.isEmpty() || list.sizeList() == 1) {
+			return; // Ordered list
 		}
 
-		// Copy the output array to arr[], so that arr[] now
-		// contains sorted numbers according to current digit
-		theArray = Arrays.copyOf(output, output.length);
-
+		int digitos = getMaxdigits(list);
 	}
 
-	// The main function to that sorts arr[] of size n using
-	// Radix Sort
-	public void sort(int sortAttribute) {
-		// Find the maximum number to know number of digits
-		long m = getMax();
+	private int getMaxdigits(DoublyLinkedList<T> list){
+		int max = Integer.MIN_VALUE;
+		DoublyLink<T> current = list.getFirst();
 
-		// Do counting sort for every digit. Note that
-		// instead of passing digit number, exp is passed.
-		// exp is 10^i where i is current digit number
-		for (int exp = 1; m / exp > 0; exp *= 10)
-			countSort(exp);
+		while (current != null) {
+			T data = current.getdData();
+			int digits = getAmountDigits(data);
+
+		}
 	}
 
-	public DoublyLinkedList<T> getList(){
-		return this.theList;
+	@SuppressWarnings("unchecked")
+	private int getAmountDigits(T data){
+		int digits = 0;
+
+		while (compare(data, (T)Integer.valueOf(0), this.sortAttribute) > 0) {
+			data = (T) Integer.valueOf(data.intValue() / 10);
+			digits++;
+		}
+
+		return digits;
 	}
+
+	/**
+     * Realiza una comparacion entre el tipo de dato {@code a} y el tipo de dato
+     * {@code b},
+     * en funcion de conocer cual de ellos es mas grande o si fuera el caso, conocer
+     * si los datos
+     * son iguales, para ellos obtendremos que, si el tipo de dato {@code a} es
+     * menor al tipo de
+     * dato {@code b} se regresa {@code -1}, si fuera el caso se regresa un
+     * {@code 1}, y si ambos
+     * datos son iguales entonces se regresa un {@code 0}
+     * 
+     * @param a             Primer dato, se comparara con el segundo dato
+     * @param b             Segundo dato, se comparara con el primer dato
+     * @param sortAttribute Selecciona el atributo por el cual se realizara
+     *                      comparacion entre los nodos
+     * @return El valor resultante de la comparacion
+     */
+    private int compare(T a, T b, int sortAttribute) {
+        comparaciones++;
+
+        Country country1 = (Country) a;
+        Country country2 = (Country) b;
+
+        switch (sortAttribute) {
+
+            case 1:
+
+                if (country1.getPopulation() < country2.getPopulation()) {
+                    return 1;
+                } else if (country1.getPopulation() > country2.getPopulation()) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            case 2:
+                return country1.getCountryName().compareTo(country2.getCountryName());
+
+            case 3:
+                if (country1.getActiveCases() < country2.getActiveCases()) {
+                    return 1;
+                } else if (country1.getActiveCases() > country2.getActiveCases()) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+
+            case 4:
+                if (country1.getTotalDeaths() < country2.getTotalDeaths()) {
+                    return 1;
+                } else if (country1.getTotalDeaths() > country2.getTotalDeaths()) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+
+            default:
+                return 0;
+        }
+    }
+
+	public int getComparaciones() {
+		return comparaciones;
+	}
+
+	public int getIntercambios() {
+		return intercambios;
+	}
+
+	public long getTiempo() {
+		return tiempo;
+	}
+
+	
 }
-/* This code is contributed by Devesh Agrawal */

@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
+import com.itextpdf.text.pdf.hyphenation.TernaryTree.Iterator;
 
 /**
  * Implementacion personalizada de una lista doblemente ligada
@@ -510,7 +511,7 @@ public class DoublyLinkedList<T> {
      * @return Lista derivada de la clase {@code LinkedList}
      * @see LinkedList
      */
-    public LinkedList<T> convertToLinkedListT() {
+    public LinkedList<T> fromDoublyLinkedListToLinkedList() {
         LinkedList<T> newList = new LinkedList<>();
 
         if (!isEmpty()) {
@@ -520,6 +521,30 @@ public class DoublyLinkedList<T> {
             }
         }
         return newList;
+    }
+
+    public DoublyLinkedList<T> fromLinkedListToDoublyLinkedList(LinkedList<T> listAux){
+        DoublyLinkedList<T> newList = new DoublyLinkedList<>();
+
+        if (!listAux.isEmpty()) {
+            for (T data : listAux) {
+                newList.insertLast(data);
+            }
+        }
+
+        return newList;
+    }
+
+    private static class Node<T> {
+        T item;
+        Node<T> next;
+        Node<T> prev;
+
+        Node(Node<T> prev, T element, Node<T> next) {
+            this.item = element;
+            this.next = next;
+            this.prev = prev;
+        }
     }
 
     /**
