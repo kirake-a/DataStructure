@@ -88,7 +88,6 @@ public class DatasetDAO {
                                 currentt = currentt.getPrevious();
                     }
                 default:
-                    System.out.println("no se puede");
                     break;
             }
             

@@ -31,7 +31,7 @@ public class App {
         data.insertFirst(tres);
         data.insertFirst(cuatro);
         */
-        
+    
         DoublyLinkedList<Country> auxList = new DoublyLinkedList<>();
         auxList = sorter.sorting(0,columna, data);
         dao.writeFile("QuickSort_ordenado", auxList, orden);

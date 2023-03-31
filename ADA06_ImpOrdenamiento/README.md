@@ -1,18 +1,41 @@
-## Getting Started
+# Título del Proyecto
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Implementando algoritmos de ordenamiento: BinaryInsertionSort, MergeSort y QuickSort.
 
-## Folder Structure
+## Comenzando 🚀
 
-The workspace contains two folders by default, where:
+En este proyecto se hace uso de listas doblemente ligadas como estructuras de datos para poder implementar los algortimos de ordenamiento
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+Se puede consultar la documentacion en formato interactivo del proyecto en la carpeta docs, 
+abriendo el archivo "index.html".
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+### Pre-requisitos 📋
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+_Algunos apuntes previo a correr el programa_
 
-## Dependency Management
+* Tener instalado el JDK 
+* Haber localizado de manera correcta la carpeta src del proyecto
+* Cuando se usa por primera vez el programa sera necesario usar el siguiente comando en la terminal
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+```
+$ javac App.java
+```
+Donde App.java corresponde al nombre del archivo en .java que es nuestro archivo main, que deberemos compilar desde la terminal.
+
+### Instalación 🔧
+
+_Cumpliendo con los Pre-requisitos, se puede comenzar a correr el programa_
+
+* Se inicia el programa con el siguiente comando
+
+```
+S java App
+```
+Donde App es el archivo .class previamente generado en "Pre-requisitos".
+
+
+## Autores ✒️
+
+* **Alvarado Interian, Ruben** - *Desarrollo, debugging y documentacion* - [kirake-a](https://gist.github.com/kirake-a)
+* **Garcilazo Cuevas, Monica** - *Desarrollo, debugging, documentacion* - [Monica](https://github.com/MoniGarcilazo)
+

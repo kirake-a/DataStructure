@@ -34,11 +34,11 @@ public class BinaryInsertionSort<T> {
         DoublyLink<T> current = list.getFirst().getNext();
 
         while (current != null) {
-            intercambios++;
+           
             int pos = binarySearch(list, current.getPrevious(), current.getdData());
 
             if (pos != -1) {
-
+            intercambios++;
                 DoublyLink<T> temp = current;
                 T tempData = temp.getdData();
 
@@ -104,9 +104,9 @@ public class BinaryInsertionSort<T> {
             case 1:
 
                 if (country1.getPopulation() < country2.getPopulation()) {
-                    return 1;
-                } else if (country1.getPopulation() > country2.getPopulation()) {
                     return -1;
+                } else if (country1.getPopulation() > country2.getPopulation()) {
+                    return 1;
                 } else {
                     return 0;
                 }
@@ -115,18 +115,18 @@ public class BinaryInsertionSort<T> {
 
             case 3:
                 if (country1.getActiveCases() < country2.getActiveCases()) {
-                    return 1;
-                } else if (country1.getActiveCases() > country2.getActiveCases()) {
                     return -1;
+                } else if (country1.getActiveCases() > country2.getActiveCases()) {
+                    return 1;
                 } else {
                     return 0;
                 }
 
             case 4:
                 if (country1.getTotalDeaths() < country2.getTotalDeaths()) {
-                    return 1;
-                } else if (country1.getTotalDeaths() > country2.getTotalDeaths()) {
                     return -1;
+                } else if (country1.getTotalDeaths() > country2.getTotalDeaths()) {
+                    return 1;
                 } else {
                     return 0;
                 }
