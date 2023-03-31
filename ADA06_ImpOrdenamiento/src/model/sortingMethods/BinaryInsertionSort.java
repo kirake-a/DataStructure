@@ -27,24 +27,29 @@ public class BinaryInsertionSort<T> {
     }
 
     private void binaryInsertSort(DoublyLinkedList<T> list) {
-        if (list == null || list.isEmpty()) {
+        if (list.isEmpty()) {
             return;
         }
 
         DoublyLink<T> current = list.getFirst().getNext();
+
         while (current != null) {
             int pos = binarySearch(list, current.getPrevious(), current.getdData());
 
             if (pos != -1) {
+
                 DoublyLink<T> temp = current;
                 T tempData = temp.getdData();
+
                 while (temp.getPrevious() != null
                         && compare(tempData, temp.getPrevious().getdData(), this.sortAttribute) > 0) {
                     temp.setdData(temp.getPrevious().getdData());
                     temp = temp.getPrevious();
                 }
+
                 temp.setdData(tempData);
             }
+
             current = current.getNext();
         }
     }
@@ -52,20 +57,22 @@ public class BinaryInsertionSort<T> {
     private int binarySearch(DoublyLinkedList<T> list, DoublyLink<T> last, T key) {
         int left = 0;
         int right = list.sizeList() - 1;
-        int mid = 0;
 
         while (left <= right) {
-            mid = (left + right) / 2;
-            T midVal = list.find(mid).getdData();
+            int mid = (left + right) / 2;
+            T midVal = list.searchItemPosition(mid);
 
-            if (compare(midVal, key, this.sortAttribute) < 0) {
+            int comparation = compare(key, midVal, this.sortAttribute);
+            
+            if (comparation == 0) {
+                return mid;
+            } else if (comparation < 0) {
                 right = mid - 1;
-            } else if (compare(midVal, key, this.sortAttribute) > 0) {
-                left = mid + 1;
             } else {
-                return -1;
+                left = mid + 1;
             }
         }
+
         return left;
     }
 
