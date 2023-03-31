@@ -42,7 +42,7 @@ public class BinaryInsertionSort<T> {
                 T tempData = temp.getdData();
 
                 while (temp.getPrevious() != null
-                        && compare(tempData, temp.getPrevious().getdData(), this.sortAttribute) > 0) {
+                        && compare(tempData, temp.getPrevious().getdData(), this.sortAttribute) < 0) {
                     temp.setdData(temp.getPrevious().getdData());
                     temp = temp.getPrevious();
                 }
