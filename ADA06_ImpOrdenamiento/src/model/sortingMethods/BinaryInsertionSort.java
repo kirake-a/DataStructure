@@ -34,6 +34,7 @@ public class BinaryInsertionSort<T> {
         DoublyLink<T> current = list.getFirst().getNext();
 
         while (current != null) {
+            intercambios++;
             int pos = binarySearch(list, current.getPrevious(), current.getdData());
 
             if (pos != -1) {
@@ -46,7 +47,6 @@ public class BinaryInsertionSort<T> {
                     temp.setdData(temp.getPrevious().getdData());
                     temp = temp.getPrevious();
                 }
-
                 temp.setdData(tempData);
             }
 

@@ -59,31 +59,33 @@ public class App {
 
     }
     public static void Menu(){
-        Scanner sc = new Scanner(System.in);
-        
-        System.out.println("Elija el numero de la columna con la que quiere ordenar");
-        System.out.println("1 - Population");
-        System.out.println("2 - CountryName");
-        System.out.println("3 - ActiveCases");
-        System.out.println("4 - TotalDeaths");
-        int aux = sc.nextInt();
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.println("Elija el numero de la columna con la que quiere ordenar");
+            System.out.println("1 - Population");
+            System.out.println("2 - CountryName");
+            System.out.println("3 - ActiveCases");
+            System.out.println("4 - TotalDeaths");
+            int aux = sc.nextInt();
 
-        if(aux >=1 && aux <=4){
-            columna = aux;
-        }else{
-            System.out.println("Esta opcion no existe");
-            throw new Error();
-        }
+            if(aux >=1 && aux <=4){
+                columna = aux;
+            }else{
+                System.out.println("Esta opcion no existe");
+                throw new Error();
+            }
 
-        System.out.println("Elija si quiere que este ordenado de manera: ");
-        System.out.println("0 - Ascendente");
-        System.out.println("1 - Descendente");
-        aux = sc.nextInt();
-        if (aux == 0 || aux == 1) {
-            orden = aux;
-        }else{
-            System.out.println("Esta opcion no existe");
-            throw new Error();
+            System.out.println("Elija si quiere que este ordenado de manera: ");
+            System.out.println("0 - Ascendente");
+            System.out.println("1 - Descendente");
+            aux = sc.nextInt();
+            if (aux == 0 || aux == 1) {
+                orden = aux;
+            }else{
+                System.out.println("Esta opcion no existe");
+                throw new Error();
+            }
+        } catch (Error e) {
+            e.printStackTrace();
         }
         
         
