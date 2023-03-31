@@ -144,16 +144,16 @@ public class BinaryInsertionSort<T> {
         }
     }
 
+    /**
+     * Numero de comparaciones al realizar
+     * @return
+     */
     public int getComparaciones() {
         return comparaciones;
     }
 
     public int getIntercambios() {
         return intercambios;
-    }
-
-    public int getSortAttribute() {
-        return sortAttribute;
     }
 
     public long getTime() {
