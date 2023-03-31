@@ -53,24 +53,26 @@ public class DoublyLinkedList<T> {
 
     public void insertInPosition(int position, T datum) {
         if (!isEmpty()) {
-            int counterPosition = 0;
-            DoublyLink<T> current = first;
 
-            if (position > this.sizeList()) {
+            if (position > this.sizeList() && position < 0) {
                 System.out.println("La posicion sobrepasa el tamanio de la lista");
             } else {
+                int counterPosition = 0;
+                DoublyLink<T> current = first;
 
-                while (counterPosition != position - 1) {
-                    current = current.getNext();
-                    counterPosition++;
+                while (current != null) {
+                    if (counterPosition == position) {
+                        DoublyLink<T> newLink = new DoublyLink<>(datum);
+
+                        newLink.setNext(current.getNext());
+                        newLink.setPrevious(current);
+                        current.setNext(newLink);
+                        current.getNext().setPrevious(newLink);
+                    } else {
+                        current = current.getNext();
+                        counterPosition++;
+                    }
                 }
-
-                DoublyLink<T> newLink = new DoublyLink<T>(datum);
-
-                newLink.setNext(current.getNext());
-                newLink.setPrevious(current);
-                current.setNext(newLink);
-                current.getNext().setPrevious(newLink);
             }
         }
     }
@@ -275,7 +277,7 @@ public class DoublyLinkedList<T> {
         T data = null;
 
         if (!isEmpty()) {
-            if (position > this.sizeList()) {
+            if (position > this.sizeList() && position < 0) {
                 System.out.println("La posicion sobrepasa el tamanio de la lista");
             } else {
                 int counter = 0;
@@ -379,16 +381,31 @@ public class DoublyLinkedList<T> {
      *              la posicion {@code end} no se agrega a la sublista
      * @return Sublista de la original en los intervalores recibidos
      */
-    public DoublyLinkedList<T> sublist(int start, int end) {
-        DoublyLinkedList<T> list = new DoublyLinkedList<>();
+    public DoublyLinkedList<T> sublist(DoublyLinkedList<T> aList, int start, int end) {
+        int whileCounter = 0;
+        DoublyLinkedList<T> auxList = new DoublyLinkedList<>();
+        System.out.println("PrincipalSizeList: " + this.sizeList());
+        
+        if ((start < aList.sizeList()) && (end <= aList.sizeList())) {
+            DoublyLink<T> current = aList.getFirst();
+            int counter = 0;
 
-        if ((start < this.sizeList()) && (end < this.sizeList())) {
-            for (int i = start; i < end; i++) {
-                list.insertInPosition(i, this.searchItemPosition(i));
+            while (current != null) {
+                if ((counter >= start) && (counter <= end)) {
+                    if (auxList.isEmpty()) {
+                        auxList.insertFirst(current.getdData());
+                    } else {
+                        auxList.insertLast(current.getdData());
+                    }
+                }
+
+                counter++;
             }
-        }
 
-        return list;
+            System.out.println("Counter: " + counter);
+        }
+        
+        return auxList;
     }
 
     /**

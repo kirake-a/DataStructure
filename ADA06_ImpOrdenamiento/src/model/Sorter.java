@@ -12,7 +12,18 @@ import model.sortingMethods.RadixSort;
  * y si sera excepciones propias o ya de java
  */
 public class Sorter {
-    private static long tiempoEjecucionQuick;
+    private long tiempoEjecucionQuick = 0;
+    private long tiempoEjecucionBinary = 0;
+    private long tiempoEjecucionMerge = 0;
+
+    private int numComparacionesQuick = 0;
+    private int numComparacionesBinary = 0;
+    private int numComparacionesMerge = 0;
+
+    private int numIntercambiosQuick = 0;
+    private int numIntercambiosBinary = 0;
+    private int numIntercambiosMerge = 0;
+
     private DoublyLinkedList<Country> list;
 
     public Sorter() {
@@ -48,7 +59,7 @@ public class Sorter {
             case 1:
                 MergeSort<Country> mergeOoperator = new MergeSort<>(this.list);
                 mergeOoperator.sort(sortingAttribute);
-                this.list = mergeOoperator.getListAttribute();
+                this.list = mergeOoperator.getList();
                 return this.list;
             // Ordenamiento Binary Insertion Sort
             case 2:
@@ -91,14 +102,24 @@ public class Sorter {
                 QuickSort<Country> quickOperator = new QuickSort<>(auxList);
                 quickOperator.sort(sortAttribute);
                 auxList = quickOperator.getList();
-                tiempoEjecucionQuick = quickOperator.getTiempo();
+                this.tiempoEjecucionQuick = quickOperator.getTiempo();
                 System.out.println(tiempoEjecucionQuick);
+                this.numComparacionesQuick = quickOperator.getComparaciones();
+                System.out.println(numComparacionesQuick);
+                this.numIntercambiosQuick = quickOperator.getIntercambios();
+                System.out.println(numIntercambiosQuick);
                 return auxList;
             // Ordenamiento Merge Sort
             case 1:
                 MergeSort<Country> mergeOoperator = new MergeSort<>(auxList);
                 mergeOoperator.sort(sortAttribute);
-                auxList = mergeOoperator.getListAttribute();
+                auxList = mergeOoperator.getList();
+                this.tiempoEjecucionMerge = mergeOoperator.getTiempo();
+                this.numComparacionesMerge = mergeOoperator.getComparacion();
+                this.numIntercambiosMerge = mergeOoperator.getIntercambios();
+                System.out.println(tiempoEjecucionMerge);
+                System.out.println(numComparacionesMerge);
+                System.out.println(numIntercambiosMerge);
                 return auxList;
             // Ordenamiento Binary Insertion Sort
             case 2:
@@ -120,7 +141,7 @@ public class Sorter {
     public void printListAsc(DoublyLinkedList<Country> auxList){
         DoublyLink<Country> current = auxList.getLast();
         while (current != null) {
-            System.out.println(current.getdData().getCountryName());
+            System.out.println(current.getdData().getTotalDeaths());
             current = current.getPrevious();
         }
     }
@@ -128,9 +149,45 @@ public class Sorter {
     public void printLIstDesc(DoublyLinkedList<Country> auxList){
         DoublyLink<Country> current = auxList.getFirst();
         while (current != null) {
-            System.out.println(current.getdData().getCountryName());
+            System.out.println(current.getdData().getTotalDeaths());
             current = current.getNext();
         }
     }
 
+    public long getTiempoEjecucionQuick() {
+        return tiempoEjecucionQuick;
+    }
+
+    public long getTiempoEjecucionBinary() {
+        return tiempoEjecucionBinary;
+    }
+
+    public long getTiempoEjecucionMerge() {
+        return tiempoEjecucionMerge;
+    }
+
+    public int getNumComparacionesQuick() {
+        return numComparacionesQuick;
+    }
+
+    public int getNumComparacionesBinary() {
+        return numComparacionesBinary;
+    }
+
+    public int getNumComparacionesMerge() {
+        return numComparacionesMerge;
+    }
+
+    public int getNumIntercambiosQuick() {
+        return numIntercambiosQuick;
+    }
+
+    public int getNumIntercambiosBinary() {
+        return numIntercambiosBinary;
+    }
+
+    public int getNumIntercambiosMerge() {
+        return numIntercambiosMerge;
+    }
+    
 }

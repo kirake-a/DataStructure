@@ -7,68 +7,21 @@ public class MergeSort<T> {
     private DoublyLinkedList<T> listAttribute;
     private int nElems; // number of data items
     private int sortAttribute;
-
-    // public MergeSort(int max) {
-    // theArray = new long[max]; // create array
-    // nElems = 0;
-    // }
+    private long tiempo;
+    private int comparacion;
+    private int intercambios;
 
     public MergeSort(DoublyLinkedList<T> theList) {
         this.listAttribute = theList;
-        this.nElems = 0;
+        this.nElems = theList.sizeList();
     }
-
-    public void insert(T value) {
-        listAttribute.insertInPosition(nElems, value);
-        nElems++;
-    }
-
-    // public void mergeSort() {
-    // long[] workSpace = new long[nElems];
-    // recMergeSort(workSpace, 0, nElems-1);
-    // }
 
     public void sort(int sortAttribute) {
+        long inicio = System.nanoTime();
         this.sortAttribute = sortAttribute;
         sortMethod(this.listAttribute);
-    }
-
-    private void recMergeSort(DoublyLinkedList<T> auxList, int lowerBound, int upperBound) {
-        if (lowerBound == upperBound) {
-            return;
-        } else {
-            int mid = (lowerBound + upperBound) / 2;
-            recMergeSort(auxList, lowerBound, mid);
-            recMergeSort(auxList, mid + 1, upperBound);
-            merge(auxList, lowerBound, mid + 1, upperBound, this.sortAttribute);
-        }
-    }
-
-    private void merge(DoublyLinkedList<T> auxList, int lowPtr, int highPtr, int upperBound, int sortAttribute) {
-        int j = 0; // workspace index
-        int lowerBound = lowPtr;
-        int mid = highPtr - 1;
-        int numItems = upperBound - lowerBound + 1;
-
-        while (lowPtr <= mid && highPtr <= upperBound) {
-            if (compare(auxList.searchItemPosition(lowPtr), auxList.searchItemPosition(highPtr), sortAttribute) < 0) {
-                auxList.insertInPosition(j++, this.listAttribute.searchItemPosition(lowPtr++));
-            } else {
-                auxList.insertInPosition(j++, this.listAttribute.searchItemPosition(highPtr++));
-            }
-        }
-
-        while (lowPtr <= mid) {
-            auxList.insertInPosition(j++, this.listAttribute.searchItemPosition(lowPtr++));
-        }
-
-        while (highPtr <= upperBound) {
-            auxList.insertInPosition(j++, this.listAttribute.searchItemPosition(highPtr++));
-        }
-
-        for (int i = 0; i < numItems; i++) {
-            this.listAttribute.insertInPosition(lowerBound + i, auxList.searchItemPosition(i));
-        }
+        long finall = System.nanoTime();
+        tiempo = (finall - inicio);
     }
 
     /**
@@ -88,7 +41,8 @@ public class MergeSort<T> {
      *                      comparacion entre los nodos
      * @return El valor resultante de la comparacion
      */
-    private int compare(T a, T b, int sortAttribute) {
+    private int compare(Country a, Country b, int sortAttribute) {
+        comparacion++;
 
         Country country1 = (Country) a;
         Country country2 = (Country) b;
@@ -130,33 +84,40 @@ public class MergeSort<T> {
         }
     }
 
-    public DoublyLinkedList<T> getListAttribute(){
+    public DoublyLinkedList<T> getList() {
         return this.listAttribute;
     }
 
     // DESDE AQUI SE INTENTA IMPLEMENTAR OTRA FORMA DE MERGE SORT
-    public void sortMethod(DoublyLinkedList<T> theList){
+    private void sortMethod(DoublyLinkedList<T> theList) {
         if (theList.sizeList() > 1) {
             int middle = theList.sizeList() / 2;
-            DoublyLinkedList<T> leftHalf = theList.sublist(0, middle);
-            DoublyLinkedList<T> rightHalf = theList.sublist(middle, theList.sizeList());
+            DoublyLinkedList<T> leftHalf = theList.sublist(theList, 0, middle);
+            DoublyLinkedList<T> rightHalf = theList.sublist(theList, middle, theList.sizeList());
+
+            System.out.println("LeftList: " + leftHalf.sizeList());
+            System.out.println("RightList: " + rightHalf.sizeList());
+            System.out.println("theList: " + theList.sizeList());
+
             sortMethod(leftHalf);
             sortMethod(rightHalf);
             merge(leftHalf, rightHalf, theList);
         }
     }
 
-    public void merge(DoublyLinkedList<T> leftHalf, DoublyLinkedList<T> rightHalft, DoublyLinkedList<T> list){
+    public void merge(DoublyLinkedList<T> leftHalf, DoublyLinkedList<T> rightHalf, DoublyLinkedList<T> auxList) {
+        intercambios++;
         int i = 0;
         int j = 0;
         int k = 0;
 
-        while (i < leftHalf.sizeList() && j < rightHalft.sizeList()) {
-            if (compare(leftHalf.searchItemPosition(i), rightHalft.searchItemPosition(j), this.sortAttribute) < 0) {
-                list.insertInPosition(k, leftHalf.searchItemPosition(i));
+        while (i < leftHalf.sizeList() && j < rightHalf.sizeList()) {
+            if (compare((Country) leftHalf.searchItemPosition(i), (Country) rightHalf.searchItemPosition(j),
+                    this.sortAttribute) <= 0) {
+                auxList.insertInPosition(k, leftHalf.searchItemPosition(i));
                 i++;
             } else {
-                list.insertInPosition(k, rightHalft.searchItemPosition(j));
+                auxList.insertInPosition(k, rightHalf.searchItemPosition(j));
                 j++;
             }
 
@@ -164,15 +125,45 @@ public class MergeSort<T> {
         }
 
         while (i < leftHalf.sizeList()) {
-            list.insertInPosition(k, leftHalf.searchItemPosition(i));
+            auxList.insertInPosition(k, leftHalf.searchItemPosition(i));
             i++;
             k++;
         }
 
-        while (j < rightHalft.sizeList()) {
-            list.insertInPosition(k, leftHalf.searchItemPosition(j));
+        while (j < rightHalf.sizeList()) {
+            auxList.insertInPosition(k, leftHalf.searchItemPosition(j));
             j++;
             k++;
         }
     }
+
+    public long getTiempo() {
+        return tiempo;
+    }
+
+    public int getComparacion() {
+        return comparacion;
+    }
+
+    public int getIntercambios() {
+        return intercambios;
+    }
+
+    public DoublyLinkedList<T> sublist(DoublyLinkedList<T> aList, int start, int end) {
+        DoublyLinkedList<T> auxList = new DoublyLinkedList<>();
+        System.out.println("PrincipalSizeList: " + aList.sizeList());
+        System.out.println("Start: " + start);
+        System.out.println("End: " + end);
+        if ((start < aList.sizeList()) && (end <= aList.sizeList())) {
+            int counter = 0;
+            System.out.println("ENTREEEEEE");
+            while (counter != end) {
+                auxList.insertInPosition(counter, aList.searchItemPosition(counter));
+                counter++;
+            }
+        }
+        
+        return auxList;
+    }
+
 }
