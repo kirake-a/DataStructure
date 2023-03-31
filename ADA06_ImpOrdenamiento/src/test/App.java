@@ -35,7 +35,9 @@ public class App {
                 sorter.getNumIntercambiosQuick());
 
     }
-
+    /**
+     * Menu para elegir las columna que se decia ordenar y el orden
+     */
     public static void Menu() {
         try (Scanner sc = new Scanner(System.in)) {
             System.out.println("Elija el numero de la columna con la que quiere ordenar");

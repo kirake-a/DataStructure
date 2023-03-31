@@ -10,6 +10,9 @@ public class Country {
     private Double totalTest;
     private Double population;
 
+    /**
+     * Constructor para generar las instancias con sus atributos
+     */
     public Country(Integer serialNumber, String country, Double totalCases, Double totalDeaths, Double totalRecovered,
             Double activeCases, Double totalTest, Double population) {
         this.serialNumber = serialNumber;
@@ -22,6 +25,9 @@ public class Country {
         this.population = population;
     }
 
+    /**
+     * 
+     */
     public Integer getSerialNumber() {
         return serialNumber;
     }

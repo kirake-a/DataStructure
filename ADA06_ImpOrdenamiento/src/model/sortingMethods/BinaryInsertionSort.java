@@ -15,7 +15,6 @@ public class BinaryInsertionSort<T> {
         this.list = list;
     }
 
-    
     /** 
      * Inicia el proceso para hacer el ordenamiento de una lista
      * doblemente ligada mediante el uso del metodo de ordenamiento
@@ -145,17 +144,28 @@ public class BinaryInsertionSort<T> {
     }
 
     /**
-     * Numero de comparaciones al realizar
-     * @return
+     * Numero de comparaciones totales generadas
+     * al realizar el proceso de ordenamiento
+     * @return Comparaciones totales
      */
     public int getComparaciones() {
         return comparaciones;
     }
 
+    /**
+     * Numero de intercambios totales generados
+     * al realiza el proceso de ordenamiento
+     * @return Intercambios totales
+     */
     public int getIntercambios() {
         return intercambios;
     }
 
+    /**
+     * Tiempo total en el que el algoritmo de
+     * ordenamiento realizo el proceso completo
+     * @return Tiempo total
+     */
     public long getTime() {
         return time;
     }

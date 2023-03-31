@@ -122,17 +122,29 @@ public class QuickSort<T> {
         return this.list;
     }
 
-
+    /**
+     * Numero de comparaciones totales generadas
+     * al realizar el proceso de ordenamiento
+     * @return Comparaciones totales
+     */
     public int getComparaciones() {
         return comparaciones;
     }
 
-
+    /**
+     * Numero de intercambios totales generados
+     * al realiza el proceso de ordenamiento
+     * @return Intercambios totales
+     */
     public int getIntercambios() {
         return intercambios;
     }
 
-
+    /**
+     * Tiempo total en el que el algoritmo de
+     * ordenamiento realizo el proceso completo
+     * @return Tiempo total
+     */
     public long getTiempo() {
         return tiempo;
     }

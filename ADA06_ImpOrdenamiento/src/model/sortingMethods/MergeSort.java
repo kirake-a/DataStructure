@@ -148,14 +148,29 @@ public class MergeSort<T> {
         return this.list;
     }
 
+    /**
+     * Tiempo total en el que el algoritmo de
+     * ordenamiento realizo el proceso completo
+     * @return Tiempo total
+     */
     public long getTime() {
         return time;
     }
 
+    /**
+     * Numero de comparaciones totales generadas
+     * al realizar el proceso de ordenamiento
+     * @return Comparaciones totales
+     */
     public int getComparacion() {
         return comparacion;
     }
 
+    /**
+     * Numero de intercambios totales generados
+     * al realiza el proceso de ordenamiento
+     * @return Intercambios totales
+     */
     public int getIntercambios() {
         return intercambios;
     }
