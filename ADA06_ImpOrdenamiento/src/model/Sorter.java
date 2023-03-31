@@ -3,7 +3,6 @@ package model;
 import model.sortingMethods.BinaryInsertionSort;
 import model.sortingMethods.MergeSort;
 import model.sortingMethods.QuickSort;
-import model.sortingMethods.RadixSort;
 
 /*
  * Este metodo es que el esta encargado de llamar al
@@ -24,57 +23,7 @@ public class Sorter {
     private int numIntercambiosBinary = 0;
     private int numIntercambiosMerge = 0;
 
-    private DoublyLinkedList<Country> list;
-
     public Sorter() {
-    }
-
-    public Sorter(DoublyLinkedList<Country> list) {
-        this.list = list;
-    }
-
-    /**
-     * Ordena la lista dada previamente en el constructor del objeto, segun el
-     * metodo de ordenamiento
-     * seleccionado por la key dada en el argumento.
-     * 
-     * @param key Selecciona el tipo de algoritmo a usar para ordenar la lista de
-     *            datos.
-     * @throws Exception El digito de la variable key no es un metodo de
-     *                   ordenamiento
-     */
-    public DoublyLinkedList<Country> sorting(int key, int sortingAttribute) throws Exception {
-        /*
-         * Escoge el metodo de ordenamiento de la lista, en teoria esta
-         * clase debera devolver la lista ordenada para su futuro procesamiento
-         */
-        switch (key) {
-            // Ordenamiento Quick Sort
-            case 0:
-                QuickSort<Country> quickOperator = new QuickSort<>(this.list);
-                quickOperator.sort(sortingAttribute);
-                this.list = quickOperator.getList();
-                return this.list;
-            // Ordenamiento Merge Sort
-            case 1:
-                MergeSort<Country> mergeOoperator = new MergeSort<>(this.list);
-                mergeOoperator.sort(sortingAttribute);
-                this.list = mergeOoperator.getList();
-                return this.list;
-            // Ordenamiento Binary Insertion Sort
-            case 2:
-                BinaryInsertionSort<Country> binaryOperator = new BinaryInsertionSort<>(this.list);
-                binaryOperator.sort(sortingAttribute);
-                return this.list;
-            // Ordenamiento Radix Sort
-            case 3: // NO ESTA IMPLEMENTADO TODAVIA
-                RadixSort<Country> radixOperator = new RadixSort<>(this.list);
-                radixOperator.sort(sortingAttribute);
-                this.list = radixOperator.getList();
-                return this.list;
-            default:
-                throw new Exception();
-        }
     }
 
     /**
@@ -130,11 +79,6 @@ public class Sorter {
                 System.out.println(numComparacionesBinary);
                 System.out.println(numIntercambiosBinary);
                 return theResult;
-            // Ordenamiento Radix Sort
-            case 3: // NO ESTA IMPLEMENTADO TODAVIA
-                RadixSort<Country> radixOperator = new RadixSort<>(auxList);
-                radixOperator.sort(sortAttribute);
-                return auxList;
             default:
                 throw new Exception();
         }
