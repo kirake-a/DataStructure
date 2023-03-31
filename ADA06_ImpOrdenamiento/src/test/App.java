@@ -31,7 +31,7 @@ public class App {
         //dao.writeFile("Ejemplito", auxList);
         sorter.printListAsc(auxList); // ascendente
         System.out.println("--------------------------");
-        sorter.printLIstDesc(auxList); //Descendiente
+        sorter.printListDesc(auxList); //Descendiente
 
         /* DaoPDF pdf = new DaoPDF();
         pdf.createPDF(sorter.getTiempoEjecucionMerge(), sorter.getNumComparacionesMerge(), sorter.getNumIntercambiosMerge(), sorter.getTiempoEjecucionBinary(), sorter.getNumComparacionesBinary(), sorter.getNumIntercambiosBinary(), sorter.getTiempoEjecucionQuick(), sorter.getNumComparacionesQuick(), sorter.getNumIntercambiosQuick());

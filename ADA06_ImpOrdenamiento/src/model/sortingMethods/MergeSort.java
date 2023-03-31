@@ -50,7 +50,7 @@ public class MergeSort<T> {
         DoublyLink<T> rightNode = right.getFirst();
 
         while ((leftNode != null) && (rightNode != null)) {
-            if (compare(leftNode.getdData(), rightNode.getdData(), sortAttribute) >= 0) {
+            if (compare(leftNode.getdData(), rightNode.getdData(), sortAttribute) <= 0) {
                 result.insertLast(leftNode.getdData());
                 leftNode = leftNode.getNext();
             } else {
