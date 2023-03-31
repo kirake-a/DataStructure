@@ -3,6 +3,8 @@ package model;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
+
 /**
  * Implementacion personalizada de una lista doblemente ligada
  * 
@@ -382,30 +384,26 @@ public class DoublyLinkedList<T> {
      * @return Sublista de la original en los intervalores recibidos
      */
     public DoublyLinkedList<T> sublist(DoublyLinkedList<T> aList, int start, int end) {
-        int whileCounter = 0;
-        DoublyLinkedList<T> auxList = new DoublyLinkedList<>();
-        System.out.println("PrincipalSizeList: " + this.sizeList());
-        
-        if ((start < aList.sizeList()) && (end <= aList.sizeList())) {
-            DoublyLink<T> current = aList.getFirst();
-            int counter = 0;
-
-            while (current != null) {
-                if ((counter >= start) && (counter <= end)) {
-                    if (auxList.isEmpty()) {
-                        auxList.insertFirst(current.getdData());
-                    } else {
-                        auxList.insertLast(current.getdData());
-                    }
-                }
-
-                counter++;
-            }
-
-            System.out.println("Counter: " + counter);
+        if (start < 0 || start > aList.sizeList() - 1 || end < 0 || end > aList.sizeList() || start > end) {
+            throw new IndexOutOfBoundsException();
         }
-        
-        return auxList;
+
+        DoublyLinkedList<T> subList = new DoublyLinkedList<T>();
+        DoublyLink<T> current = aList.getFirst();
+        int index = 0;
+
+        while (index < start) {
+            current = current.getNext();
+            index++;
+        }
+
+        while (index < end) {
+            subList.insertLast(current.getdData());
+            current = current.getNext();
+            index++;
+        }
+
+        return subList;
     }
 
     /**
@@ -559,5 +557,9 @@ public class DoublyLinkedList<T> {
             current = current.getPrevious();
         }
         System.out.println("");
+    }
+
+    public void setFirst(DoublyLink<T> first){
+        this.first = first;
     }
 }

@@ -111,12 +111,11 @@ public class Sorter {
                 return auxList;
             // Ordenamiento Merge Sort
             case 1:
-                MergeSort<Country> mergeOoperator = new MergeSort<>(auxList);
-                mergeOoperator.sort(sortAttribute);
-                auxList = mergeOoperator.getList();
-                this.tiempoEjecucionMerge = mergeOoperator.getTiempo();
-                this.numComparacionesMerge = mergeOoperator.getComparacion();
-                this.numIntercambiosMerge = mergeOoperator.getIntercambios();
+                MergeSort<Country> mergeOperator = new MergeSort<Country>(auxList);
+                auxList = mergeOperator.sort(sortAttribute);
+                this.tiempoEjecucionMerge = mergeOperator.getTiempo();
+                this.numComparacionesMerge = mergeOperator.getComparacion();
+                this.numIntercambiosMerge = mergeOperator.getIntercambios();
                 System.out.println(tiempoEjecucionMerge);
                 System.out.println(numComparacionesMerge);
                 System.out.println(numIntercambiosMerge);
@@ -141,7 +140,7 @@ public class Sorter {
     public void printListAsc(DoublyLinkedList<Country> auxList){
         DoublyLink<Country> current = auxList.getLast();
         while (current != null) {
-            System.out.println(current.getdData().getTotalDeaths());
+            System.out.println(current.getdData().getCountryName());
             current = current.getPrevious();
         }
     }
@@ -149,7 +148,7 @@ public class Sorter {
     public void printLIstDesc(DoublyLinkedList<Country> auxList){
         DoublyLink<Country> current = auxList.getFirst();
         while (current != null) {
-            System.out.println(current.getdData().getTotalDeaths());
+            System.out.println(current.getdData().getCountryName());
             current = current.getNext();
         }
     }

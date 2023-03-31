@@ -1,6 +1,5 @@
 package test;
 
-import dao.DaoPDF;
 import dao.DatasetDAO;
 import model.Country;
 import model.DoublyLinkedList;
@@ -26,10 +25,10 @@ public class App {
         data.insertFirst(tres);
         data.insertFirst(cuatro);
         */
-
+        
         DoublyLinkedList<Country> auxList = new DoublyLinkedList<>();
-        auxList = sorter.sorting(1,4, data);
-        dao.writeFile("Ejemplito", auxList);
+        auxList = sorter.sorting(1,2, data);
+        //dao.writeFile("Ejemplito", auxList);
         sorter.printListAsc(auxList); // ascendente
         System.out.println("--------------------------");
         sorter.printLIstDesc(auxList); //Descendiente
