@@ -4,11 +4,10 @@ import model.sortingMethods.BinaryInsertionSort;
 import model.sortingMethods.MergeSort;
 import model.sortingMethods.QuickSort;
 
-/*
- * Este metodo es que el esta encargado de llamar al
- * metodo de ordenamiento que sea requerido.
- * Considerar si se necesitaran excepciones para las llamadas
- * y si sera excepciones propias o ya de java
+/**
+ * Encargado de realizar las llamadas a las funciones que
+ * realizan los ordenamiento del dataset que llega en forma de
+ * una lista doblemente ligada
  */
 public class Sorter {
     private long tiempoEjecucionQuick = 0;
@@ -23,7 +22,11 @@ public class Sorter {
     private int numIntercambiosBinary = 0;
     private int numIntercambiosMerge = 0;
 
+    /**
+     * Constructor por defecto para generar instancias
+     */
     public Sorter() {
+
     }
 
     /**
@@ -84,7 +87,11 @@ public class Sorter {
         }
     }
 
-    public void printListDesc(DoublyLinkedList<Country> auxList){
+    /**
+     * Despliega la lista del argumento en forma descendente
+     * @param auxList Lista a mostrar
+     */
+    public void printListDesc(DoublyLinkedList<Country> auxList) {
         DoublyLink<Country> current = auxList.getLast();
         while (current != null) {
             System.out.println(current.getdData().getCountryName());
@@ -92,48 +99,106 @@ public class Sorter {
         }
     }
 
-    public void printListAsc(DoublyLinkedList<Country> auxList){
+    /**
+     * Despliega la lista del argumento en forma ascendente
+     * @param auxList Lista a mostrar
+     */
+    public void printListAsc(DoublyLinkedList<Country> auxList) {
         DoublyLink<Country> current = auxList.getFirst();
         while (current != null) {
             System.out.println(current.getdData().getCountryName());
             current = current.getNext();
         }
     }
-
+    
+    /** 
+     * Tiempo de ejecucion del metodo de ordenamiento 
+     * {@code Quick Sort}
+     * @return Tiempo total de ejecucion en nanosegundo
+     * @see QuickSort
+     */
     public long getTiempoEjecucionQuick() {
         return tiempoEjecucionQuick;
     }
-
+    
+    /** 
+     * Tiempo de ejecucion del metodo de ordenamiento 
+     * {@code Binary Insertion Sort}
+     * @return Tiempo total de ejecucion en nanosegundo
+     * @see BinaryInsertionSort
+     */
     public long getTiempoEjecucionBinary() {
         return tiempoEjecucionBinary;
     }
 
+    /** 
+     * Tiempo de ejecucion del metodo de ordenamiento 
+     * {@code Merge Sort}
+     * @return Tiempo total de ejecucion en nanosegundo
+     * @see MergeSort
+     */
     public long getTiempoEjecucionMerge() {
         return tiempoEjecucionMerge;
     }
 
+    /**
+     * Numero de comparaciones dadas al implementar 
+     * el metodo de ordenamiento {@code Quick Sort}
+     * @return Numero total de comparaciones
+     * @see QuickSort
+     */
     public int getNumComparacionesQuick() {
         return numComparacionesQuick;
     }
 
+    /**
+     * Numero de comparaciones dadas al implementar 
+     * el metodo de ordenamiento {@code Binary Insertion Sort
+     * @return Numero total de comparaciones
+     * @see BinaryInsertionSort
+     */
     public int getNumComparacionesBinary() {
         return numComparacionesBinary;
     }
 
+    /**
+     * Numero de comparaciones dadas al implementar 
+     * el metodo de ordenamiento {@code Merge Sort}
+     * @see MergeSort
+     * @return Numero total de comparaciones
+     */
     public int getNumComparacionesMerge() {
         return numComparacionesMerge;
     }
 
+    /**
+     * Numero de intercambios realizados
+     * el implementar la funcion {@code Quick Sort}
+     * @return Numero de intercambios
+     * @see QuickSort
+     */
     public int getNumIntercambiosQuick() {
         return numIntercambiosQuick;
     }
 
+    /**
+     * Numero de intercambios realizados
+     * el implementar la funcion {@code Binary Insertio Sort}
+     * @return Numero de intercambios
+     * @see BinaryInsertiionSort
+     */
     public int getNumIntercambiosBinary() {
         return numIntercambiosBinary;
     }
 
+    /**
+     * Numero de intercambios realizados
+     * el implementar la funcion {@code Merge Sort}
+     * @return Numero de intercambios
+     * @see MergeSort
+     */
     public int getNumIntercambiosMerge() {
         return numIntercambiosMerge;
     }
-    
+
 }

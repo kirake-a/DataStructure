@@ -523,30 +523,6 @@ public class DoublyLinkedList<T> {
         return newList;
     }
 
-    public DoublyLinkedList<T> fromLinkedListToDoublyLinkedList(LinkedList<T> listAux){
-        DoublyLinkedList<T> newList = new DoublyLinkedList<>();
-
-        if (!listAux.isEmpty()) {
-            for (T data : listAux) {
-                newList.insertLast(data);
-            }
-        }
-
-        return newList;
-    }
-
-    private static class Node<T> {
-        T item;
-        Node<T> next;
-        Node<T> prev;
-
-        Node(Node<T> prev, T element, Node<T> next) {
-            this.item = element;
-            this.next = next;
-            this.prev = prev;
-        }
-    }
-
     /**
      * Elimina todos los nodos contenido en la lista
      */
@@ -588,22 +564,4 @@ public class DoublyLinkedList<T> {
         this.first = first;
     }
 
-    public DoublyLink<T> find(int index) {
-        DoublyLink<T> current;
-        int middleIndex = sizeList() / 2; 
-        
-        if (index <= middleIndex) { 
-            current = first;
-            for (int i = 0; i < index; i++) { 
-                current = current.getNext();
-            }
-        } else { 
-            current = last;
-            for (int i = sizeList() - 1; i > index; i--) { 
-                current = current.getPrevious();
-            }
-        }
-        
-        return current; 
-    }
 }

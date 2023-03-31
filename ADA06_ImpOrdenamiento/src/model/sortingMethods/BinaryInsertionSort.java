@@ -15,6 +15,14 @@ public class BinaryInsertionSort<T> {
         this.list = list;
     }
 
+    
+    /** 
+     * Inicia el proceso para hacer el ordenamiento de una lista
+     * doblemente ligada mediante el uso del metodo de ordenamiento
+     * binary insertion.
+     * @param sortAttribute
+     * @return Lista ordenada de tipo {@code DoublyLinkedList<T>}
+     */
     public DoublyLinkedList<T> sort(int sortAttribute){
         long inicio = System.nanoTime();
         this.sortAttribute = sortAttribute;
