@@ -53,9 +53,11 @@ public class MergeSort<T> {
             if (compare(leftNode.getdData(), rightNode.getdData(), sortAttribute) <= 0) {
                 result.insertLast(leftNode.getdData());
                 leftNode = leftNode.getNext();
+                intercambios++;
             } else {
                 result.insertLast(rightNode.getdData());
                 rightNode = rightNode.getNext();
+                intercambios++;
             }
         }
 

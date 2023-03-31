@@ -57,22 +57,41 @@ public class DatasetDAO {
         return data;
     }
 
-    public void writeFile(String path, DoublyLinkedList<Country> data) {
+    public void writeFile(String path, DoublyLinkedList<Country> data, int order) {
         file = createFile(path);
 
         try {
             PrintWriter writer = new PrintWriter(new FileWriter(file, true));
-            DoublyLink<Country> current = data.getFirst();
+            switch (order) {
+                case 0:
+                    DoublyLink<Country> current = data.getFirst();
 
-            while (current != null) {
-                writer.println(current.getdData().getSerialNumber() + "," + current.getdData().getCountryName() + ","
-                        + current.getdData().getTotalCases() + "," + current.getdData().getTotalDeaths() + ","
-                        + current.getdData().getTotalRecovered() + "," + current.getdData().getActiveCases() + ","
-                        + current.getdData().getTotalTest() + "," + current.getdData().getPopulation());
+                    while (current != null) {
+                        writer.println(current.getdData().getSerialNumber() + "," + current.getdData().getCountryName() + ","
+                                + current.getdData().getTotalCases() + "," + current.getdData().getTotalDeaths() + ","
+                                + current.getdData().getTotalRecovered() + "," + current.getdData().getActiveCases() + ","
+                                + current.getdData().getTotalTest() + "," + current.getdData().getPopulation());
+        
+                                current = current.getNext();
+                    }
+        
+                    break;
+                case 1:
+                    DoublyLink<Country> currentt = data.getLast();
 
-                        current = current.getNext();
+                    while (currentt != null) {
+                        writer.println(currentt.getdData().getSerialNumber() + "," + currentt.getdData().getCountryName() + ","
+                                + currentt.getdData().getTotalCases() + "," + currentt.getdData().getTotalDeaths() + ","
+                                + currentt.getdData().getTotalRecovered() + "," + currentt.getdData().getActiveCases() + ","
+                                + currentt.getdData().getTotalTest() + "," + currentt.getdData().getPopulation());
+        
+                                currentt = currentt.getPrevious();
+                    }
+                default:
+                    System.out.println("no se puede");
+                    break;
             }
-
+            
             writer.close();
             System.out.println("CSV created correctly");
 
